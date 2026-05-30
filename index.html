@@ -278,7 +278,7 @@ var _0x1c3487=_0x3e0b;(function(_0x3d3aa3,_0x174689){var _0x18f2cd=_0x3e0b,_0x17
     </div>
   </div>
   <div class="card">
-    <div class="card-header">🏢 CUOTA DE MERCADO — QUIÉN INSTALA<span class="insight">Enel + Copec = 68% del mercado</span></div>
+    <div class="card-header">🏢 CUOTA DE MERCADO — QUIÉN INSTALA<span class="insight">Enel + Copec = 87% del mercado</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cuota"></canvas></div>
       <div class="insight-bar">Dos operadores dominan la red pública. <b>Enel</b> lidera con 649 puntos, seguido de <b>Copec</b> con 431.</div>
@@ -311,7 +311,7 @@ var _0x1c3487=_0x3e0b;(function(_0x3d3aa3,_0x174689){var _0x18f2cd=_0x3e0b,_0x17
     </div>
   </div>
   <div class="card">
-    <div class="card-header">💡 POTENCIA PROMEDIO POR INSTALADOR (kW)<span class="insight">Shell y Enex = cargadores más rápidos</span></div>
+    <div class="card-header">💡 POTENCIA PROMEDIO POR INSTALADOR (kW)<span class="insight">Trolebuses y Enex = cargadores más rápidos</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-potencia-inst"></canvas></div>
       <div class="insight-bar"><b>Shell (71,5 kW)</b> y <b>Enex (68 kW)</b> tienen la mayor potencia media — cargadores rápidos DC. <b>Enel</b> y <b>Copec</b> tienen red más grande pero con mezcla AC/DC.</div>
@@ -353,15 +353,15 @@ var MAPA_DATA=[{"lat": -39.81545, "lng": -73.24808, "nombre": "Saesa Valdivia", 
 var TOP_LABELS=["Las Condes", "Estaci\u00f3n Central", "La Florida", "Santiago", "Pudahuel", "Vitacura", "Valpara\u00edso", "Providencia", "Quilicura", "Maip\u00fa", "Huechuraba", "Vina del Mar", "Concepci\u00f3n", "Lo Barnechea", "Penalol\u00e9n", "Rancagua", "Puerto Montt", "Nunoa", "La Reina", "San Bernardo"];
 var TOP_VALS=[336, 220, 125, 75, 66, 65, 50, 47, 34, 34, 28, 26, 25, 23, 22, 22, 21, 21, 20, 18];
 var COBERTURA={"con": 137, "sin": 209, "total": 346};
-var CUOTA_LABELS=["Enel", "Copec", "Shell", "Saesa", "Chass", "Enex", "Saba"];
-var CUOTA_VALS=[649, 431, 68, 26, 22, 14, 6];
+var CUOTA_LABELS=["Enel", "Copec", "Enex", "Trolebuses de Chile", "Saesa", "Chass", "Saba"];
+var CUOTA_VALS=[665, 531, 82, 36, 26, 22, 6];
 var ACDC_LABELS=["Metropolitana", "Valpara\u00edso", "Coquimbo", "O\u2019Higgins", "Maule", "La Araucan\u00eda", "Los Lagos", "Antofagasta", "\u00d1uble", "Biob\u00edo", "De los R\u00edos", "Atacama", "Tarapac\u00e1", "Magallanes", "Arica y Parinacota", "Ays\u00e9n"];
 var ACDC_AC=[1175, 93, 22, 44, 27, 23, 42, 22, 8, 34, 9, 14, 11, 6, 7, 19];
 var ACDC_DC=[178, 30, 21, 20, 20, 16, 16, 12, 12, 10, 6, 6, 6, 4, 2, 2];
 var CONECT_LABELS=["AC-Tipo 2 (Menneke)", "CCS Tipo 2", "CHAdeMO", "AC-Tipo 1 (SAE J1772)", "GB/T DC", "CE Type 2", "CCS Tipo 1", "CCS TIPO 2 (DC)"];
 var CONECT_VALS=[1312, 379, 168, 33, 16, 6, 2, 1];
-var POT_LABELS=["Shell", "Enex", "Copec", "Enel", "Saesa", "Chass", "Saba"];
-var POT_VALS=[71.5, 68.0, 53.8, 25.8, 22.0, 11.8, 7.0];
+var POT_LABELS=["Trolebuses de Chile", "Enex", "Copec", "Saesa", "Enel", "Chass", "Saba"];
+var POT_VALS=[224.2, 93.2, 67.3, 40.6, 32.0, 12.4, 7.0];
 var EVOL_LABELS=["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"];
 var EVOL_VALS=[1225.0, 4326.4, 4678.6, 2437.0, 5612.3, 10603.9, 8880.3, 31218.8];
 var EVOL_CONECT=[43,399,748,400,530,1842,2030,3819];
@@ -389,10 +389,10 @@ function _initCargadores() {
   var charts=[
     ['chart-cobertura','doughnut',{labels:['Comunas con cargadores','Comunas sin cargadores'],datasets:[{data:[COBERTURA.con,COBERTURA.sin],backgroundColor:['#4FC3F7','#455a64'],borderColor:'#1a2035',borderWidth:2}]},{plugins:{legend:{labels:{color:'#333333',font:{size:12}}},tooltip:{callbacks:{label:function(ctx){return ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/COBERTURA.total*100)+'%)';}}}},cutout:'65%'}],
     ['chart-top-comunas','bar',{labels:TOP_LABELS,datasets:[{label:'Cargadores',data:TOP_VALS,backgroundColor:'#4FC3F7',borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:10}},grid:{display:false}}}}],
-    ['chart-cuota','doughnut',{labels:CUOTA_LABELS,datasets:[{data:CUOTA_VALS,backgroundColor:['#4FC3F7','#FF6B6B','#FFD93D','#6BCB77','#845EC2','#FF9671','#00C9A7'],borderColor:'#1a2035',borderWidth:2}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}},tooltip:{callbacks:{label:function(ctx){var t=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/t*100)+'%)';}}}}}],
+    ['chart-cuota','doughnut',{labels:CUOTA_LABELS,datasets:[{data:CUOTA_VALS,backgroundColor:['#4FC3F7','#FF6B6B','#FF9671','#FFD93D','#6BCB77','#845EC2','#00C9A7'],borderColor:'#1a2035',borderWidth:2}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}},tooltip:{callbacks:{label:function(ctx){var t=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/t*100)+'%)';}}}}}],
     ['chart-acdc','bar',{labels:ACDC_LABELS,datasets:[{label:'AC',data:ACDC_AC,backgroundColor:'#4CAF50',borderRadius:2},{label:'DC',data:ACDC_DC,backgroundColor:'#FF5722',borderRadius:2}]},{plugins:{legend:{labels:{color:'#333333'}}},scales:{x:{stacked:true,ticks:{color:'#333333',font:{size:9},maxRotation:45},grid:{display:false}},y:{stacked:true,ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}}}}],
     ['chart-conectores-tipo','bar',{labels:CONECT_LABELS,datasets:[{label:'Puntos',data:CONECT_VALS,backgroundColor:['#4FC3F7','#FF6B6B','#FFD93D','#6BCB77','#845EC2','#FF9671'],borderRadius:4}]},{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333',font:{size:10}},grid:{display:false}},y:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}}}}],
-    ['chart-potencia-inst','bar',{labels:POT_LABELS,datasets:[{label:'kW promedio',data:POT_VALS,backgroundColor:(function(){var m={'Enel':'#4FC3F7','Copec':'#FF6B6B','Shell':'#FFD93D','Saesa':'#6BCB77','Chass':'#845EC2','Enex':'#FF9671','Saba':'#00C9A7'};return POT_LABELS.map(function(l){return m[l]||'#aaa';});})(),borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:11}},grid:{display:false}}}}],
+    ['chart-potencia-inst','bar',{labels:POT_LABELS,datasets:[{label:'kW promedio',data:POT_VALS,backgroundColor:(function(){var m={'Enel':'#4FC3F7','Copec':'#FF6B6B','Enex':'#FF9671','Trolebuses de Chile':'#FFD93D','Saesa':'#6BCB77','Chass':'#845EC2','Saba':'#00C9A7'};return POT_LABELS.map(function(l){return m[l]||'#aaa';});})(),borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:11}},grid:{display:false}}}}],
     ['chart-evol-potencia','line',{labels:EVOL_LABELS,datasets:[{label:'kW instalados',data:EVOL_VALS,borderColor:'#4FC3F7',backgroundColor:'rgba(79,195,247,0.12)',tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#4FC3F7',yAxisID:'yKW'},{label:'Conectores instalados',data:EVOL_CONECT,borderColor:'#FF9671',backgroundColor:'rgba(255,150,113,0.1)',tension:0.4,fill:false,pointRadius:5,pointBackgroundColor:'#FF9671',borderDash:[5,3],yAxisID:'yCon'}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},yKW:{type:'linear',position:'left',title:{display:true,text:'kW instalados',color:'#4FC3F7',font:{size:10}},ticks:{color:'#4FC3F7'},grid:{color:'rgba(0,0,0,0.08)'}},yCon:{type:'linear',position:'right',title:{display:true,text:'Conectores',color:'#FF9671',font:{size:10}},ticks:{color:'#FF9671'},grid:{drawOnChartArea:false}}}}]
   ];
   charts.forEach(function(def){
