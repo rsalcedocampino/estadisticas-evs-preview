@@ -476,9 +476,9 @@ function _setTextos() {
 // Override: add E-TRUCKS to chartLineas
 function _addETrucksToLineas() {
   var canvas = document.getElementById('chartLineas');
-  if (!canvas || !canvas._chartInstance) { setTimeout(_addETrucksToLineas, 200); return; }
-  var chart = canvas._chartInstance;
-  // Check if ETRUCK already added
+  if (!canvas) { setTimeout(_addETrucksToLineas, 300); return; }
+  var chart = Chart.getChart(canvas);
+  if (!chart) { setTimeout(_addETrucksToLineas, 300); return; }
   if (chart.data.datasets.some(function(d){ return d.label && d.label.indexOf('TRUCK')>=0; })) return;
   chart.data.datasets.push({
     label: 'E-TRUCKS',
