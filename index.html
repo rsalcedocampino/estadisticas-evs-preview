@@ -414,6 +414,153 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 </div>
 </div>
 
+
+<script>
+var SOLAR_DATA={"solarInscrita":{"labels":["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"],"solar":[1.04,3.89,6.61,9.67,20.81,31.37,33.78,52.78,59.92,87.86,134.9,45.36],"hidro":[0.0,0.0,0.0,0.0,0.0,0.01,0.23,0.25,0.08,0.0,0.03,0.0]},"instalAnual":{"labels":["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"],"solar":[76,379,1321,1835,1977,1540,3161,6019,5279,5629,10822,3567],"total":[76,379,1321,1835,1977,1541,3168,6023,5281,5629,10824,3568]},"solarRegion":{"labels":["Antofagasta","Atacama","Metropolitana","Maule","Valparaiso","Coquimbo","O'Higgins","Tarapaca"],"mw":[4266.6,2929.2,951.3,685.1,651.1,595.6,569.1,421.5]},"mwOperativo":{"labels":["2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"],"mw":[47.9,137.6,216.4,350.3,402.6,152.3,314.9,137.5,570.0,328.3,1192.7,108.0]},"cruceSolarEV":{"labels":["Antofagasta","Atacama","Metropolitana","Maule","Valparaíso","Coquimbo","O'Higgins","Tarapacá"],"solar":[4266.6,2929.2,951.3,685.1,651.1,595.6,569.1,421.5],"evs":[605,247,21971,3482,2515,918,0,303]},"totales":{"mwOperativo":11653.2,"proyectos":716,"topRegion":"Antofagasta","topRegionMW":4266.6}};
+</script>
+
+<!-- ═══════ SECCIÓN ENERGÍA SOLAR ═══════ -->
+<div style="margin:12px 0 4px;padding:4px 8px;background:#1B5E20;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">
+  ☀️ ENERGÍA SOLAR FOTOVOLTAICA — GENERACIÓN DISTRIBUIDA Y PMGD
+</div>
+
+<!-- KPIs solar -->
+<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+  <div class="card" style="text-align:center;padding:12px 8px;">
+    <div style="font-size:22px;font-weight:800;color:#F57C00;">11,653.2 MW</div>
+    <div style="font-size:11px;color:#555;">Capacidad Operativa Total</div>
+    <div style="font-size:10px;color:#888;margin-top:2px;">Detalle Instalacion Solar</div>
+  </div>
+  <div class="card" style="text-align:center;padding:12px 8px;">
+    <div style="font-size:22px;font-weight:800;color:#F57C00;">716</div>
+    <div style="font-size:11px;color:#555;">Proyectos Operativos</div>
+    <div style="font-size:10px;color:#888;margin-top:2px;">Detalle Instalacion Solar</div>
+  </div>
+  <div class="card" style="text-align:center;padding:12px 8px;">
+    <div style="font-size:22px;font-weight:800;color:#F57C00;">Antofagasta</div>
+    <div style="font-size:11px;color:#555;">Región líder · 4,266.6 MW</div>
+    <div style="font-size:10px;color:#888;margin-top:2px;">Detalle Instalacion Solar</div>
+  </div>
+</div>
+
+<!-- Fila 1: Potencia inscrita + Instalaciones nuevas -->
+<div class="grid">
+  <div class="card">
+    <div class="card-header">📈 POTENCIA SOLAR INSCRITA POR AÑO (MW)<span class="insight">2025 bate récord con 134,9 MW inscritos</span></div>
+    <div class="card-body">
+      <div class="chart-wrap tall"><canvas id="chart-solar-inscrita"></canvas></div>
+      <div class="insight-bar">La potencia solar inscrita creció <strong>+130x</strong> desde 2015 (1 MW) hasta 2025 (134,9 MW). Antofagasta y Atacama concentran los proyectos de mayor escala.</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Poten. - Gener. - Año - Region</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">🏗️ NUEVAS INSTALACIONES SOLARES POR AÑO<span class="insight">2025: 10.822 nuevas instalaciones</span></div>
+    <div class="card-body">
+      <div class="chart-wrap tall"><canvas id="chart-solar-instal"></canvas></div>
+      <div class="insight-bar">Las instalaciones solares nuevas se multiplicaron <strong>142x</strong> entre 2015 y 2025. El 99% corresponde a sistemas fotovoltaicos.</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Instal. - Gener. - Año</div>
+    </div>
+  </div>
+</div>
+
+<!-- Fila 2: MW operativo por año + por región -->
+<div class="grid">
+  <div class="card">
+    <div class="card-header">⚡ MW SOLARES ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">2024 lidera con 1.192,7 MW</span></div>
+    <div class="card-body">
+      <div class="chart-wrap tall"><canvas id="chart-solar-mwyr"></canvas></div>
+      <div class="insight-bar">En 2024 entraron en operación <strong>1.192,7 MW</strong> solares, el mayor año de la historia. Acumulado total: <strong>11,653.2 MW</strong> operativos.</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">🗺 POTENCIA SOLAR OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande concentra el 62% del total</span></div>
+    <div class="card-body">
+      <div class="chart-wrap tall"><canvas id="chart-solar-region"></canvas></div>
+      <div class="insight-bar">Antofagasta lidera con <strong>4,266.6 MW</strong>, seguida de Atacama (2,929.2 MW). El norte aprovecha la mayor radiación solar del planeta.</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar</div>
+    </div>
+  </div>
+</div>
+
+<!-- Fila 3: Cruce Solar vs EVs -->
+<div class="grid" style="grid-template-columns:1fr;">
+  <div class="card">
+    <div class="card-header">🔋 CRUCE: POTENCIA SOLAR (MW) vs EVs CON PERMISO — POR REGIÓN<span class="insight">RM lidera en EVs · Norte lidera en solar</span></div>
+    <div class="card-body">
+      <div class="chart-wrap"><canvas id="chart-solar-ev-cruce"></canvas></div>
+      <div class="insight-bar">Contraste notable: <strong>Antofagasta</strong> tiene 4.266 MW solares pero solo 605 EVs, mientras <strong>Metropolitana</strong> tiene 21.971 EVs con 951 MW. El norte genera energía solar que puede impulsar la electromovilidad del país.</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar + Permiso de Ciruclacion Total</div>
+    </div>
+  </div>
+</div>
+<!-- ═══════ FIN SECCIÓN SOLAR ═══════ -->
+
+<script>
+
+function _initSolarCharts() {
+  var sd = SOLAR_DATA;
+  var green = '#2E7D32', orange = '#F57C00', yellow = '#FDD835', blue = '#1976D2', teal = '#00897B';
+  var gridColor = 'rgba(0,0,0,0.07)';
+  var textColor = '#333';
+
+  // Chart 1: Potencia inscrita anual
+  var c1 = document.getElementById('chart-solar-inscrita');
+  if(c1) new Chart(c1, {type:'bar', data:{
+    labels: sd.solarInscrita.labels,
+    datasets:[
+      {label:'Solar (MW)', data:sd.solarInscrita.solar, backgroundColor:orange, borderRadius:3},
+      {label:'Hidráulica (MW)', data:sd.solarInscrita.hidro, backgroundColor:blue, borderRadius:3}
+    ]
+  }, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:textColor}}},
+    scales:{x:{ticks:{color:textColor},grid:{color:gridColor}},y:{ticks:{color:textColor},grid:{color:gridColor}}}}});
+
+  // Chart 2: Nuevas instalaciones anuales
+  var c2 = document.getElementById('chart-solar-instal');
+  if(c2) new Chart(c2, {type:'bar', data:{
+    labels: sd.instalAnual.labels,
+    datasets:[{label:'Instalaciones Solar', data:sd.instalAnual.solar, backgroundColor:yellow, borderRadius:3}]
+  }, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:textColor}}},
+    scales:{x:{ticks:{color:textColor},grid:{color:gridColor}},y:{ticks:{color:textColor},grid:{color:gridColor}}}}});
+
+  // Chart 3: MW entrando en operación por año
+  var c3 = document.getElementById('chart-solar-mwyr');
+  if(c3) new Chart(c3, {type:'bar', data:{
+    labels: sd.mwOperativo.labels,
+    datasets:[{label:'MW en operación', data:sd.mwOperativo.mw, backgroundColor:green, borderRadius:3}]
+  }, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:textColor}}},
+    scales:{x:{ticks:{color:textColor},grid:{color:gridColor}},y:{ticks:{color:textColor},grid:{color:gridColor}}}}});
+
+  // Chart 4: MW por región (horizontal)
+  var c4 = document.getElementById('chart-solar-region');
+  if(c4) new Chart(c4, {type:'bar', data:{
+    labels: sd.solarRegion.labels,
+    datasets:[{label:'MW operativos', data:sd.solarRegion.mw,
+      backgroundColor:sd.solarRegion.labels.map(function(_,i){return i<2?orange:i<4?yellow:green;}), borderRadius:3}]
+  }, options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    plugins:{legend:{display:false}},
+    scales:{x:{ticks:{color:textColor},grid:{color:gridColor}},y:{ticks:{color:textColor,font:{size:10}},grid:{display:false}}}}});
+
+  // Chart 5: Cruce Solar vs EVs (dual axis)
+  var c5 = document.getElementById('chart-solar-ev-cruce');
+  if(c5) new Chart(c5, {type:'bar', data:{
+    labels: sd.cruceSolarEV.labels,
+    datasets:[
+      {label:'Solar MW', data:sd.cruceSolarEV.solar, backgroundColor:orange, borderRadius:3, yAxisID:'ySolar'},
+      {label:'EVs con permiso', data:sd.cruceSolarEV.evs, backgroundColor:blue, borderRadius:3, yAxisID:'yEVs'}
+    ]
+  }, options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:textColor}}},
+    scales:{
+      x:{ticks:{color:textColor},grid:{color:gridColor}},
+      ySolar:{type:'linear',position:'left',title:{display:true,text:'MW Solar',color:orange,font:{size:10}},ticks:{color:orange},grid:{color:gridColor}},
+      yEVs:{type:'linear',position:'right',title:{display:true,text:'EVs',color:blue,font:{size:10}},ticks:{color:blue},grid:{drawOnChartArea:false}}
+    }}});
+}
+if(document.readyState==='complete'){setTimeout(_initSolarCharts,600);}
+else{window.addEventListener('load',function(){setTimeout(_initSolarCharts,600);});}
+
+</script>
 <div class="footer" id="footer-texto"></div>
 
 
