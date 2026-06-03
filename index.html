@@ -428,8 +428,8 @@ function _updateRegionesChart(year) {
   var d = REGIONES_YEARLY[year];
   if(!d) return;
   var canvas = document.getElementById('chartRegiones');
-  if(!canvas || !canvas._chartInstance) { setTimeout(function(){ _updateRegionesChart(year); }, 300); return; }
-  var chart = canvas._chartInstance;
+  var chart = Chart.getChart(canvas);
+  if(!chart) { setTimeout(function(){ _updateRegionesChart(year); }, 300); return; }
   chart.data.labels = d.labels;
   chart.data.datasets[0].data = d.vals;
   chart.update();
@@ -445,8 +445,8 @@ function _updateMarcasChart(ym) {
   var d = MARCAS_MONTHLY[ym];
   if(!d) return;
   var canvas = document.getElementById('chartMarcas');
-  if(!canvas || !canvas._chartInstance) { setTimeout(function(){ _updateMarcasChart(ym); }, 300); return; }
-  var chart = canvas._chartInstance;
+  var chart = Chart.getChart(canvas);
+  if(!chart) { setTimeout(function(){ _updateMarcasChart(ym); }, 300); return; }
   chart.data.labels = d.labels;
   chart.data.datasets[0].data = d.BEV;
   chart.data.datasets[1].data = d.PHEV;
