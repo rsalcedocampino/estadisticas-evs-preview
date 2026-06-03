@@ -163,13 +163,16 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
   <!-- CHART:regiones -->
 <div class="card">
     <div class="card-header">🗺 PERMISOS EV POR REGIÓN – <span id="anio-regiones-header"></span><span class="insight">RM concentra el 67% de la flota EV</span></div>
-    <div class="card-body">
-      <div style="padding:6px 14px 4px;display:flex;align-items:center;gap:10px;">
+    <div class="card-body" style="padding:0;">
+      <div style="padding:10px 16px 8px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;">
         <span style="font-size:11px;font-weight:700;color:#1B5E20;">📅 Año:</span>
-        <select id="regiones-year-sel" onchange="_updateRegionesChart(this.value)" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024" selected>2024</option></select>
-        <span id="regiones-total-label" style="font-size:11px;color:#666;"></span>
-      <div class="chart-wrap xl"><canvas id="chartRegiones"></canvas></div>
-      <div class="insight-bar">La <strong>Región Metropolitana</strong> lidera con 21.971 EVs en circulación, seguida por Maule (3.482) y Valparaíso (2.515).</div>
+        <select id="regiones-year-sel" onchange="_updateRegionesChart(this.value)" style="font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024" selected>2024</option></select>
+        <span id="regiones-total-label" style="font-size:11px;color:#666;font-weight:600;"></span>
+      </div>
+      <div style="height:560px;padding:10px 16px 4px;">
+        <canvas id="chartRegiones"></canvas>
+      </div>
+      <div class="insight-bar" id="regiones-insight-bar">La <strong>Región Metropolitana</strong> lidera con 21.971 EVs en circulación, seguida por Maule (3.482) y Valparaíso (2.515).</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Ciruclacion Total</div>
     </div>
   </div>
@@ -455,7 +458,11 @@ function _updateRegionesChart(year) {
   chart.update();
   var total = d.vals.reduce(function(a,b){return a+b;},0);
   var el = document.getElementById('regiones-total-label');
-  if(el) el.textContent = total.toLocaleString('es-CL') + ' EVs ese año';
+  if(el) el.textContent = total.toLocaleString('es-CL') + ' EVs con permiso ese año';
+  var ibar = document.getElementById('regiones-insight-bar');
+  if(ibar && d.labels.length>1){
+    ibar.innerHTML = 'La <strong>'+d.labels[0]+'</strong> lidera con '+d.vals[0].toLocaleString('es-CL')+' EVs. Le siguen '+d.labels[1]+' ('+d.vals[1].toLocaleString('es-CL')+') y '+d.labels[2]+' ('+d.vals[2].toLocaleString('es-CL')+')';
+  }
   // Update header year
   var hdr = document.getElementById('anio-regiones-header');
   if(hdr) hdr.textContent = year;
