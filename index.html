@@ -125,13 +125,12 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 <div class="card">
     <div class="card-header">🏆 TOP 12 MARCAS – BEV + PHEV<span data-marcas-hdr style="font-weight:400;"> · Abr-2026</span><span class="insight">Marcas chinas = +50% del mercado enchufable</span></div>
     <div class="card-body">
-      <div class="chart-wrap tall">
       <div style="padding:6px 14px 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <span style="font-size:11px;font-weight:700;color:#1B5E20;">📅 Período:</span>
         <select id="marcas-mes-sel" onchange="_updateMarcasChart(this.value)" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="2024-12" >Dic-24</option><option value="2025-02" >Feb-25</option><option value="2025-03" >Mar-25</option><option value="2025-04" >Abr-25</option><option value="2025-05" >May-25</option><option value="2025-06" >Jun-25</option><option value="2025-07" >Jul-25</option><option value="2025-08" >Ago-25</option><option value="2025-09" >Sep-25</option><option value="2025-10" >Oct-25</option><option value="2025-11" >Nov-25</option><option value="2025-12" >Dic-25</option><option value="2026-01" >Ene-26</option><option value="2026-02" >Feb-26</option><option value="2026-03" >Mar-26</option><option value="2026-04" selected>Abr-26</option></select>
         <span id="marcas-total-label" style="font-size:11px;color:#666;"></span>
       </div>
-      <canvas id="chartMarcas"></canvas></div>
+      <div class="chart-wrap tall"><canvas id="chartMarcas"></canvas></div>
       <div class="insight-bar"><strong>BYD</strong> lidera en total (2.317 un. en el período), <strong>Tesla</strong> en BEV puro (1.555 un.), <strong>Changan</strong> en PHEV (1.270 un.). Período Dic 2024–Abr 2026 (16 meses disponibles; Ene-2025 no está en la fuente).</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Marcas de EVs</div>
     </div>
@@ -165,13 +164,11 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 <div class="card">
     <div class="card-header">🗺 PERMISOS EV POR REGIÓN – <span id="anio-regiones-header"></span><span class="insight">RM concentra el 67% de la flota EV</span></div>
     <div class="card-body">
-      <div class="chart-wrap xl">
       <div style="padding:6px 14px 4px;display:flex;align-items:center;gap:10px;">
         <span style="font-size:11px;font-weight:700;color:#1B5E20;">📅 Año:</span>
         <select id="regiones-year-sel" onchange="_updateRegionesChart(this.value)" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024" selected>2024</option></select>
         <span id="regiones-total-label" style="font-size:11px;color:#666;"></span>
-      </div>
-      <canvas id="chartRegiones"></canvas></div>
+      <div class="chart-wrap xl"><canvas id="chartRegiones"></canvas></div>
       <div class="insight-bar">La <strong>Región Metropolitana</strong> lidera con 21.971 EVs en circulación, seguida por Maule (3.482) y Valparaíso (2.515).</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Ciruclacion Total</div>
     </div>
