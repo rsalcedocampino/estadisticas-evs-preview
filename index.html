@@ -750,6 +750,66 @@ else{window.addEventListener('load',function(){setTimeout(_initSolarCharts,600);
 
 </script>
 
+
+<script>
+var AC_DATA={"sinCargador":[{"comuna":"Villa Alemana","region":"Valparaíso","evs":269,"kw_recom":60},{"comuna":"Coronel","region":"Biobío","evs":224,"kw_recom":60},{"comuna":"Chiguayante","region":"Biobío","evs":202,"kw_recom":60},{"comuna":"Padre Hurtado","region":"Metropolitana","evs":99,"kw_recom":44},{"comuna":"Quilpué","region":"Valparaíso","evs":86,"kw_recom":44},{"comuna":"Lo Espejo","region":"Metropolitana","evs":80,"kw_recom":44},{"comuna":"Algarrobo","region":"Valparaíso","evs":67,"kw_recom":22},{"comuna":"Santa María","region":"Valparaíso","evs":65,"kw_recom":22},{"comuna":"Peñaflor","region":"Metropolitana","evs":64,"kw_recom":22},{"comuna":"Limache","region":"Valparaíso","evs":64,"kw_recom":22},{"comuna":"La Higuera","region":"Coquimbo","evs":59,"kw_recom":22},{"comuna":"Río Claro","region":"Maule","evs":55,"kw_recom":22},{"comuna":"San Felipe","region":"Valparaíso","evs":54,"kw_recom":22},{"comuna":"Cholchol","region":"La Araucanía","evs":47,"kw_recom":22},{"comuna":"San Nicolás","region":"Ñuble","evs":39,"kw_recom":22},{"comuna":"Petorca","region":"Valparaíso","evs":32,"kw_recom":22},{"comuna":"La Cruz","region":"Valparaíso","evs":28,"kw_recom":22},{"comuna":"Padre las Casas","region":"La Araucanía","evs":28,"kw_recom":22},{"comuna":"Papudo","region":"Valparaíso","evs":28,"kw_recom":22},{"comuna":"Rauco","region":"Maule","evs":24,"kw_recom":22}],"soloBajo":[{"comuna":"Villa Alemana","region":"Valparaíso","cargadores":13,"kw_max":22,"kw_recom":44},{"comuna":"Santa Cruz","region":"O'Higgins","cargadores":9,"kw_max":22,"kw_recom":44},{"comuna":"Pichilemu","region":"O'Higgins","cargadores":13,"kw_max":22,"kw_recom":44},{"comuna":"Cochrane","region":"Aysén","cargadores":4,"kw_max":7,"kw_recom":22},{"comuna":"Chaitén","region":"Los Lagos","cargadores":2,"kw_max":7,"kw_recom":44},{"comuna":"Chile Chico","region":"Aysén","cargadores":5,"kw_max":7,"kw_recom":22},{"comuna":"Peralillo","region":"O'Higgins","cargadores":3,"kw_max":22,"kw_recom":22}]};
+</script>
+
+<!-- AC CHARGER RECS -->
+<div style="margin:12px 0 4px;padding:4px 8px;background:#1565C0;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔌 RECOMENDACIÓN: COMUNAS PRIORITARIAS PARA INSTALAR CARGADORES 22–60 kW</div>
+<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
+  <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #1565C0;"><div style="font-size:22px;font-weight:800;color:#1565C0;">58</div><div style="font-size:11px;color:#555;">Comunas sin cargador con EVs</div><div style="font-size:10px;color:#888;">Fuente: Permiso de Circulación 2024</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #1565C0;"><div style="font-size:22px;font-weight:800;color:#1565C0;">168</div><div style="font-size:11px;color:#555;">Comunas sin cargador en total</div><div style="font-size:10px;color:#888;">346 comunas en Chile · 178 con cargadores</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #E65100;"><div style="font-size:22px;font-weight:800;color:#E65100;">20</div><div style="font-size:11px;color:#555;">Com. con solo cargadores ≤22 kW</div><div style="font-size:10px;color:#888;">Candidatas a upgrade de potencia</div></div>
+</div>
+<div class="grid">
+  <div class="card"><div class="card-header">🏙️ TOP 20 COMUNAS SIN CARGADOR — ORDENADAS POR EVs CON PERMISO 2024<span class="insight">Villa Alemana, Coronel y Chiguayante: prioridad máxima</span></div>
+    <div class="card-body"><div style="height:340px;"><canvas id="chart-ac-sin-carg"></canvas></div>
+    <div class="insight-bar"><strong>Villa Alemana</strong> (269 EVs), <strong>Coronel</strong> (224) y <strong>Chiguayante</strong> (202) son las comunas con más EVs y cero cargadores. Se recomienda instalar <strong>60 kW</strong> en las 3 primeras y <strong>22–44 kW</strong> en las restantes.</div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci + Permiso de Ciruclacion Total</div></div></div>
+  <div class="card"><div class="card-header">⬆️ COMUNAS CON SOLO CARGADORES ≤22 kW — REQUIEREN UPGRADE<span class="insight">Pichilemu, Santa Cruz: destinos turísticos sin DC</span></div>
+    <div class="card-body"><div style="height:220px;"><canvas id="chart-ac-upgrade"></canvas></div>
+    <div class="insight-bar">Estas comunas tienen cargadores pero de muy baja potencia (≤22 kW). Con la masificación del EV se requiere al menos un punto de <strong>44–60 kW</strong> para reducir tiempos de carga.</div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div></div></div>
+</div>
+<!-- FIN AC RECS -->
+
+<script>
+function _initACCharts(){
+  var d=AC_DATA; var tc="#333"; var gc="rgba(0,0,0,0.07)";
+  var colors=d.sinCargador.map(function(r){return r.kw_recom===60?"#C62828":r.kw_recom===44?"#E65100":"#1565C0";});
+  var c1=document.getElementById("chart-ac-sin-carg");
+  if(c1)new Chart(c1,{type:"bar",data:{
+    labels:d.sinCargador.map(function(r){return r.comuna;}),
+    datasets:[
+      {label:"EVs con permiso 2024",data:d.sinCargador.map(function(r){return r.evs;}),backgroundColor:colors,borderRadius:3,yAxisID:"yEVs"},
+      {label:"kW recomendados",data:d.sinCargador.map(function(r){return r.kw_recom;}),type:"line",borderColor:"#FDD835",backgroundColor:"rgba(253,216,53,0.2)",yAxisID:"yKW",tension:0.3,pointRadius:5,pointBackgroundColor:"#FDD835",fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:tc}},tooltip:{callbacks:{label:function(ctx){
+        if(ctx.datasetIndex===0)return ctx.label+": "+ctx.raw+" EVs (rec. "+d.sinCargador[ctx.dataIndex].kw_recom+" kW)";
+        return "Recom: "+ctx.raw+" kW";
+      }}}},
+      scales:{x:{ticks:{color:tc,maxRotation:45,font:{size:10}},grid:{color:gc}},
+        yEVs:{type:"linear",position:"left",title:{display:true,text:"EVs 2024",color:tc,font:{size:10}},ticks:{color:tc},grid:{color:gc}},
+        yKW:{type:"linear",position:"right",title:{display:true,text:"kW recomendado",color:"#FDD835",font:{size:10}},ticks:{color:"#FDD835"},grid:{drawOnChartArea:false},min:0,max:80}
+    }}});
+  var c2=document.getElementById("chart-ac-upgrade");
+  if(c2)new Chart(c2,{type:"bar",data:{
+    labels:d.soloBajo.map(function(r){return r.comuna;}),
+    datasets:[
+      {label:"Cargadores actuales",data:d.soloBajo.map(function(r){return r.cargadores;}),backgroundColor:"#90A4AE",borderRadius:3},
+      {label:"kW max actual",data:d.soloBajo.map(function(r){return r.kw_max;}),backgroundColor:"#E65100",borderRadius:3},
+      {label:"kW recomendado",data:d.soloBajo.map(function(r){return r.kw_recom;}),backgroundColor:"#1565C0",borderRadius:3}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:tc}}},
+      scales:{x:{ticks:{color:tc},grid:{color:gc}},y:{ticks:{color:tc},grid:{color:gc}}}
+    }});
+}
+if(document.readyState==="complete"){setTimeout(_initACCharts,1000);}
+else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);});}
+</script>
 <!-- GAP ANALYSIS -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#C62828;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 ANÁLISIS DE BRECHAS — DÓNDE INSTALAR CARGADORES >150 kW</div>
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
