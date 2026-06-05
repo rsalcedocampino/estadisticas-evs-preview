@@ -70,45 +70,31 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 
   .update-tip { background: #E8F5E9; border: 1px dashed #66BB6A; border-radius: 8px; margin: 12px 24px 0; padding: 10px 16px; font-size: 11px; color: #2E7D32; display: flex; gap: 10px; align-items: center; }
   .update-tip code { background: #C8E6C9; border-radius: 4px; padding: 1px 6px; font-size: 10px; }
-  .sec-toggle{display:flex;align-items:center;justify-content:space-between;background:#1B5E20;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;margin:10px 0 2px;user-select:none;transition:background 0.2s;}
-  .sec-toggle:hover{background:#2E7D32;}
-  .sec-toggle-title{font-size:13px;font-weight:700;letter-spacing:0.3px;}
-  .sec-toggle-sub{font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;}
-  .sec-toggle-arrow{font-size:14px;transition:transform 0.3s;margin-left:8px;}
-  .sec-toggle.open .sec-toggle-arrow{transform:rotate(180deg);}
-  .sec-content{display:none;}
+  .sec-btn{display:flex;align-items:center;justify-content:space-between;background:#1B5E20;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;margin:10px 0 2px;user-select:none;transition:background 0.2s;}
+  .sec-btn:hover{background:#2E7D32;}
+  .sec-lbl{font-size:13px;font-weight:700;}
+  .sec-sub{font-size:11px;opacity:0.7;margin-left:8px;font-weight:400;}
+  .sec-arrow{font-size:14px;transition:transform 0.3s;}
+  .sec-btn.open .sec-arrow{transform:rotate(180deg);}
+  .sec-panel{overflow:hidden;max-height:0;transition:max-height 0.5s ease;}
+  .sec-panel.open{max-height:30000px;}
 </style>
 <script>
-/* Map lazy-init registry */
-var _secMapsInited = {};
-var _secMapFns = {
-  "sec-mapa":    function(){
-    if(_secMapsInited["sec-mapa"]){ if(typeof _mapaMap!=="undefined"&&_mapaMap)_mapaMap.invalidateSize(); return; }
-    if(typeof _initCargadores==="function"){ _initCargadores(); _secMapsInited["sec-mapa"]=true; }
-  },
-  "sec-ernc":    function(){
-    if(_secMapsInited["sec-ernc"]){ if(typeof _bessMapInstance!=="undefined"&&_bessMapInstance)_bessMapInstance.invalidateSize(); return; }
-    if(typeof _initBESSMapa==="function"){ _initBESSMapa(); _secMapsInited["sec-ernc"]=true; }
-  },
-  "sec-brechas": function(){ if(typeof window.initGapMap==="function" && !_secMapsInited["sec-brechas"]){ window.initGapMap(); _secMapsInited["sec-brechas"]=true; } },
-};
-function _resizeMaps(id){
-  setTimeout(function(){
-    /* Resize Leaflet maps in opened section */
-    if(id==="sec-mapa"    && typeof _mapaMap!=="undefined"        && _mapaMap)       { try{_mapaMap.invalidateSize();}catch(e){} }
-    if(id==="sec-ernc"    && typeof _bessMapInstance!=="undefined" && _bessMapInstance){ try{_bessMapInstance.invalidateSize();}catch(e){} }
-    if(id==="sec-brechas" && typeof _GMAP!=="undefined"           && _GMAP)          { try{_GMAP.invalidateSize();}catch(e){} }
-    /* Lazy init if not done yet */
-    if(_secMapFns[id]) _secMapFns[id]();
-  }, 100);
-}
-function secToggle(id){
-  var h=document.getElementById("hdr-"+id),c=document.getElementById("cnt-"+id);
-  if(!h||!c)return;
-  var o=c.style.display==="block";
-  c.style.display=o?"none":"block";
-  o?h.classList.remove("open"):h.classList.add("open");
-  if(!o) _resizeMaps(id);
+function secBtn(id){
+  var btn=document.getElementById('btn-'+id);
+  var pan=document.getElementById('pan-'+id);
+  if(!btn||!pan)return;
+  var opening=!btn.classList.contains('open');
+  btn.classList.toggle('open');
+  pan.classList.toggle('open');
+  if(opening){
+    // Resize Leaflet maps after transition
+    setTimeout(function(){
+      if(id==='mapa'&&typeof _mapaMap!=='undefined'&&_mapaMap)_mapaMap.invalidateSize();
+      if(id==='ernc'&&typeof _bessMapInstance!=='undefined'&&_bessMapInstance)_bessMapInstance.invalidateSize();
+      if(id==='brec'&&typeof _GMAP!=='undefined'&&_GMAP)_GMAP.invalidateSize();
+    },550);
+  }
 }
 </script>
 
@@ -148,7 +134,7 @@ function secToggle(id){
 <div class="kpi-row" id="kpi-row"></div>
 
 
-<div class="sec-toggle" id="hdr-sec-evs" onclick="secToggle('sec-evs')"><span class="sec-toggle-title">EVs & Mercado 🚗</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;opacity:0.7;">Ventas, Penetración, Marcas, Regiones</span><span class="sec-toggle-arrow">&#9660;</span></div></div><div class="sec-content" id="cnt-sec-evs">
+<div class="sec-btn open" id="btn-ev" onclick="secBtn('ev')"><span><span class="sec-lbl">EVs & Mercado</span><span class="sec-sub">Ventas, Penetración, Marcas, Regiones, Flota</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel open" id="pan-ev">
 <!-- FILA 1 -->
 <div class="grid">
   <!-- CHART:ventas -->
@@ -235,7 +221,7 @@ function secToggle(id){
 
 
 </div>
-<div class="sec-toggle" id="hdr-sec-infra" onclick="secToggle('sec-infra')"><span class="sec-toggle-title">Infraestructura de Carga ⚡</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;opacity:0.7;">Cargadores, Conectores, Energía MW</span><span class="sec-toggle-arrow">&#9660;</span></div></div><div class="sec-content" id="cnt-sec-infra">
+<div class="sec-btn open" id="btn-infra" onclick="secBtn('infra')"><span><span class="sec-lbl">Infraestructura de Carga</span><span class="sec-sub">Cargadores, Conectores, Energía MW, Ratio</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel open" id="pan-infra">
 <!-- FILA 3b: Conectores + MW -->
 <div class="grid-full">
   <!-- CHART:conectoresMW -->
@@ -349,10 +335,10 @@ function secToggle(id){
 
 
 <!-- ═══════════════ SECCIÓN: CARGADORES PÚBLICOS ═══════════════════════ -->
-
+<!-- 
 </div>
-<div class="sec-toggle" id="hdr-sec-cargadores" onclick="secToggle('sec-cargadores')"><span class="sec-toggle-title">Cargadores Públicos 🗺</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;opacity:0.7;">Cuota, Análisis comunas, Cobertura</span><span class="sec-toggle-arrow">&#9660;</span></div></div><div class="sec-content" id="cnt-sec-cargadores">
-<!-- SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
+<div class="sec-btn open" id="btn-carg" onclick="secBtn('carg')"><span><span class="sec-lbl">Cargadores Públicos</span><span class="sec-sub">Cuota, Análisis comunas, Cobertura</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel open" id="pan-carg">
+SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="grid">
   <div class="card">
     <div class="card-header">🏙️ COBERTURA COMUNAL<span class="insight">178 de 346 comunas con cargador</span></div>
@@ -420,7 +406,7 @@ function secToggle(id){
   </div>
 
 </div>
-<div class="sec-toggle" id="hdr-sec-mapa" onclick="secToggle('sec-mapa')"><span class="sec-toggle-title">Mapa de Cargadores 🗺</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;opacity:0.7;">Mapa interactivo, 3.115 puntos</span><span class="sec-toggle-arrow">&#9660;</span></div></div><div class="sec-content" id="cnt-sec-mapa">
+<div class="sec-btn open" id="btn-mapa" onclick="secBtn('mapa')"><span><span class="sec-lbl">Mapa de Cargadores</span><span class="sec-sub">Mapa interactivo, 3.115 puntos, Filtros</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel open" id="pan-mapa">
 <div class="grid">
   <div class="card" style="grid-column:span 2;">
     <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE<span class="insight">3.115 conectores · AC=verde · DC=naranja</span></div>
@@ -495,7 +481,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 
 
 </div>
-<div class="sec-toggle" id="hdr-sec-ernc" onclick="secToggle('sec-ernc')"><span class="sec-toggle-title">Solar & ERNC ☀️</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;opacity:0.7;">Potencia solar, Pipeline, ERNC</span><span class="sec-toggle-arrow">&#9660;</span></div></div><div class="sec-content" id="cnt-sec-ernc">
+<div class="sec-btn open" id="btn-ernc" onclick="secBtn('ernc')"><span><span class="sec-lbl">Solar & ERNC</span><span class="sec-sub">Potencia solar, Pipeline, Proyectos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel open" id="pan-ernc">
 <!-- ═══════ SECCIÓN ERNC ═══════ -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#1B5E20;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 ENERGÍAS RENOVABLES NO CONVENCIONALES (ERNC) — PIPELINE Y OPERACIÓN</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
@@ -608,7 +594,8 @@ function _initBESSMapa() {
   _applyBESSFilters();
 }
 
-/* mapa-ernc: lazy init via secToggle */
+if(document.readyState==='complete'){setTimeout(_initBESSMapa,800);}
+else{window.addEventListener('load',function(){setTimeout(_initBESSMapa,800);});}
 </script>
 <!-- fin ERNC -->
 <script>
@@ -859,7 +846,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 </script>
 
 </div>
-<div class="sec-toggle" id="hdr-sec-brechas" onclick="secToggle('sec-brechas')"><span class="sec-toggle-title">Análisis de Brechas 📍</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:11px;opacity:0.7;">Recomendaciones, Mapa, Tabla 116 puntos</span><span class="sec-toggle-arrow">&#9660;</span></div></div><div class="sec-content" id="cnt-sec-brechas">
+<div class="sec-btn open" id="btn-brec" onclick="secBtn('brec')"><span><span class="sec-lbl">Análisis de Brechas</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel open" id="pan-brec">
 <!-- AC CHARGER RECS -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#1565C0;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔌 RECOMENDACIÓN: COMUNAS PRIORITARIAS PARA INSTALAR CARGADORES 22–60 kW</div>
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
@@ -1091,14 +1078,15 @@ window.gapMapReset=function(){
   ["gf-pri","gf-reg","gf-kw"].forEach(function(id){var e=document.getElementById(id);if(e)e.value="";});
   window.gapMapFilter();
 };
-window.initGapMap=function(){
+window.addEventListener("load",function(){
+  setTimeout(function(){
     var el=document.getElementById("mapa-gaps");
-    if(!el)return;
-    if(el._leaflet_id){if(_GMAP)_GMAP.invalidateSize();return;}
+    if(!el||el._leaflet_id)return;
     _GMAP=L.map("mapa-gaps").setView([-38,-71],5);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"(c) OpenStreetMap",maxZoom:18}).addTo(_GMAP);
     window.gapMapFilter();
-  };
+  },300);
+});
 })();
 </script>
 
@@ -1225,7 +1213,8 @@ function _initCargadores() {
     el._chartInstance=chart;
   });
 }
-/* mapa-cargadores: lazy init via secToggle */
+if(document.readyState==='complete'){setTimeout(_initCargadores,500);}
+else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);});}
 </script>
 
 <!-- MAPA AL FINAL --></body>
