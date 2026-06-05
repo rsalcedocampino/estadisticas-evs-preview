@@ -142,7 +142,7 @@ function fmtCL(n,dec){
 </div>
   <div>
     <div class="sub">Datos actualizados sobre electromovilidad, infraestructura de carga, energía renovable y oportunidades de inversión en Chile</div>
-    <h1>Observatorio EV &amp; Energía Chile 2026</h1>
+    <h1>Observatorio de Electromovilidad y Energía Chile 2026</h1>
     <div class="sub" id="subtitulo-header"></div>
   </div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
@@ -154,7 +154,7 @@ function fmtCL(n,dec){
 
 <!-- KPIs -->
 <div class="kpi-row" id="kpi-row"></div>
-<div style="background:#E8F5E9;border-left:4px solid #1ABBA8;padding:10px 16px;margin:0 0 4px;font-size:11px;color:#2B5BA8;line-height:1.7;"><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia de datos para electromovilidad, infraestructura de carga y energía renovable en Chile. Análisis de ventas EV, cargadores públicos, permisos de circulación, proyectos ERNC y brechas territoriales. <a href="mailto:rsalcedocampino@gmail.com?subject=Consulta%20Observatorio%20EV" style="color:#2B5BA8;font-weight:700;">Solicitar asesoría →</a></div>
+<div style="background:#E8F5E9;border-left:4px solid #1ABBA8;padding:10px 16px;margin:0 0 4px;font-size:11px;color:#2B5BA8;line-height:1.7;"><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia territorial y energética para identificar brechas, oportunidades de inversión y tendencias en electromovilidad, infraestructura de carga y energías renovables en Chile. Análisis de ventas EV, cargadores públicos, permisos de circulación, proyectos ERNC y brechas territoriales. <a href="mailto:rsalcedocampino@gmail.com?subject=Consulta%20Observatorio%20EV" style="color:#2B5BA8;font-weight:700;">Solicitar asesoría →</a></div>
 
 
 <div class="sec-btn" id="btn-ev" onclick="secBtn('ev')"><span><span class="sec-lbl">EVs & Mercado</span><span class="sec-sub">Ventas, Penetración, Marcas, Regiones, Flota</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ev">
@@ -512,7 +512,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19.889,5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">7.487,4 MWh</div><div style="font-size:11px;color:#555;">Almacenamiento Operativo</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,814</div><div style="font-size:11px;color:#555;">Total Proyectos ERNC</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,030</div><div style="font-size:11px;color:#555;">Proyectos En OperaciÃ³n</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,030</div><div style="font-size:11px;color:#555;">Proyectos En Operación</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
 </div>
 <div class="grid">
   <div class="card"><div class="card-header">🔋 POTENCIA ERNC POR ESTADO (MW)<span class="insight">19.889 MW operativos · 33.390 MW aprobados</span></div>
@@ -1040,7 +1040,7 @@ function _updateMarcasChart(ym) {
 
 function _setTextos() {
   var footer = document.getElementById('footer-texto');
-  if (footer) footer.innerHTML = '<div><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia de datos para electromovilidad e infraestructura en Chile. Desarrollado por Rodrigo Salcedo Campino.</div>'
+  if (footer) footer.innerHTML = '<div><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia territorial y energética para electromovilidad e infraestructura en Chile. Desarrollado por Rodrigo Salcedo Campino.</div>'
     + '<div style="margin-top:4px;">Fuentes: Energ\u00edas Futuro, AgenciaSE, SEC, Asociaci\u00f3n de Veh\u00edculos El\u00e9ctricos de Chile AVEC, ANAC, Ministerio de Energ\u00eda Chile, Ministerio de Transporte, Desarrollo Territorial, Ministerios de Medio Ambiente, Ministerio de Obras P\u00fablicas, IEA.</div>'
     + '<div style="margin-top:4px;font-weight:600;">Prohibida su reproducci\u00f3n.</div>';
   var sub = document.getElementById('subtitulo-header');
