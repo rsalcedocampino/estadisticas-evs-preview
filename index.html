@@ -79,12 +79,36 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
   .sec-content{display:none;}
 </style>
 <script>
+/* Map lazy-init registry */
+var _secMapsInited = {};
+var _secMapFns = {
+  "sec-mapa":    function(){
+    if(_secMapsInited["sec-mapa"]){ if(typeof _mapaMap!=="undefined"&&_mapaMap)_mapaMap.invalidateSize(); return; }
+    if(typeof _initCargadores==="function"){ _initCargadores(); _secMapsInited["sec-mapa"]=true; }
+  },
+  "sec-ernc":    function(){
+    if(_secMapsInited["sec-ernc"]){ if(typeof _bessMapInstance!=="undefined"&&_bessMapInstance)_bessMapInstance.invalidateSize(); return; }
+    if(typeof _initBESSMapa==="function"){ _initBESSMapa(); _secMapsInited["sec-ernc"]=true; }
+  },
+  "sec-brechas": function(){ if(typeof window.initGapMap==="function" && !_secMapsInited["sec-brechas"]){ window.initGapMap(); _secMapsInited["sec-brechas"]=true; } },
+};
+function _resizeMaps(id){
+  setTimeout(function(){
+    /* Resize Leaflet maps in opened section */
+    if(id==="sec-mapa"    && typeof _mapaMap!=="undefined"        && _mapaMap)       { try{_mapaMap.invalidateSize();}catch(e){} }
+    if(id==="sec-ernc"    && typeof _bessMapInstance!=="undefined" && _bessMapInstance){ try{_bessMapInstance.invalidateSize();}catch(e){} }
+    if(id==="sec-brechas" && typeof _GMAP!=="undefined"           && _GMAP)          { try{_GMAP.invalidateSize();}catch(e){} }
+    /* Lazy init if not done yet */
+    if(_secMapFns[id]) _secMapFns[id]();
+  }, 100);
+}
 function secToggle(id){
   var h=document.getElementById("hdr-"+id),c=document.getElementById("cnt-"+id);
   if(!h||!c)return;
   var o=c.style.display==="block";
   c.style.display=o?"none":"block";
   o?h.classList.remove("open"):h.classList.add("open");
+  if(!o) _resizeMaps(id);
 }
 </script>
 
@@ -584,8 +608,7 @@ function _initBESSMapa() {
   _applyBESSFilters();
 }
 
-if(document.readyState==='complete'){setTimeout(_initBESSMapa,800);}
-else{window.addEventListener('load',function(){setTimeout(_initBESSMapa,800);});}
+/* mapa-ernc: lazy init via secToggle */
 </script>
 <!-- fin ERNC -->
 <script>
@@ -1068,15 +1091,14 @@ window.gapMapReset=function(){
   ["gf-pri","gf-reg","gf-kw"].forEach(function(id){var e=document.getElementById(id);if(e)e.value="";});
   window.gapMapFilter();
 };
-window.addEventListener("load",function(){
-  setTimeout(function(){
+window.initGapMap=function(){
     var el=document.getElementById("mapa-gaps");
-    if(!el||el._leaflet_id)return;
+    if(!el)return;
+    if(el._leaflet_id){if(_GMAP)_GMAP.invalidateSize();return;}
     _GMAP=L.map("mapa-gaps").setView([-38,-71],5);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"(c) OpenStreetMap",maxZoom:18}).addTo(_GMAP);
     window.gapMapFilter();
-  },300);
-});
+  };
 })();
 </script>
 
@@ -1203,8 +1225,7 @@ function _initCargadores() {
     el._chartInstance=chart;
   });
 }
-if(document.readyState==='complete'){setTimeout(_initCargadores,500);}
-else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);});}
+/* mapa-cargadores: lazy init via secToggle */
 </script>
 
 <!-- MAPA AL FINAL --></body>
