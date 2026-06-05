@@ -78,6 +78,16 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
   .sec-toggle.open .sec-toggle-arrow{transform:rotate(180deg);}
   .sec-content{display:none;}
 </style>
+<script>
+function secToggle(id){
+  var h=document.getElementById("hdr-"+id),c=document.getElementById("cnt-"+id);
+  if(!h||!c)return;
+  var o=c.style.display==="block";
+  c.style.display=o?"none":"block";
+  o?h.classList.remove("open"):h.classList.add("open");
+}
+</script>
+
 <style>
 .yoy-tag{display:inline-block;background:#FFF3E0;color:#E65100;border:1px solid #FFB74D;border-radius:4px;font-size:10px;padding:1px 6px;cursor:help;font-weight:600;margin:0 2px;}
 .yoy-tag:hover::after{content:attr(data-tip);position:absolute;background:#333;color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;white-space:nowrap;z-index:9999;margin-left:4px;}
@@ -1197,20 +1207,5 @@ if(document.readyState==='complete'){setTimeout(_initCargadores,500);}
 else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);});}
 </script>
 
-<!-- MAPA AL FINAL -->
-
-
-
-<div
-
-<script>
-function secToggle(id){
-  var h=document.getElementById("hdr-"+id),c=document.getElementById("cnt-"+id);
-  if(!h||!c)return;
-  var o=c.style.display==="block";
-  c.style.display=o?"none":"block";
-  o?h.classList.remove("open"):h.classList.add("open");
-}
-</script>
-</body>
+<!-- MAPA AL FINAL --></body>
 </html>
