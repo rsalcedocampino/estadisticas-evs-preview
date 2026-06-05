@@ -71,7 +71,7 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
   .update-tip { background: #E8F5E9; border: 1px dashed #66BB6A; border-radius: 8px; margin: 12px 24px 0; padding: 10px 16px; font-size: 11px; color: #2E7D32; display: flex; gap: 10px; align-items: center; }
   .update-tip code { background: #C8E6C9; border-radius: 4px; padding: 1px 6px; font-size: 10px; }
   /* Collapsible sections */
-  .sec-header{display:flex;align-items:center;justify-content:space-between;background:#1B5E20;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;margin:10px 0 4px;user-select:none;transition:background 0.2s;}
+  .sec-header{display:flex;align-items:center;justify-content:space-between;background:#1B5E20;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;margin:10px 0 4px;user-select:none;transition:background 0.2s;min-height:40px;}
   .sec-header:hover{background:#2E7D32;}
   .sec-header .sec-title{font-size:13px;font-weight:700;letter-spacing:0.3px;}
   .sec-header .sec-count{font-size:11px;opacity:0.75;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:10px;}
@@ -189,7 +189,7 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 </div>
 
 </div></div>
-<div id="sec-infra" class="sec-anchor"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">⚡ Infraestructura de Carga <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Cargadores · Conectores · Energía MW · Ratio</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style=""><!-- FILA 3b: Conectores + MW -->
+<div id="sec-infra" class="sec-anchor" style="display:block;margin-top:4px;"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">⚡ Infraestructura de Carga <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Cargadores · Conectores · Energía MW · Ratio</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style=""><!-- FILA 3b: Conectores + MW -->
 <div class="grid-full">
   <!-- CHART:conectoresMW -->
 <div class="card">
@@ -302,7 +302,7 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 
 
 <!-- ══════════</div></div>
-<div id="sec-cargadores" class="sec-anchor"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">🗺 Cargadores Públicos <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Mapa interactivo · Cuota · Análisis comunas</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style="">═════ SECCIÓN: CARGADORES PÚBLICOS ═══════════════════════ -->
+<div id="sec-cargadores" class="sec-anchor" style="display:block;margin-top:4px;"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">🗺 Cargadores Públicos <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Mapa interactivo · Cuota · Análisis comunas</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style="">═════ SECCIÓN: CARGADORES PÚBLICOS ═══════════════════════ -->
 <!-- SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="grid">
   <div class="card">
@@ -442,7 +442,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 </script>
 
  </div></div>
-<div id="sec-ernc" class="sec-anchor"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">☀️ Solar & ERNC <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Potencia solar · Pipeline · Proyectos ERNC</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style="">═══════ SECCIÓN ERNC ═══════ 
+<div id="sec-ernc" class="sec-anchor" style="display:block;margin-top:4px;"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">☀️ Solar & ERNC <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Potencia solar · Pipeline · Proyectos ERNC</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style="">═══════ SECCIÓN ERNC ═══════ 
 <div style="margin:12px 0 4px;padding:4px 8px;background:#1B5E20;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 ENERGÍAS RENOVABLES NO CONVENCIONALES (ERNC) — PIPELINE Y OPERACIÓN</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19,889.5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicacion Generacion - BESS</div></div>
@@ -823,7 +823,7 @@ if(document.readyState==="complete"){setTimeout(_initACCharts,1000);}
 else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);});}
 </script>
 </div></div>
-<div id="sec-brechas" class="sec-anchor"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">📍 Análisis de Brechas <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Recomendaciones · Mapa · Tabla 116 puntos</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style=""><!-- GAP ANALYSIS -->
+<div id="sec-brechas" class="sec-anchor" style="display:block;margin-top:4px;"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">📍 Análisis de Brechas <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Recomendaciones · Mapa · Tabla 116 puntos</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style=""><!-- GAP ANALYSIS -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#C62828;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 ANÁLISIS DE BRECHAS — DÓNDE INSTALAR CARGADORES >150 kW</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #C62828;"><div style="font-size:22px;font-weight:800;color:#C62828;">16</div><div style="font-size:11px;color:#555;">Puntos Prioridad ALTA</div><div style="font-size:10px;color:#888;">>200 km sin cargador >150 kW</div></div>
@@ -895,7 +895,7 @@ function _sortGapTable(){
 // gap map init via inline script below
 setTimeout(_sortGapTable,200);
 </script>
-</div></div>
+</div>
 <div class="footer" id="footer-texto"></div>
 
 
