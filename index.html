@@ -121,7 +121,6 @@ function fmtCL(n,dec){
   return dec>0?parts.join(","):parts[0];
 }
 /* Override Chart.js default tick formatter globally */
-Chart.defaults.locale="es-CL";
 </script>
 
 </head>
@@ -641,7 +640,7 @@ function _initBESSCharts(){
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:tc,font:{size:10}}}}}});
   var c4=document.getElementById("chart-bess-anio");
   if(c4)new Chart(c4,{type:"bar",data:{labels:b.porAnio.labels,datasets:[{label:"MW operacion",data:b.porAnio.mw,backgroundColor:"#1976D2",borderRadius:3}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}}},scales:{x:{ticks:{color:tc,callback:function(v){return fmtCL(v);}},grid:{color:gc}},y:{ticks:{color:tc,callback:function(v){return fmtCL(v);},grid:{color:gc}}}}});
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}}},scales:{x:{ticks:{color:tc},grid:{color:gc}},y:{ticks:{color:tc},grid:{color:gc}}}}});
 }
 if(document.readyState==="complete"){setTimeout(_initBESSCharts,700);}
 else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);});}
