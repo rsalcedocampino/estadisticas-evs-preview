@@ -111,6 +111,19 @@ function secBtn(id){
 .yoy-tag{display:inline-block;background:#FFF3E0;color:#E65100;border:1px solid #FFB74D;border-radius:4px;font-size:10px;padding:1px 6px;cursor:help;font-weight:600;margin:0 2px;}
 .yoy-tag:hover::after{content:attr(data-tip);position:absolute;background:#333;color:#fff;padding:4px 8px;border-radius:4px;font-size:11px;white-space:nowrap;z-index:9999;margin-left:4px;}
 </style>
+<script>
+/* Chilean number format: dot=thousands, comma=decimal */
+function fmtCL(n,dec){
+  if(n===null||n===undefined||isNaN(n))return n;
+  dec=dec!==undefined?dec:0;
+  var parts=Number(n).toFixed(dec).split(".");
+  parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,".");
+  return dec>0?parts.join(","):parts[0];
+}
+/* Override Chart.js default tick formatter globally */
+Chart.defaults.locale="es-CL";
+</script>
+
 </head>
 <body>
 
@@ -497,8 +510,8 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 <!-- ═══════ SECCIÓN ERNC ═══════ -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 ENERGÍAS RENOVABLES NO CONVENCIONALES (ERNC) — PIPELINE Y OPERACIÓN</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19,889.5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">7,487.4 MWh</div><div style="font-size:11px;color:#555;">Almacenamiento Operativo</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19.889,5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">7.487,4 MWh</div><div style="font-size:11px;color:#555;">Almacenamiento Operativo</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,814</div><div style="font-size:11px;color:#555;">Total Proyectos ERNC</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,030</div><div style="font-size:11px;color:#555;">Proyectos En OperaciÃ³n</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
 </div>
@@ -628,7 +641,7 @@ function _initBESSCharts(){
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:tc,font:{size:10}}}}}});
   var c4=document.getElementById("chart-bess-anio");
   if(c4)new Chart(c4,{type:"bar",data:{labels:b.porAnio.labels,datasets:[{label:"MW operacion",data:b.porAnio.mw,backgroundColor:"#1976D2",borderRadius:3}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}}},scales:{x:{ticks:{color:tc},grid:{color:gc}},y:{ticks:{color:tc},grid:{color:gc}}}}});
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}}},scales:{x:{ticks:{color:tc,callback:function(v){return fmtCL(v);}},grid:{color:gc}},y:{ticks:{color:tc,callback:function(v){return fmtCL(v);},grid:{color:gc}}}}});
 }
 if(document.readyState==="complete"){setTimeout(_initBESSCharts,700);}
 else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);});}
@@ -641,7 +654,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
 <!-- KPIs solar -->
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;">
-    <div style="font-size:22px;font-weight:800;color:#F57C00;">11,653.2 MW</div>
+    <div style="font-size:22px;font-weight:800;color:#F57C00;">11.653,2 MW</div>
     <div style="font-size:11px;color:#555;">Capacidad Operativa Total</div>
     <div style="font-size:10px;color:#888;margin-top:2px;">Detalle Instalacion Solar</div>
   </div>
@@ -652,7 +665,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
   </div>
   <div class="card" style="text-align:center;padding:12px 8px;">
     <div style="font-size:22px;font-weight:800;color:#F57C00;">Antofagasta</div>
-    <div style="font-size:11px;color:#555;">Región líder · 4,266.6 MW</div>
+    <div style="font-size:11px;color:#555;">Región líder · 4.266,6 MW</div>
     <div style="font-size:10px;color:#888;margin-top:2px;">Detalle Instalacion Solar</div>
   </div>
 </div>
@@ -684,7 +697,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
     <div class="card-header">⚡ MW SOLARES ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">2024 lidera con 1.192,7 MW</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-solar-mwyr"></canvas></div>
-      <div class="insight-bar">En 2024 entraron en operación <strong>1.192,7 MW</strong> solares, el mayor año de la historia. Acumulado total: <strong>11,653.2 MW</strong> operativos.</div>
+      <div class="insight-bar">En 2024 entraron en operación <strong>1.192,7 MW</strong> solares, el mayor año de la historia. Acumulado total: <strong>11.653,2 MW</strong> operativos.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar</div>
     </div>
   </div>
@@ -692,7 +705,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
     <div class="card-header">🗺 POTENCIA SOLAR OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande concentra el 62% del total</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-solar-region"></canvas></div>
-      <div class="insight-bar">Antofagasta lidera con <strong>4,266.6 MW</strong>, seguida de Atacama (2,929.2 MW). El norte aprovecha la mayor radiación solar del planeta.</div>
+      <div class="insight-bar">Antofagasta lidera con <strong>4.266,6 MW</strong>, seguida de Atacama (2.929,2 MW). El norte aprovecha la mayor radiación solar del planeta.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar</div>
     </div>
   </div>
@@ -993,10 +1006,10 @@ function _updateRegionesChart(year) {
   chart.update();
   var total = d.vals.reduce(function(a,b){return a+b;},0);
   var el = document.getElementById('regiones-total-label');
-  if(el) el.textContent = total.toLocaleString('es-CL') + ' EVs con permiso ese año';
+  if(el) el.textContent = total.toLocaleString('es-CL',{useGrouping:true}) + ' EVs con permiso ese año';
   var ibar = document.getElementById('regiones-insight-bar');
   if(ibar && d.labels.length>1){
-    ibar.innerHTML = 'La <strong>'+d.labels[0]+'</strong> lidera con '+d.vals[0].toLocaleString('es-CL')+' EVs. Le siguen '+d.labels[1]+' ('+d.vals[1].toLocaleString('es-CL')+') y '+d.labels[2]+' ('+d.vals[2].toLocaleString('es-CL')+')';
+    ibar.innerHTML = 'La <strong>'+d.labels[0]+'</strong> lidera con '+d.vals[0].toLocaleString('es-CL',{useGrouping:true})+' EVs. Le siguen '+d.labels[1]+' ('+d.vals[1].toLocaleString('es-CL',{useGrouping:true})+') y '+d.labels[2]+' ('+d.vals[2].toLocaleString('es-CL',{useGrouping:true})+')';
   }
   // Update header year
   var hdr = document.getElementById('anio-regiones-header');
@@ -1016,7 +1029,7 @@ function _updateMarcasChart(ym) {
   // Update total label
   var total = d.BEV.reduce(function(a,b){return a+b;},0) + d.PHEV.reduce(function(a,b){return a+b;},0);
   var el = document.getElementById('marcas-total-label');
-  if(el) el.textContent = total.toLocaleString('es-CL') + ' veh. ese mes';
+  if(el) el.textContent = total.toLocaleString('es-CL',{useGrouping:true}) + ' veh. ese mes';
   // Update card header title period
   var hdr = document.querySelector('[data-marcas-hdr]');
   if(hdr){
