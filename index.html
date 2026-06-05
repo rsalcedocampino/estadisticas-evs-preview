@@ -968,6 +968,117 @@ function _sortGapTable(){
 setTimeout(_sortGapTable,200);
 </script>
 </div>
+
+<!-- CALCULADORA DE OPORTUNIDADES -->
+<div style="margin:10px 0 4px;padding:6px 16px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;border-radius:8px;font-size:14px;font-weight:700;">📊 Calculadora de Oportunidades de Inversión en Carga EV</div>
+<div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(43,91,168,0.08);border:1px solid #dce6f5;padding:14px 16px;margin-bottom:8px;">
+  <div style="font-size:12px;color:#1E3D7A;margin-bottom:12px;line-height:1.6;">Ajusta los pesos de cada variable para personalizar el ranking de comunas con mayor oportunidad de inversión en infraestructura de carga. El puntaje total siempre suma 100%.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;" id="calc-weights">
+    <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">EVs con permiso en la comuna</span>
+        <span id="w_evs-val" style="font-size:13px;font-weight:700;color:#2B5BA8;">30%</span>
+      </div>
+      <input type="range" id="w_evs" min="0" max="60" value="30" step="1" style="width:100%;accent-color:#2B5BA8;" oninput="updateCalc()"/>
+    </div>
+    <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Sin cargadores públicos</span>
+        <span id="w_nocarg-val" style="font-size:13px;font-weight:700;color:#1ABBA8;">25%</span>
+      </div>
+      <input type="range" id="w_nocarg" min="0" max="60" value="25" step="1" style="width:100%;accent-color:#1ABBA8;" oninput="updateCalc()"/>
+    </div>
+    <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Solo cargadores AC ≤22 kW</span>
+        <span id="w_upgrade-val" style="font-size:13px;font-weight:700;color:#F5A623;">15%</span>
+      </div>
+      <input type="range" id="w_upgrade" min="0" max="60" value="15" step="1" style="width:100%;accent-color:#F5A623;" oninput="updateCalc()"/>
+    </div>
+    <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Cercanía a ruta o corredor</span>
+        <span id="w_ruta-val" style="font-size:13px;font-weight:700;color:#4A90D9;">15%</span>
+      </div>
+      <input type="range" id="w_ruta" min="0" max="60" value="15" step="1" style="width:100%;accent-color:#4A90D9;" oninput="updateCalc()"/>
+    </div>
+    <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Actividad turística/comercial</span>
+        <span id="w_turismo-val" style="font-size:13px;font-weight:700;color:#E8890A;">10%</span>
+      </div>
+      <input type="range" id="w_turismo" min="0" max="60" value="10" step="1" style="width:100%;accent-color:#E8890A;" oninput="updateCalc()"/>
+    </div>
+    <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Potencia ERNC disponible</span>
+        <span id="w_ernc-val" style="font-size:13px;font-weight:700;color:#7A9CC8;">5%</span>
+      </div>
+      <input type="range" id="w_ernc" min="0" max="60" value="5" step="1" style="width:100%;accent-color:#7A9CC8;" oninput="updateCalc()"/>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+    <div id="calc-total-bar" style="font-size:11px;color:#666;">Total: <strong id="calc-total-pct" style="color:#2B5BA8;">100%</strong> <span id="calc-total-warn" style="color:#C62828;display:none;">⚠ Ajusta los pesos para sumar 100%</span></div>
+    <button onclick="resetCalcWeights()" style="background:#EEF2FB;color:#2B5BA8;border:1px solid #4A90D9;border-radius:6px;padding:4px 12px;font-size:11px;cursor:pointer;">↺ Restablecer</button>
+  </div>
+  <div style="overflow-x:auto;max-height:480px;overflow-y:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:11px;">
+      <thead style="position:sticky;top:0;background:#1E3D7A;color:#fff;z-index:1;">
+        <tr><th style="padding:7px 8px;text-align:left;">#</th><th style="padding:7px 8px;text-align:left;">Comuna</th><th style="padding:7px 8px;">Región</th><th style="padding:7px 8px;text-align:right;">EVs 2024</th><th style="padding:7px 8px;text-align:right;">Cargadores</th><th style="padding:7px 8px;text-align:right;">kW máx.</th><th style="padding:7px 8px;text-align:right;">Puntaje</th><th style="padding:7px 8px;">Oportunidad</th></tr>
+      </thead>
+      <tbody id="calc-tbody"></tbody>
+    </table>
+  </div>
+  <div style="font-size:10px;color:#888;text-align:right;padding-top:6px;">Fuente: Permiso de Circulación 2024 + Registro de Cargadores Públicos SEC</div>
+</div>
+<!-- /CALCULADORA -->
+
+<script>
+var CALC_DATA=[{"comuna":"Pelarco","region":"Maule","evs":1483,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":64.0},{"comuna":"Colbún","region":"Maule","evs":1150,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":64.0},{"comuna":"Villa Alemana","region":"Valparaíso","evs":269,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":50.1},{"comuna":"La Serena","region":"Coquimbo","evs":483,"total_carg":25,"max_kw":191.0,"has_dc":true,"score":48.0},{"comuna":"Coronel","region":"Biobío","evs":224,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":47.4},{"comuna":"Calle Larga","region":"Valparaíso","evs":219,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":47.1},{"comuna":"Marchihue","region":"O’Higgins","evs":203,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":46.2},{"comuna":"Chiguayante","region":"Biobío","evs":202,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":46.1},{"comuna":"Algarrobo","region":"Valparaíso","evs":67,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":43.0},{"comuna":"Papudo","region":"Valparaíso","evs":28,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":39.2},{"comuna":"Peñalolén","region":"Metropolitana","evs":3279,"total_carg":22,"max_kw":213.4,"has_dc":true,"score":39.0},{"comuna":"Providencia","region":"Metropolitana","evs":2146,"total_carg":69,"max_kw":256.5,"has_dc":true,"score":39.0},{"comuna":"Santiago","region":"Metropolitana","evs":935,"total_carg":127,"max_kw":240.0,"has_dc":true,"score":39.0},{"comuna":"Las Condes","region":"Metropolitana","evs":1098,"total_carg":437,"max_kw":190.0,"has_dc":true,"score":39.0},{"comuna":"Puente Alto","region":"Metropolitana","evs":501,"total_carg":22,"max_kw":144.0,"has_dc":true,"score":39.0},{"comuna":"Alhué","region":"Metropolitana","evs":4269,"total_carg":2,"max_kw":43.6,"has_dc":false,"score":39.0},{"comuna":"Renca","region":"Metropolitana","evs":768,"total_carg":9,"max_kw":70.0,"has_dc":true,"score":39.0},{"comuna":"Lo Prado","region":"Metropolitana","evs":543,"total_carg":8,"max_kw":70.0,"has_dc":true,"score":39.0},{"comuna":"San Joaquín","region":"Metropolitana","evs":554,"total_carg":21,"max_kw":70.0,"has_dc":true,"score":39.0},{"comuna":"Vitacura","region":"Metropolitana","evs":838,"total_carg":114,"max_kw":213.4,"has_dc":true,"score":39.0},{"comuna":"Peñalolén","region":"Metropolitana","evs":3279,"total_carg":19,"max_kw":120.0,"has_dc":true,"score":39.0},{"comuna":"Lo Barnechea","region":"Metropolitana","evs":1174,"total_carg":37,"max_kw":191.0,"has_dc":true,"score":39.0},{"comuna":"Vichuquén","region":"Maule","evs":119,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":38.1},{"comuna":"Ñuñoa","region":"Metropolitana","evs":480,"total_carg":21,"max_kw":70.0,"has_dc":true,"score":37.8},{"comuna":"Ñuñoa","region":"Metropolitana","evs":480,"total_carg":8,"max_kw":60.0,"has_dc":true,"score":37.8},{"comuna":"Paiguano","region":"Coquimbo","evs":115,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":37.7},{"comuna":"El Quisco","region":"Valparaíso","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":37.7},{"comuna":"Padre Hurtado","region":"Metropolitana","evs":99,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":36.2},{"comuna":"Viña del Mar","region":"Valparaíso","evs":451,"total_carg":26,"max_kw":213.4,"has_dc":true,"score":36.1},{"comuna":"Viña del Mar","region":"Valparaíso","evs":451,"total_carg":13,"max_kw":60.0,"has_dc":true,"score":36.1},{"comuna":"Colina","region":"Metropolitana","evs":437,"total_carg":35,"max_kw":180.0,"has_dc":true,"score":35.2},{"comuna":"Huechuraba","region":"Metropolitana","evs":432,"total_carg":47,"max_kw":191.0,"has_dc":true,"score":34.9},{"comuna":"Lo Espejo","region":"Metropolitana","evs":80,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":34.3},{"comuna":"Antofagasta","region":"Antofagasta","evs":420,"total_carg":27,"max_kw":180.0,"has_dc":true,"score":34.2},{"comuna":"Santa María","region":"Valparaíso","evs":65,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":32.8},{"comuna":"Limache","region":"Valparaíso","evs":64,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":32.7},{"comuna":"La Higuera","region":"Coquimbo","evs":59,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":32.3},{"comuna":"La Florida","region":"Metropolitana","evs":383,"total_carg":139,"max_kw":256.5,"has_dc":true,"score":32.0},{"comuna":"Río Claro","region":"Maule","evs":55,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":31.9},{"comuna":"San Felipe","region":"Valparaíso","evs":54,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":31.8},{"comuna":"Cholchol","region":"La Araucanía","evs":47,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":31.1},{"comuna":"San Nicolás","region":"Ñuble","evs":39,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":30.3},{"comuna":"Concepción","region":"Biobío","evs":352,"total_carg":47,"max_kw":191.0,"has_dc":true,"score":30.1},{"comuna":"Rancagua","region":"O’Higgins","evs":349,"total_carg":35,"max_kw":254.0,"has_dc":true,"score":29.9},{"comuna":"Timaukel","region":"Magallanes","evs":32,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":29.6},{"comuna":"Petorca","region":"Valparaíso","evs":32,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":29.6},{"comuna":"Ránquil","region":"Ñuble","evs":30,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":29.4},{"comuna":"Maipú","region":"Metropolitana","evs":340,"total_carg":47,"max_kw":256.5,"has_dc":true,"score":29.4},{"comuna":"La Cruz","region":"Valparaíso","evs":28,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":29.2},{"comuna":"Padre las Casas","region":"La Araucanía","evs":28,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":29.2},{"comuna":"San Esteban","region":"Valparaíso","evs":24,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.8},{"comuna":"Rauco","region":"Maule","evs":24,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.8},{"comuna":"Sagrada Familia","region":"Maule","evs":23,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.7},{"comuna":"Pozo Almonte","region":"Tarapacá","evs":21,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.5},{"comuna":"Codegua","region":"O’Higgins","evs":21,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.5},{"comuna":"Penco","region":"Biobío","evs":19,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.4},{"comuna":"Cauquenes","region":"Maule","evs":19,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.4},{"comuna":"Angol","region":"La Araucanía","evs":20,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.4},{"comuna":"Tierra Amarilla","region":"Atacama","evs":20,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.4},{"comuna":"Alto Hospicio","region":"Tarapacá","evs":20,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.4},{"comuna":"San Bernardo","region":"Metropolitana","evs":319,"total_carg":38,"max_kw":191.0,"has_dc":true,"score":28.1},{"comuna":"La Reina","region":"Metropolitana","evs":319,"total_carg":35,"max_kw":70.0,"has_dc":true,"score":28.1},{"comuna":"Coquimbo","region":"Coquimbo","evs":169,"total_carg":11,"max_kw":94.6,"has_dc":true,"score":28.0},{"comuna":"Santa Juana","region":"Biobío","evs":15,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.0},{"comuna":"Futrono","region":"Los Ríos","evs":15,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":28.0},{"comuna":"Licantén","region":"Maule","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"El Tabo","region":"Valparaíso","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"Constitución","region":"Maule","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"Guaitecas","region":"Aysén","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"Nancagua","region":"O’Higgins","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"Tortel","region":"Aysén","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"Litueche","region":"O’Higgins","evs":14,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.9},{"comuna":"Pumanque","region":"O’Higgins","evs":13,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.8},{"comuna":"Pencahue","region":"Maule","evs":13,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.8},{"comuna":"Laja","region":"Biobío","evs":13,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.8},{"comuna":"Cabrero","region":"Biobío","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"Putaendo","region":"Valparaíso","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"Futaleufú","region":"Los Lagos","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"La Unión","region":"Los Ríos","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"Quinta de Tilcoco","region":"O’Higgins","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"Purranque","region":"Los Lagos","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"Vilcún","region":"La Araucanía","evs":12,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.7},{"comuna":"Taltal","region":"Antofagasta","evs":11,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.6},{"comuna":"Salamanca","region":"Coquimbo","evs":11,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.6},{"comuna":"Hualañé","region":"Maule","evs":11,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.6},{"comuna":"Bulnes","region":"Ñuble","evs":11,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.6},{"comuna":"Antuco","region":"Biobío","evs":10,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.5},{"comuna":"San Clemente","region":"Maule","evs":10,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.5},{"comuna":"San Juan de la Costa","region":"Los Lagos","evs":10,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.5},{"comuna":"Palmilla","region":"O’Higgins","evs":10,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.5},{"comuna":"Lanco","region":"Los Ríos","evs":10,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.5},{"comuna":"Las Cabras","region":"O’Higgins","evs":9,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.4},{"comuna":"Coltauco","region":"O’Higgins","evs":9,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.4},{"comuna":"Rengo","region":"O’Higgins","evs":9,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.4},{"comuna":"Lota","region":"Biobío","evs":9,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.4},{"comuna":"Cobquecura","region":"Ñuble","evs":9,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.4},{"comuna":"Lago Verde","region":"Aysén","evs":9,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.4},{"comuna":"Cartagena","region":"Valparaíso","evs":8,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.3},{"comuna":"Nacimiento","region":"Biobío","evs":8,"total_carg":0,"max_kw":0.0,"has_dc":false,"score":27.3},{"comuna":"Pichilemu","region":"O’Higgins","evs":8,"total_carg":13,"max_kw":22.0,"has_dc":false,"score":27.3}];
+var CALC_DEFAULTS={w_evs:30,w_nocarg:25,w_upgrade:15,w_ruta:15,w_turismo:10,w_ernc:5};
+var TOURIST_COM=["pucon","villarrica","puerto varas","castro","ancud","vina del mar","pichilemu","algarrobo","papudo","la serena","coquimbo","san pedro de atacama"];
+function getW(id){return parseInt(document.getElementById(id).value)||0;}
+function updateCalc(){
+  var ws={w_evs:getW("w_evs"),w_nocarg:getW("w_nocarg"),w_upgrade:getW("w_upgrade"),w_ruta:getW("w_ruta"),w_turismo:getW("w_turismo"),w_ernc:getW("w_ernc")};
+  var total=Object.values(ws).reduce(function(a,b){return a+b;},0);
+  document.getElementById("calc-total-pct").textContent=total+"%";
+  document.getElementById("calc-total-warn").style.display=total!==100?"inline":"none";
+  ["w_evs","w_nocarg","w_upgrade","w_ruta","w_turismo","w_ernc"].forEach(function(id){
+    document.getElementById(id+"-val").textContent=ws[id]+"%";
+  });
+  var scored=CALC_DATA.map(function(c){
+    var s=0;
+    var evs_s=Math.min(c.evs/500*100,100);
+    s+=evs_s*ws.w_evs/100;
+    if(c.total_carg===0) s+=ws.w_nocarg;
+    if(c.total_carg>0&&c.max_kw<=22&&!c.has_dc) s+=ws.w_upgrade;
+    var ruta_s=Math.min(c.evs/200*100,100)*0.5;
+    s+=ruta_s*ws.w_ruta/100;
+    var norm_c=c.comuna.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    if(TOURIST_COM.some(function(t){return norm_c.indexOf(t)>=0;})) s+=ws.w_turismo;
+    s+=ws.w_ernc*0.3;
+    return Object.assign({},c,{score:Math.round(s*10)/10});
+  }).sort(function(a,b){return b.score-a.score;});
+  var tbody=document.getElementById("calc-tbody");
+  if(!tbody)return;
+  var html="";
+  scored.slice(0,50).forEach(function(c,i){
+    var opp=c.total_carg===0?"Sin cargador":c.max_kw<=22&&!c.has_dc?"Solo AC lento":"Ampliar capacidad";
+    var opp_c=c.total_carg===0?"#C62828":c.max_kw<=22&&!c.has_dc?"#F5A623":"#2B5BA8";
+    var bar_w=Math.round(c.score);
+    html+='<tr style="border-bottom:1px solid #eee;'+(i%2?"background:#F5F8FF;":"")+'">'      +'<td style="padding:5px 8px;color:#888;font-size:10px;">'+(i+1)+'</td>'      +'<td style="padding:5px 8px;font-weight:600;color:#1E3D7A;">'+c.comuna+'</td>'      +'<td style="padding:5px 8px;font-size:10px;color:#666;">'+c.region+'</td>'      +'<td style="padding:5px 8px;text-align:right;">'+c.evs.toLocaleString("es-CL")+'</td>'      +'<td style="padding:5px 8px;text-align:right;">'+c.total_carg+'</td>'      +'<td style="padding:5px 8px;text-align:right;">'+c.max_kw+'</td>'      +'<td style="padding:5px 8px;text-align:right;">'        +'<div style="display:flex;align-items:center;gap:4px;">'        +'<div style="width:'+bar_w+'px;max-width:60px;height:6px;background:#2B5BA8;border-radius:3px;"></div>'        +'<span style="font-weight:700;color:#1E3D7A;">'+c.score+'</span>'        +'</div></td>'      +'<td style="padding:5px 8px;"><span style="background:'+opp_c+';color:#fff;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;">'+opp+'</span></td>'      +"</tr>";
+  });
+  tbody.innerHTML=html;
+}
+function resetCalcWeights(){
+  Object.keys(CALC_DEFAULTS).forEach(function(id){
+    document.getElementById(id).value=CALC_DEFAULTS[id];
+  });
+  updateCalc();
+}
+if(document.readyState==="complete"){setTimeout(updateCalc,200);}
+else{window.addEventListener("load",function(){setTimeout(updateCalc,200);});}
+</script>
 <div class="footer" id="footer-texto"></div>
 
 
