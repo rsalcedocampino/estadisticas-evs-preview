@@ -306,7 +306,7 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
     <div class="card-header">🏢 CUOTA DE MERCADO — QUIÉN INSTALA<span class="insight">Enel + Copec = 89% del mercado</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cuota"></canvas></div>
-      <div class="insight-bar">Dos operadores dominan la red pública. <b>Enel</b> lidera con 649 puntos, seguido de <b>Copec</b> con 431.</div>
+      <div class="insight-bar">Dos operadores dominan la red pública. <b>Enel</b> lidera con 1.301 conectores, seguido de <b>Copec</b> con 946.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
     </div>
   </div>
@@ -827,11 +827,11 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
         if(typeof L==='undefined'||typeof GAP_DATA==='undefined'){setTimeout(_waitLeafletGap,200);return;}
         var el=document.getElementById('mapa-gaps');
         if(!el||el._leaflet_id)return;
-        var map=L.map('mapa-gaps').setView([-36,-70],4);
+        var map=L.map('mapa-gaps').setView([-38,-71],5);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:18}).addTo(map);
         GAP_DATA.forEach(function(p){
           var c=p.prioridad==='ALTA'?'#C62828':p.prioridad==='MEDIA'?'#E65100':'#9E9E9E';
-          var r=p.kw_recom>=350?10:p.kw_recom>=180?8:6;
+          var r=p.kw_recom>=350?14:p.kw_recom>=180?12:9;
           var ico=L.divIcon({className:'',html:'<div style="width:'+r*2+'px;height:'+r*2+'px;border-radius:50%;background:'+c+';border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,0.4);"></div>',iconSize:[r*2,r*2]});
           L.marker([p.lat,p.lng],{icon:ico}).bindPopup('<b style="color:'+c+';">['+ p.prioridad+'] '+p.lugar+'</b><br>'+p.region+'<br>⚡ Recom: <b>'+p.kw_recom+' kW</b><br>Dist. carg: '+p.dist_cercano+' km<br>Dist. >150kW: <b>'+p.dist_hp+' km</b>').addTo(map);
         });
@@ -872,11 +872,11 @@ var GAP_DATA=[{"lugar":"Puerto Williams","region":"Magallanes","dist_cercano":28
 function _initGapMap(){
   var el=document.getElementById("mapa-gaps");
   if(!el||el._leaflet_id)return;
-  var map=L.map("mapa-gaps").setView([-36,-70],4);
+  var map=L.map("mapa-gaps").setView([-38,-71],5);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"&copy; OpenStreetMap contributors",maxZoom:18}).addTo(map);
   GAP_DATA.forEach(function(p){
     var c=p.prioridad==="ALTA"?"#C62828":p.prioridad==="MEDIA"?"#E65100":"#9E9E9E";
-    var r=p.kw_recom>=350?10:p.kw_recom>=180?8:6;
+    var r=p.kw_recom>=350?14:p.kw_recom>=180?12:9;
     var ico=L.divIcon({className:"",html:'<div style="width:'+r*2+'px;height:'+r*2+'px;border-radius:50%;background:'+c+';border:2px solid #fff;box-shadow:0 2px 5px rgba(0,0,0,0.4);"></div>',iconSize:[r*2,r*2]});
     L.marker([p.lat,p.lng],{icon:ico}).bindPopup("<b style='color:"+c+";'>["+p.prioridad+"] "+p.lugar+"</b><br>"+p.region+"<br>⚡ Recom: <b>"+p.kw_recom+" kW</b><br>Dist. carg: "+p.dist_cercano+" km<br>Dist. >150kW: <b>"+p.dist_hp+" km</b>").addTo(map);
   });
