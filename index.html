@@ -142,6 +142,7 @@ function secBtn(id){
 
 <!-- KPIs -->
 <div class="kpi-row" id="kpi-row"></div>
+<div style="background:#E8F5E9;border-left:4px solid #2E7D32;padding:10px 16px;margin:0 0 4px;font-size:11px;color:#1B5E20;line-height:1.7;"><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia de datos para electromovilidad, infraestructura de carga y energía renovable en Chile. Análisis de ventas EV, cargadores públicos, permisos de circulación, proyectos ERNC y brechas territoriales. <a href="mailto:rsalcedocampino@gmail.com?subject=Consulta%20Observatorio%20EV" style="color:#1B5E20;font-weight:700;">Solicitar asesoría →</a></div>
 
 
 <div class="sec-btn" id="btn-ev" onclick="secBtn('ev')"><span><span class="sec-lbl">EVs & Mercado</span><span class="sec-sub">Ventas, Penetración, Marcas, Regiones, Flota</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ev">
@@ -205,7 +206,7 @@ function secBtn(id){
     <div class="card-header">⚡ RATIO EVs POR CONECTOR (ACUMULADO)<span class="insight">BEV+PHEV vs conectores públicos</span></div>
     <div class="card-body">
       <div class="chart-wrap"><canvas id="chartRatio"></canvas></div>
-      <div class="insight-bar">Ratio de <strong>EVs enchufables (BEV+PHEV) por conector PÚBLICO acumulado</strong>. En 2026 hay <strong>~12x</strong> más BEV+PHEV que conectores públicos disponibles. Cifra que aumentó desde 2020 conforme crece la flota enchufable.</div>
+      <div class="insight-bar">En 2026 hay <strong>~12 BEV+PHEV por cada conector público</strong>. La brecha creció desde 8x en 2024 — la flota enchufable escala más rápido que la infraestructura pública.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ventas EV Anuales + Conectores EVs Cargadores</div>
     </div>
   </div>
@@ -231,7 +232,7 @@ function secBtn(id){
 
 
 </div>
-<div class="sec-btn" id="btn-infra" onclick="secBtn('infra')"><span><span class="sec-lbl">Infraestructura de Carga</span><span class="sec-sub">Cargadores, Conectores, Energía MW, Ratio</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-infra">
+<div class="sec-btn" id="btn-infra" onclick="secBtn('infra')"><span><span class="sec-lbl">Red de Carga e Infraestructura</span><span class="sec-sub">Cargadores, Conectores, Energía MW, Ratio</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-infra">
 <!-- FILA 3b: Conectores + MW -->
 <div class="grid-full">
   <!-- CHART:conectoresMW -->
@@ -347,7 +348,7 @@ function secBtn(id){
 <!-- ═══════════════ SECCIÓN: CARGADORES PÚBLICOS ═══════════════════════ -->
 <!-- 
 </div>
-<div class="sec-btn" id="btn-carg" onclick="secBtn('carg')"><span><span class="sec-lbl">Cargadores Públicos</span><span class="sec-sub">Cuota, Análisis comunas, Cobertura</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-carg">
+<div class="sec-btn" id="btn-carg" onclick="secBtn('carg')"><span><span class="sec-lbl">Análisis de Cargadores Públicos</span><span class="sec-sub">Cuota, Análisis comunas, Cobertura</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-carg">
 SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="grid">
   <div class="card">
@@ -417,7 +418,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 
 </div>
 </div>
-<div class="sec-btn" id="btn-mapa" onclick="secBtn('mapa')"><span><span class="sec-lbl">Mapa de Cargadores</span><span class="sec-sub">Mapa interactivo, 3.115 puntos, Filtros</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-mapa">
+<div class="sec-btn" id="btn-mapa" onclick="secBtn('mapa')"><span><span class="sec-lbl">Mapa Nacional de Infraestructura</span><span class="sec-sub">Mapa interactivo, 3.115 puntos, Filtros</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-mapa">
 <div class="grid">
   <div class="card" style="grid-column:span 2;">
     <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE<span class="insight">3.115 conectores · AC=verde · DC=naranja</span></div>
@@ -857,7 +858,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 </script>
 
 </div>
-<div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span><span class="sec-lbl">Análisis de Brechas</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
+<div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span><span class="sec-lbl">Oportunidades e Inversión</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
 <!-- AC CHARGER RECS -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#1565C0;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔌 RECOMENDACIÓN: COMUNAS PRIORITARIAS PARA INSTALAR CARGADORES 22–60 kW</div>
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
@@ -1027,7 +1028,7 @@ function _updateMarcasChart(ym) {
 
 function _setTextos() {
   var footer = document.getElementById('footer-texto');
-  if (footer) footer.innerHTML = '<div>Desarrollado por Rodrigo Salcedo Campino.</div>'
+  if (footer) footer.innerHTML = '<div><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia de datos para electromovilidad e infraestructura en Chile. Desarrollado por Rodrigo Salcedo Campino.</div>'
     + '<div style="margin-top:4px;">Fuentes: Energ\u00edas Futuro, AgenciaSE, SEC, Asociaci\u00f3n de Veh\u00edculos El\u00e9ctricos de Chile AVEC, ANAC, Ministerio de Energ\u00eda Chile, Ministerio de Transporte, Desarrollo Territorial, Ministerios de Medio Ambiente, Ministerio de Obras P\u00fablicas, IEA.</div>'
     + '<div style="margin-top:4px;font-weight:600;">Prohibida su reproducci\u00f3n.</div>';
   var sub = document.getElementById('subtitulo-header');
