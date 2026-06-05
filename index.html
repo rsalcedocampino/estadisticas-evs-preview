@@ -311,6 +311,7 @@ function fmtCL(n,dec){
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chartPresionRegional"></canvas></div>
       <div class="insight-bar"><strong>Maule (74x)</strong> es la región más crítica del país — cuatro veces más presión que la Metropolitana (16x). <strong>Biobío (26x)</strong> y <strong>Coquimbo (21x)</strong> también superan el umbral alto. Las regiones del sur tienen mejor cobertura relativa: Aysén (5x), Los Lagos (8x) y Araucanía (9x). <em>Colores: rojo oscuro ≥ 50x · rojo ≥ 25x · naranja ≥ 15x · amarillo ≥ 10x · verde &lt; 10x.</em></div>
+      <div style="background:#EEF2FB;border-left:3px solid #2B5BA8;padding:6px 14px;font-size:10px;color:#1E3D7A;font-style:italic;">Este índice permite priorizar inversiones en infraestructura pública de carga según la presión actual de la flota enchufable, cobertura regional y disponibilidad de conectores públicos.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Circulación Total + Conectores Regiones</div>
     </div>
   </div>
@@ -364,10 +365,10 @@ function fmtCL(n,dec){
 SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="grid">
   <div class="card">
-    <div class="card-header">🏙️ COBERTURA COMUNAL<span class="insight">178 de 346 comunas con cargador</span></div>
+    <div class="card-header">🏙️ COBERTURA COMUNAL<span class="insight">178 / 346 comunas con cargador público (51,4%)</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cobertura"></canvas></div>
-      <div class="insight-bar"><b>168 comunas</b> (49%) sin ningún conector público registrado registrado en SEC.</div>
+      <div class="insight-bar"><b>178 comunas</b> tienen al menos un conector público registrado (51,4% de cobertura nacional). <b>168 comunas</b> aún no cuentan con carga pública. Chile tiene 346 comunas en total. registrado en SEC.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
     </div>
   </div>
@@ -436,7 +437,9 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE<span class="insight">3.115 conectores · AC=verde · DC=naranja</span></div>
     <div class="card-body" style="padding:0;">
       <!-- FILTROS MAPA -->
-      <div id="mapa-filtros" style="background:#f8f9fa;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      
+      <div style="background:#EEF2FB;border-left:4px solid #F5A623;padding:8px 14px;font-size:11px;color:#1E3D7A;"><strong>📋 Cómo usar este mapa:</strong> Filtra por región, comuna, tipo de conector, instalador o infraestructura para identificar cobertura pública, zonas sin carga rápida y oportunidades de expansión. — Fuente: SEC — Actualizado mayo 2026</div>
+<div id="mapa-filtros" style="background:#f8f9fa;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
         <span style="font-size:11px;font-weight:700;color:#2B5BA8;white-space:nowrap;">🔍 Filtros:</span>
         <select id="f-region" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
           <option value="">Todas las regiones</option>
@@ -508,6 +511,8 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 <div class="sec-btn" id="btn-ernc" onclick="secBtn('ernc')"><span><span class="sec-lbl">Solar & ERNC</span><span class="sec-sub">Potencia solar, Pipeline, Proyectos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ernc">
 <!-- ═══════ SECCIÓN ERNC ═══════ -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 ENERGÍAS RENOVABLES NO CONVENCIONALES (ERNC) — PIPELINE Y OPERACIÓN</div>
+
+<div style="background:#EEF2FB;border-left:4px solid #1ABBA8;padding:10px 16px;margin:4px 0 8px;font-size:11px;color:#1E3D7A;line-height:1.7;">La electromovilidad no escala solo con vehículos y cargadores. También requiere <strong>energía disponible, generación limpia, almacenamiento y planificación territorial</strong>. Esta sección conecta la infraestructura de carga con la capacidad renovable y solar del país, entregando una lectura integral del ecosistema energético.</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19.889,5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">7.487,4 MWh</div><div style="font-size:11px;color:#555;">Almacenamiento Operativo</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
@@ -872,7 +877,8 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 </div>
 <div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span><span class="sec-lbl">Oportunidades e Inversión</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
 <!-- AC CHARGER RECS -->
-<div style="margin:12px 0 4px;padding:4px 8px;background:#1565C0;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔌 RECOMENDACIÓN: COMUNAS PRIORITARIAS PARA INSTALAR CARGADORES 22–60 kW</div>
+<div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 Dónde Invertir en Infraestructura de Carga en Chile</div>
+<div style="padding:4px 8px 8px;font-size:11px;color:#1E3D7A;font-style:italic;">Priorización territorial según flota EV, cobertura actual, potencia disponible y distancia a cargadores rápidos existentes.</div>
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #1565C0;"><div style="font-size:22px;font-weight:800;color:#1565C0;">58</div><div style="font-size:11px;color:#555;">Comunas sin cargador con EVs</div><div style="font-size:10px;color:#888;">Fuente: Permiso de Circulación 2024</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #1565C0;"><div style="font-size:22px;font-weight:800;color:#1565C0;">168</div><div style="font-size:11px;color:#555;">Comunas sin cargador en total</div><div style="font-size:10px;color:#888;">346 comunas en Chile · 178 con cargadores</div></div>
@@ -890,7 +896,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 </div>
 <!-- FIN AC RECS -->
 <!-- GAP ANALYSIS -->
-<div style="margin:12px 0 4px;padding:4px 8px;background:#C62828;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 ANÁLISIS DE BRECHAS — DÓNDE INSTALAR CARGADORES >150 kW</div>
+<div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#C62828,#E65100);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 Dónde Instalar Cargadores Rápidos (>150 kW) — Brechas Territoriales</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #C62828;"><div style="font-size:22px;font-weight:800;color:#C62828;">16</div><div style="font-size:11px;color:#555;">Puntos Prioridad ALTA</div><div style="font-size:10px;color:#888;">>200 km sin cargador >150 kW</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #E65100;"><div style="font-size:22px;font-weight:800;color:#E65100;">21</div><div style="font-size:11px;color:#555;">Puntos Prioridad MEDIA</div><div style="font-size:10px;color:#888;">100–200 km sin cargador >150 kW</div></div>
