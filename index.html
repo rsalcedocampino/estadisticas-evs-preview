@@ -614,16 +614,16 @@ function _initBESSCharts(){
   var b=BESS_DATA,tc="#333",gc="rgba(0,0,0,0.07)";
   var c1=document.getElementById("chart-bess-estado");
   if(c1)new Chart(c1,{type:"bar",data:{labels:b.porEstado.labels,datasets:[
-    {label:"MW",data:b.porEstado.mw,backgroundColor:["#F57C00","#FDD835","#1976D2","#2E7D32","#00ACC1"],borderRadius:3,yAxisID:"yMW"},
+    {label:"MW",data:b.porEstado.mw,backgroundColor:["#E65100","#F9A825","#1565C0","#2E7D32","#0277BD"],borderRadius:3,yAxisID:"yMW"},
     {label:"MWh",data:b.porEstado.mwh,type:"line",borderColor:"#6A1B9A",backgroundColor:"rgba(106,27,154,0.1)",yAxisID:"yMWh",tension:0.3,pointRadius:4,fill:false}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}}},
   scales:{x:{ticks:{color:tc},grid:{color:gc}},yMW:{type:"linear",position:"left",title:{display:true,text:"MW",color:"#2E7D32",font:{size:10}},ticks:{color:"#2E7D32"},grid:{color:gc}},
   yMWh:{type:"linear",position:"right",title:{display:true,text:"MWh",color:"#6A1B9A",font:{size:10}},ticks:{color:"#6A1B9A"},grid:{drawOnChartArea:false}}}}});
   var c2=document.getElementById("chart-bess-region");
-  if(c2)new Chart(c2,{type:"bar",data:{labels:b.porRegion.labels,datasets:[{label:"MW",data:b.porRegion.mw,backgroundColor:b.porRegion.labels.map(function(_,i){return i===0?"#F57C00":i===1?"#FDD835":"#2E7D32";}),borderRadius:3}]},
+  if(c2)new Chart(c2,{type:"bar",data:{labels:b.porRegion.labels,datasets:[{label:"MW",data:b.porRegion.mw,backgroundColor:b.porRegion.labels.map(function(_,i){return i===0?"#C62828":i===1?"#E65100":"#1565C0";}),borderRadius:3}]},
   options:{responsive:true,maintainAspectRatio:false,indexAxis:"y",plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc},grid:{color:gc}},y:{ticks:{color:tc,font:{size:10}},grid:{display:false}}}}});
   var c3=document.getElementById("chart-bess-tech");
-  if(c3)new Chart(c3,{type:"doughnut",data:{labels:b.porTecnologia.labels,datasets:[{data:b.porTecnologia.mw,backgroundColor:["#F57C00","#1976D2","#2E7D32","#FDD835","#C62828","#6A1B9A"],borderWidth:2,borderColor:"#fff"}]},
+  if(c3)new Chart(c3,{type:"doughnut",data:{labels:b.porTecnologia.labels,datasets:[{data:b.porTecnologia.mw,backgroundColor:["#FDD835","#0277BD","#2E7D32","#1565C0","#E65100","#546E7A"],borderWidth:2,borderColor:"#fff"}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:tc,font:{size:10}}}}}});
   var c4=document.getElementById("chart-bess-anio");
   if(c4)new Chart(c4,{type:"bar",data:{labels:b.porAnio.labels,datasets:[{label:"MW operacion",data:b.porAnio.mw,backgroundColor:"#1976D2",borderRadius:3}]},
@@ -787,7 +787,7 @@ function _initSolarCharts() {
   if(c4) new Chart(c4, {type:'bar', data:{
     labels: sd.solarRegion.labels,
     datasets:[{label:'MW operativos', data:sd.solarRegion.mw,
-      backgroundColor:sd.solarRegion.labels.map(function(_,i){return i<2?orange:i<4?yellow:green;}), borderRadius:3}]
+      backgroundColor:sd.solarRegion.labels.map(function(_,i){return i<2?"#C62828":i<4?"#E65100":"#1565C0";}), borderRadius:3}]
   }, options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
     plugins:{legend:{display:false}},
     scales:{x:{ticks:{color:textColor},grid:{color:gridColor}},y:{ticks:{color:textColor,font:{size:10}},grid:{display:false}}}}});
@@ -822,7 +822,7 @@ var AC_DATA={"sinCargador":[{"comuna":"Villa Alemana","region":"Valparaíso","ev
 <script>
 function _initACCharts(){
   var d=AC_DATA; var tc="#333"; var gc="rgba(0,0,0,0.07)";
-  var colors=d.sinCargador.map(function(r){return r.kw_recom===60?"#C62828":r.kw_recom===44?"#E65100":"#1565C0";});
+  var colors=d.sinCargador.map(function(r){return r.kw_recom===60?"#C62828":r.kw_recom===44?"#E65100":"#2E7D32";});
   var c1=document.getElementById("chart-ac-sin-carg");
   if(c1)new Chart(c1,{type:"bar",data:{
     labels:d.sinCargador.map(function(r){return r.comuna;}),
@@ -896,7 +896,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
         <span id="gf-count" style="font-size:11px;color:#1B5E20;font-weight:600;"></span>
       </div>
       <div id="mapa-gaps" style="height:520px;width:100%;"></div>
-      <div style="padding:6px 14px;font-size:10px;color:#555;border-top:1px solid #f0f0f0;">Tamaño proporcional al kW · Clic para ver detalle</div>
+      <div style="padding:6px 14px;font-size:10px;color:#555;border-top:1px solid #f0f0f0;">\U0001f534 Prioridad Alta &nbsp; \U0001f7e0 Prioridad Media &nbsp; ⚪ Prioridad Baja &nbsp;|⚡ Tamaño ∝ kW recomendado · \U0001f7e2 Cargador ≥150 kW existente</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC — Análisis haversine</div>
     </div></div>
 </div>
@@ -1076,7 +1076,7 @@ window.gapMapFilter=function(){
     return true;
   });
   data.forEach(function(p){
-    var c=p.prioridad==="ALTA"?"#C62828":p.prioridad==="MEDIA"?"#E65100":"#9E9E9E";
+    var c=p.prioridad==="ALTA"?"#B71C1C":p.prioridad==="MEDIA"?"#E65100":"#757575";
     var r=p.kw_recom>=350?12:p.kw_recom>=180?9:7;
     var m=L.circleMarker([p.lat,p.lng],{radius:r,fillColor:c,color:"#fff",weight:2,fillOpacity:0.9})
       .bindPopup("<b>"+p.lugar+"</b><br>"+p.region+"<br><b>"+p.prioridad+"</b><br>"+p.kw_recom+" kW recomendado<br>Dist. carg: "+p.dist_cercano+" km<br>Dist >150kW: "+p.dist_hp+" km");
@@ -1198,7 +1198,7 @@ function _initCargadores() {
     legend.onAdd=function(){
       var d=L.DomUtil.create('div','');
       d.style.cssText='background:rgba(255,255,255,0.95);color:#333;border:1px solid #ddd;padding:8px 12px;border-radius:8px;font-size:12px;line-height:1.8;box-shadow:0 2px 6px rgba(0,0,0,0.15);';
-      d.innerHTML='<b>Tipo carga</b><br><span style="color:#4CAF50;">&#9679;</span> AC<br><span style="color:#FF5722;">&#9679;</span> DC';
+      d.innerHTML='<div style="font-weight:700;font-size:11px;margin-bottom:3px;">Tipo de Carga</div><div><span style="color:#2E7D32;">&#9679;</span> AC — corriente alterna</div><div><span style="color:#E65100;">&#9679;</span> DC — carga rápida</div>';
       return d;
     };
     legend.addTo(_mapaMap);
@@ -1208,12 +1208,12 @@ function _initCargadores() {
   var charts=[
 
     ['chart-cobertura','doughnut',{labels:['Comunas con cargadores','Comunas sin cargadores'],datasets:[{data:[COBERTURA.con,COBERTURA.sin],backgroundColor:['#4FC3F7','#455a64'],borderColor:'#1a2035',borderWidth:2}]},{plugins:{legend:{labels:{color:'#333333',font:{size:12}}},tooltip:{callbacks:{label:function(ctx){return ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/COBERTURA.total*100)+'%)';}}}},cutout:'65%'}],
-    ['chart-top-comunas','bar',{labels:TOP_LABELS,datasets:[{label:'Cargadores',data:TOP_VALS,backgroundColor:'#4FC3F7',borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:10}},grid:{display:false}}}}],
-    ['chart-cuota','doughnut',{labels:CUOTA_LABELS,datasets:[{data:CUOTA_VALS,backgroundColor:['#4FC3F7','#FF6B6B','#FF9671','#FFD93D','#845EC2','#6BCB77','#00C9A7','#aaa'],borderColor:'#1a2035',borderWidth:2}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}},tooltip:{callbacks:{label:function(ctx){var t=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/t*100)+'%)';}}}}}],
-    ['chart-acdc','bar',{labels:ACDC_LABELS,datasets:[{label:'AC',data:ACDC_AC,backgroundColor:'#4CAF50',borderRadius:2},{label:'DC',data:ACDC_DC,backgroundColor:'#FF5722',borderRadius:2}]},{plugins:{legend:{labels:{color:'#333333'}}},scales:{x:{stacked:true,ticks:{color:'#333333',font:{size:9},maxRotation:45},grid:{display:false}},y:{stacked:true,ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}}}}],
-    ['chart-conectores-tipo','bar',{labels:CONECT_LABELS,datasets:[{label:'Puntos',data:CONECT_VALS,backgroundColor:['#4FC3F7','#FF6B6B','#FFD93D','#6BCB77','#845EC2','#FF9671'],borderRadius:4}]},{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333',font:{size:10}},grid:{display:false}},y:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}}}}],
-    ['chart-potencia-inst','bar',{labels:POT_LABELS,datasets:[{label:'kW promedio',data:POT_VALS,backgroundColor:(function(){var m={'Enel':'#4FC3F7','Copec':'#FF6B6B','Enex':'#FF9671','Trolebuses de Chile':'#FFD93D','Chass':'#845EC2','Saesa':'#6BCB77','EVBox':'#00C9A7','Otros':'#aaa'};return POT_LABELS.map(function(l){return m[l]||'#aaa';});})(),borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:11}},grid:{display:false}}}}],
-    ['chart-evol-potencia','line',{labels:EVOL_LABELS,datasets:[{label:'kW instalados',data:EVOL_VALS,borderColor:'#4FC3F7',backgroundColor:'rgba(79,195,247,0.12)',tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#4FC3F7',yAxisID:'yKW'},{label:'Conectores instalados',data:EVOL_CONECT,borderColor:'#FF9671',backgroundColor:'rgba(255,150,113,0.1)',tension:0.4,fill:false,pointRadius:5,pointBackgroundColor:'#FF9671',borderDash:[5,3],yAxisID:'yCon'}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},yKW:{type:'linear',position:'left',title:{display:true,text:'kW instalados',color:'#4FC3F7',font:{size:10}},ticks:{color:'#4FC3F7'},grid:{color:'rgba(0,0,0,0.08)'}},yCon:{type:'linear',position:'right',title:{display:true,text:'Conectores',color:'#FF9671',font:{size:10}},ticks:{color:'#FF9671'},grid:{drawOnChartArea:false}}}}]
+    ['chart-top-comunas','bar',{labels:TOP_LABELS,datasets:[{label:'Cargadores',data:TOP_VALS,backgroundColor:'#1565C0',borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:10}},grid:{display:false}}}}],
+    ['chart-cuota','doughnut',{labels:CUOTA_LABELS,datasets:[{data:CUOTA_VALS,backgroundColor:['#1565C0','#C62828','#E65100','#F9A825','#6A1B9A','#2E7D32','#00695C','#9E9E9E'],borderColor:'#1a2035',borderWidth:2}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}},tooltip:{callbacks:{label:function(ctx){var t=ctx.dataset.data.reduce(function(a,b){return a+b;},0);return ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/t*100)+'%)';}}}}}],
+    ['chart-acdc','bar',{labels:ACDC_LABELS,datasets:[{label:'AC',data:ACDC_AC,backgroundColor:'#2E7D32',borderRadius:2},{label:'DC',data:ACDC_DC,backgroundColor:'#E65100',borderRadius:2}]},{plugins:{legend:{labels:{color:'#333333'}}},scales:{x:{stacked:true,ticks:{color:'#333333',font:{size:9},maxRotation:45},grid:{display:false}},y:{stacked:true,ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}}}}],
+    ['chart-conectores-tipo','bar',{labels:CONECT_LABELS,datasets:[{label:'Puntos',data:CONECT_VALS,backgroundColor:['#1565C0','#0277BD','#2E7D32','#E65100','#6A1B9A','#546E7A'],borderRadius:4}]},{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333',font:{size:10}},grid:{display:false}},y:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}}}}],
+    ['chart-potencia-inst','bar',{labels:POT_LABELS,datasets:[{label:'kW promedio',data:POT_VALS,backgroundColor:(function(){var m={'Enel':'#1565C0','Copec':'#C62828','Enex':'#E65100','Trolebuses de Chile':'#F9A825','Chass':'#6A1B9A','Saesa':'#2E7D32','EVBox':'#00695C','Otros':'#9E9E9E'};return POT_LABELS.map(function(l){return m[l]||'#aaa';});})(),borderRadius:4}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},y:{ticks:{color:'#333333',font:{size:11}},grid:{display:false}}}}],
+    ['chart-evol-potencia','line',{labels:EVOL_LABELS,datasets:[{label:'kW instalados',data:EVOL_VALS,borderColor:'#1565C0',backgroundColor:'rgba(21,101,192,0.1)',tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#4FC3F7',yAxisID:'yKW'},{label:'Conectores instalados',data:EVOL_CONECT,borderColor:'#E65100',backgroundColor:'rgba(230,81,0,0.08)',tension:0.4,fill:false,pointRadius:5,pointBackgroundColor:'#FF9671',borderDash:[5,3],yAxisID:'yCon'}]},{plugins:{legend:{labels:{color:'#333333',font:{size:11}}}},scales:{x:{ticks:{color:'#333333'},grid:{color:'rgba(0,0,0,0.08)'}},yKW:{type:'linear',position:'left',title:{display:true,text:'kW instalados',color:'#4FC3F7',font:{size:10}},ticks:{color:'#4FC3F7'},grid:{color:'rgba(0,0,0,0.08)'}},yCon:{type:'linear',position:'right',title:{display:true,text:'Conectores',color:'#FF9671',font:{size:10}},ticks:{color:'#FF9671'},grid:{drawOnChartArea:false}}}}]
   ];
   charts.forEach(function(def){
     var el=document.getElementById(def[0]);
