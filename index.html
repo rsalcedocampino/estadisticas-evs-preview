@@ -376,60 +376,7 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci + Conectores EVs Cargadores</div>
     </div>
   </div>
-<div class="grid">
-  <div class="card" style="grid-column:span 2;">
-    <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE<span class="insight">3.115 conectores · AC=verde · DC=naranja</span></div>
-    <div class="card-body" style="padding:0;">
-      <!-- FILTROS MAPA -->
-      <div id="mapa-filtros" style="background:#f8f9fa;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-        <span style="font-size:11px;font-weight:700;color:#1B5E20;white-space:nowrap;">🔍 Filtros:</span>
-        <select id="f-region" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
-          <option value="">Todas las regiones</option>
-          <option>Metropolitana</option><option>Valparaíso</option><option>O’Higgins</option>
-          <option>Maule</option><option>Biobío</option><option>La Araucanía</option>
-          <option>Los Lagos</option><option>Antofagasta</option><option>Coquimbo</option>
-          <option>Atacama</option><option>Tarapacá</option><option>Arica y Parinacota</option>
-          <option>De los Ríos</option><option>Aysén</option><option>Magallanes</option>
-          <option>Ñuble</option>
-        </select>
-        <select id="f-comuna-sel" onchange="document.getElementById('f-comuna').value=this.value;_applyMapFilters();" style="display:none;font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;max-width:160px;">
-          <option value="">Todas las comunas</option>
-        </select>
-        <input id="f-comuna" type="hidden" value="">
-        <input id="f-comuna-txt" type="text" placeholder="Buscar comuna..." oninput="document.getElementById('f-comuna').value=this.value;_applyMapFilters();" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;width:130px;color:#333;" />
-        <select id="f-tipo" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
-          <option value="">AC + DC</option>
-          <option value="AC">Solo AC</option>
-          <option value="DC">Solo DC</option>
-        </select>
-        <select id="f-conector" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;max-width:170px;">
-          <option value="">Todos los conectores</option>
-          <option>Tipo 2 (Menneke)</option>
-          <option>Combo T2 (CCS Tipo 2)</option>
-          <option>Tipo 2 Socket (T2SC)</option>
-          <option>CHAdeMO</option>
-          <option>Tipo 1 (SAE J1772)</option>
-          <option>GB/T DC</option>
-        </select>
-        <select id="f-instalador" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
-          <option value="">Todos los instaladores</option>
-          <option>Enel</option><option>Copec</option><option>Enex</option>
-          <option>Saesa</option><option>Chass</option><option>Saba</option>
-          <option>Trolebuses de Chile</option>
-        </select>
-        <select id="f-infra" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
-          <option value="">Toda la infraestructura</option>
-          <option value="PUBLICO">Público</option>
-          <option value="CC T.PUBLICO">CC T.Público</option>
-          <option value="PRIVADO">Privado</option>
-        </select>
-        <button onclick="_resetMapFilters()" style="font-size:11px;padding:4px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#666;cursor:pointer;">× Limpiar</button>
-        <span id="mapa-counter" style="font-size:11px;color:#1B5E20;font-weight:600;margin-left:4px;white-space:nowrap;"></span>
-      </div>
-      <div id="mapa-cargadores" style="height:420px;width:100%;border-radius:0 0 10px 10px;"></div>
-    </div>
-  </div>
-</div>
+
 </div>
 
 
@@ -1206,6 +1153,62 @@ if(document.readyState==='complete'){setTimeout(_initCargadores,500);}
 else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);});}
 </script>
 
+<div id="sec-mapa" class="sec-anchor" style="display:block;margin-top:4px;"><div class="sec-header collapsed" onclick="toggleSec(this)"><div class="sec-title">🗺 Mapa de Cargadores <span style="font-weight:400;opacity:0.7;font-size:11px;margin-left:6px;">Mapa interactivo · Cargadores públicos Chile</span></div><div style="display:flex;align-items:center;gap:8px;"><span class="sec-arrow">&#9660;</span></div></div><div class="sec-body collapsed" style="">
+<div class="grid">
+  <div class="card" style="grid-column:span 2;">
+    <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE<span class="insight">3.115 conectores · AC=verde · DC=naranja</span></div>
+    <div class="card-body" style="padding:0;">
+      <!-- FILTROS MAPA -->
+      <div id="mapa-filtros" style="background:#f8f9fa;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+        <span style="font-size:11px;font-weight:700;color:#1B5E20;white-space:nowrap;">🔍 Filtros:</span>
+        <select id="f-region" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
+          <option value="">Todas las regiones</option>
+          <option>Metropolitana</option><option>Valparaíso</option><option>O’Higgins</option>
+          <option>Maule</option><option>Biobío</option><option>La Araucanía</option>
+          <option>Los Lagos</option><option>Antofagasta</option><option>Coquimbo</option>
+          <option>Atacama</option><option>Tarapacá</option><option>Arica y Parinacota</option>
+          <option>De los Ríos</option><option>Aysén</option><option>Magallanes</option>
+          <option>Ñuble</option>
+        </select>
+        <select id="f-comuna-sel" onchange="document.getElementById('f-comuna').value=this.value;_applyMapFilters();" style="display:none;font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;max-width:160px;">
+          <option value="">Todas las comunas</option>
+        </select>
+        <input id="f-comuna" type="hidden" value="">
+        <input id="f-comuna-txt" type="text" placeholder="Buscar comuna..." oninput="document.getElementById('f-comuna').value=this.value;_applyMapFilters();" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;width:130px;color:#333;" />
+        <select id="f-tipo" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
+          <option value="">AC + DC</option>
+          <option value="AC">Solo AC</option>
+          <option value="DC">Solo DC</option>
+        </select>
+        <select id="f-conector" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;max-width:170px;">
+          <option value="">Todos los conectores</option>
+          <option>Tipo 2 (Menneke)</option>
+          <option>Combo T2 (CCS Tipo 2)</option>
+          <option>Tipo 2 Socket (T2SC)</option>
+          <option>CHAdeMO</option>
+          <option>Tipo 1 (SAE J1772)</option>
+          <option>GB/T DC</option>
+        </select>
+        <select id="f-instalador" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
+          <option value="">Todos los instaladores</option>
+          <option>Enel</option><option>Copec</option><option>Enex</option>
+          <option>Saesa</option><option>Chass</option><option>Saba</option>
+          <option>Trolebuses de Chile</option>
+        </select>
+        <select id="f-infra" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
+          <option value="">Toda la infraestructura</option>
+          <option value="PUBLICO">Público</option>
+          <option value="CC T.PUBLICO">CC T.Público</option>
+          <option value="PRIVADO">Privado</option>
+        </select>
+        <button onclick="_resetMapFilters()" style="font-size:11px;padding:4px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#666;cursor:pointer;">× Limpiar</button>
+        <span id="mapa-counter" style="font-size:11px;color:#1B5E20;font-weight:600;margin-left:4px;white-space:nowrap;"></span>
+      </div>
+      <div id="mapa-cargadores" style="height:420px;width:100%;border-radius:0 0 10px 10px;"></div>
+    </div>
+  </div>
+</div>
+</div></div>
 <!-- MAPA AL FINAL -->
 
 
