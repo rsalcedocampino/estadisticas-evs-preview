@@ -136,6 +136,7 @@ function secBtn(id){
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
     <div class="badge" id="badge-fecha"></div>
     <a href="https://www.linkedin.com/in/rsalcedoc" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.5);border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;color:white;text-decoration:none;white-space:nowrap;letter-spacing:0.3px;">✉ Contacto</a>
+    <a href="mailto:rsalcedocampino@gmail.com?subject=Solicitud%20de%20an%C3%A1lisis" style="background:#F57C00;border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:white;text-decoration:none;white-space:nowrap;">📊 Solicitar Análisis</a>
   </div>
 </div>
 
@@ -152,7 +153,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartVentas"></canvas></div>
       <div class="insight-bar">En 2025 se vendieron <strong>37.613 EVs</strong>. MHEV domina (16.729) pero BEV sube a 5.512. Los PHEV casi igualan a BEV en 2026.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: EV NO y Enchu. Venta Anual</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ventas EV Anuales</div>
     </div>
   </div>
 <!-- /CHART:ventas -->
@@ -205,7 +206,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap"><canvas id="chartRatio"></canvas></div>
       <div class="insight-bar">Ratio de <strong>EVs enchufables (BEV+PHEV) por conector PÚBLICO acumulado</strong>. En 2026 hay <strong>~12x</strong> más BEV+PHEV que conectores públicos disponibles. Cifra que aumentó desde 2020 conforme crece la flota enchufable.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: EV NO y Enchu. Venta Anual + Conectores EVs Cargadores</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ventas EV Anuales + Conectores EVs Cargadores</div>
     </div>
   </div>
 <!-- /CHART:ratio -->
@@ -222,7 +223,7 @@ function secBtn(id){
         <canvas id="chartRegiones"></canvas>
       </div>
       <div class="insight-bar" id="regiones-insight-bar">La <strong>Región Metropolitana</strong> lidera con 21.971 EVs en circulación, seguida por Maule (3.482) y Valparaíso (2.515).</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Ciruclacion Total</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Circulación Total</div>
     </div>
   </div>
 <!-- /CHART:regiones -->
@@ -239,7 +240,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartConectoresMW"></canvas></div>
       <div class="insight-bar">En <strong>2025</strong> se instalaron 3.819 conectores nuevos (+88% vs 2024) y 96,4 MW de potencia — el mayor año de la historia. La potencia media acumulada se mantiene estable en ~<strong>21 kW/conector</strong>, aunque los cargadores privados y públicos dominan el volumen mientras los CC T.Público aportan la mayor densidad de potencia.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores EVs Cargadores + Energia MW Cargadores</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores EVs Cargadores + Energía MW Cargadores</div>
     </div>
   </div>
 <!-- /CHART:conectoresMW -->
@@ -254,7 +255,7 @@ function secBtn(id){
       <div class="chart-wrap tall"><canvas id="chartPermisosEV"></canvas></div>
       <div class="insight-bar">En <strong>2024</strong> circulan <strong>33.853 EVs</strong> con permiso vigente (+101% vs 2023), representando el <strong>0,26% de la flota total</strong> de 13,2 M de vehículos. El mayor salto ocurrió en 2018 (+172%) con la llegada masiva de las primeras flotas. Los datos de permisos tienen un rezago de ~12 meses respecto a las ventas.</div>
       <div style="font-size:10px;color:#888;padding:2px 14px 4px;"><strong style="color:#E65100;">YoY (Year over Year)</strong>: variación porcentual respecto al mismo período del año anterior.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Ciruclacion Total</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Circulación Total</div>
     </div>
   </div>
 <!-- /CHART:flotaEV -->
@@ -273,7 +274,7 @@ function secBtn(id){
         <strong>MHEV:</strong> Tecnología puente que domina el mercado híbrido. &nbsp;|&nbsp;
         <strong>E-Buses:</strong> Pico en 2023 (1.427), luego cae.
       </div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: EV NO y Enchu. Venta Anual</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ventas EV Anuales</div>
     </div>
   </div>
 <!-- /CHART:evolucion -->
@@ -287,7 +288,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chartCruceRegional"></canvas></div>
       <div class="insight-bar">Maule acumula <strong>3.482 EVs en circulación (2024)</strong> con solo <strong>47 conectores públicos disponibles (2026)</strong> — ratio de 74x, el más alto del país. Metropolitana concentra el 70% de los conectores nacionales (1.353), mientras Aysén tiene la mejor cobertura relativa (5x). <em>Nota: datos EVs corresponden a permisos de circulación 2024, último año disponible.</em></div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Ciruclacion Total + Conectores Regiones</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Circulación Total + Conectores Regiones</div>
     </div>
   </div>
 <!-- /CHART:cruceRegion -->
@@ -297,7 +298,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chartPresionRegional"></canvas></div>
       <div class="insight-bar"><strong>Maule (74x)</strong> es la región más crítica del país — cuatro veces más presión que la Metropolitana (16x). <strong>Biobío (26x)</strong> y <strong>Coquimbo (21x)</strong> también superan el umbral alto. Las regiones del sur tienen mejor cobertura relativa: Aysén (5x), Los Lagos (8x) y Araucanía (9x). <em>Colores: rojo oscuro ≥ 50x · rojo ≥ 25x · naranja ≥ 15x · amarillo ≥ 10x · verde &lt; 10x.</em></div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Ciruclacion Total + Conectores Regiones</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Permiso de Circulación Total + Conectores Regiones</div>
     </div>
   </div>
 <!-- /CHART:presion -->
@@ -311,7 +312,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartEbusesCruce"></canvas></div>
       <div class="insight-bar">A diferencia de los vehículos particulares (14,5 EVs/cargador), los e-buses muestran una cobertura de infraestructura muy superior: <strong>solo 1,5 buses por conector CC o Electroterminal</strong>. En 2025, la red de carga para buses alcanzó <strong>3.504 conectores acumulados</strong>, creciendo más rápido que la flota. El peak de 2023 (1.427 nuevos buses) fue absorbido sin deteriorar el ratio.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: EV NO y Enchu. Venta Anual + Cargadores EVs</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ventas EV Anuales + Cargadores EVs</div>
     </div>
   </div>
 <!-- /CHART:ebusCon -->
@@ -335,7 +336,7 @@ function secBtn(id){
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartEbusesMW"></canvas></div>
       <div class="insight-bar">En 2025 se instalaron <strong>54,8 MW</strong> de potencia de carga para buses (46,7 MW en CC Público + 8,1 MW en Electroterminal), acompañando los <strong>2.009 nuevos e-buses</strong> del año. El año 2020 fue excepcional en CC Público (12 MW) por el despliegue inicial de Transantiago eléctrico. En 2026*, los datos son parciales (ene–may).</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Energia MW Cargadores + EV NO y Enchu. Venta Anual</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Energía MW Cargadores + Ventas EV Anuales</div>
     </div>
   </div>
 <!-- /CHART:ebusMW -->
@@ -353,8 +354,8 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-header">🏙️ COBERTURA COMUNAL<span class="insight">178 de 346 comunas con cargador</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cobertura"></canvas></div>
-      <div class="insight-bar"><b>209 comunas</b> (60%) sin ningún punto de carga público registrado en SEC.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
+      <div class="insight-bar"><b>168 comunas</b> (49%) sin ningún conector público registrado registrado en SEC.</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
     </div>
   </div>
   <div class="card">
@@ -362,7 +363,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cuota"></canvas></div>
       <div class="insight-bar">Dos operadores dominan la red pública. <b>Enel</b> lidera con 1.301 conectores, seguido de <b>Copec</b> con 946.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
     </div>
   </div>
 </div>
@@ -379,8 +380,8 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chart-acdc"></canvas></div>
       <div class="insight-bar">La <b>Región Metropolitana</b> concentra el mayor volumen de conectores DC de alta potencia. Las regiones del sur tienen predominio casi exclusivo de AC.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
     </div>
   </div>
 </div>
@@ -391,7 +392,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-conectores-tipo"></canvas></div>
       <div class="insight-bar"><b>AC Tipo 2</b> domina con 1.312 puntos. El estándar <b>CCS Tipo 2</b> (carga rápida DC) crece a medida que aumenta la flota BEV.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
     </div>
   </div>
   <div class="card">
@@ -399,7 +400,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-potencia-inst"></canvas></div>
       <div class="insight-bar"><b>Shell (71,5 kW)</b> y <b>Enex (68 kW)</b> tienen la mayor potencia media — cargadores rápidos DC. <b>Enel</b> y <b>Copec</b> tienen red más grande pero con mezcla AC/DC.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div>
     </div>
   </div>
 </div>
@@ -410,7 +411,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     <div class="card-body">
       <div class="chart-wrap" style="height:240px;"><canvas id="chart-evol-potencia"></canvas></div>
       <div class="insight-bar">En <b>2025</b> se alcanzó el mayor nivel de potencia instalada en un año, impulsado por la expansión masiva de cargadores rápidos DC en la red pública.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci + Conectores EVs Cargadores</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC + Conectores EVs Cargadores</div>
     </div>
   </div>
 
@@ -495,30 +496,30 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 <!-- ═══════ SECCIÓN ERNC ═══════ -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#1B5E20;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 ENERGÍAS RENOVABLES NO CONVENCIONALES (ERNC) — PIPELINE Y OPERACIÓN</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19,889.5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicacion Generacion - BESS</div></div>
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">7,487.4 MWh</div><div style="font-size:11px;color:#555;">Almacenamiento Operativo</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicacion Generacion - BESS</div></div>
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,814</div><div style="font-size:11px;color:#555;">Total Proyectos ERNC</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicacion Generacion - BESS</div></div>
-  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,030</div><div style="font-size:11px;color:#555;">Proyectos En OperaciÃ³n</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicacion Generacion - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">19,889.5 MW</div><div style="font-size:11px;color:#555;">Capacidad Operativa</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">7,487.4 MWh</div><div style="font-size:11px;color:#555;">Almacenamiento Operativo</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,814</div><div style="font-size:11px;color:#555;">Total Proyectos ERNC</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
+  <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1,030</div><div style="font-size:11px;color:#555;">Proyectos En OperaciÃ³n</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
 </div>
 <div class="grid">
   <div class="card"><div class="card-header">🔋 POTENCIA ERNC POR ESTADO (MW)<span class="insight">19.889 MW operativos · 33.390 MW aprobados</span></div>
     <div class="card-body"><div class="chart-wrap tall"><canvas id="chart-bess-estado"></canvas></div>
     <div class="insight-bar">Pipeline ERNC total: <strong>78.201 MW</strong>. Los aprobados (33.390 MW) representan el futuro inmediato de la capacidad renovable.</div>
-    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicacion Generacion - BESS</div></div></div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
   <div class="card"><div class="card-header">🗺 POTENCIA ERNC OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande lidera el parque ERNC</span></div>
     <div class="card-body"><div class="chart-wrap tall"><canvas id="chart-bess-region"></canvas></div>
     <div class="insight-bar"><strong>Antofagasta</strong> lidera con 6.920 MW, seguida de Atacama (3.861 MW). El norte concentra el mayor recurso solar y eólico.</div>
-    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicacion Generacion - BESS</div></div></div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
 </div>
 <div class="grid">
   <div class="card"><div class="card-header">⚡ MW ERNC POR TECNOLOGÍA (PIPELINE TOTAL)<span class="insight">Solar fotovoltaica domina con 42.118 MW</span></div>
     <div class="card-body"><div class="chart-wrap"><canvas id="chart-bess-tech"></canvas></div>
     <div class="insight-bar">Solar fotovoltaica (42.118 MW), eólica (17.156 MW) y BESS puro (12.727 MW). Chile se consolida como líder latinoamericano en renovables.</div>
-    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicacion Generacion - BESS</div></div></div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
   <div class="card"><div class="card-header">📈 MW ERNC ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">Crecimiento acelerado desde 2022</span></div>
     <div class="card-body"><div class="chart-wrap"><canvas id="chart-bess-anio"></canvas></div>
     <div class="insight-bar">La capacidad ERNC operativa ha crecido fuertemente desde 2022, impulsada por proyectos solares y eólicos de gran escala.</div>
-    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicacion Generacion - BESS</div></div></div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
 </div>
 
 <!-- MAPA ERNC -->
@@ -538,7 +539,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
       </div>
       <div id="mapa-ernc" style="height:480px;width:100%;"></div>
       <div style="padding:8px 14px;font-size:11px;color:#555;border-top:1px solid #f0f0f0;">🟢 En Operación &nbsp; 🔵 En Construcción &nbsp; 🟡 Aprobado &nbsp; ⚪ En Calificación &nbsp; 🟠 En Pruebas &nbsp; | &nbsp; Tamaño proporcional a MW</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicacion Generacion - BESS</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div>
     </div>
   </div>
 </div>
@@ -671,7 +672,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-solar-instal"></canvas></div>
       <div class="insight-bar">Las instalaciones solares nuevas se multiplicaron <strong>142x</strong> entre 2015 y 2025. El 99% corresponde a sistemas fotovoltaicos.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Instal. - Gener. - Año</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Instalaciones por Año y Tecnología</div>
     </div>
   </div>
 </div>
@@ -703,7 +704,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
     <div class="card-body">
       <div class="chart-wrap"><canvas id="chart-solar-ev-cruce"></canvas></div>
       <div class="insight-bar">Contraste notable: <strong>Antofagasta</strong> tiene 4.266 MW solares pero solo 605 EVs, mientras <strong>Metropolitana</strong> tiene 21.971 EVs con 951 MW. El norte genera energía solar que puede impulsar la electromovilidad del país.</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar + Permiso de Ciruclacion Total</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Detalle Instalacion Solar + Permiso de Circulación Total</div>
     </div>
   </div>
 </div>
@@ -868,11 +869,11 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
   <div class="card"><div class="card-header">🏙️ TOP 20 COMUNAS SIN CARGADOR — ORDENADAS POR EVs CON PERMISO 2024<span class="insight">Villa Alemana, Coronel y Chiguayante: prioridad máxima</span></div>
     <div class="card-body"><div style="height:340px;"><canvas id="chart-ac-sin-carg"></canvas></div>
     <div class="insight-bar"><strong>Villa Alemana</strong> (269 EVs), <strong>Coronel</strong> (224) y <strong>Chiguayante</strong> (202) son las comunas con más EVs y cero cargadores. Se recomienda instalar <strong>60 kW</strong> en las 3 primeras y <strong>22–44 kW</strong> en las restantes.</div>
-    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci + Permiso de Ciruclacion Total</div></div></div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC + Permiso de Circulación Total</div></div></div>
   <div class="card"><div class="card-header">⬆️ COMUNAS CON SOLO CARGADORES ≤22 kW — REQUIEREN UPGRADE<span class="insight">Pichilemu, Santa Cruz: destinos turísticos sin DC</span></div>
     <div class="card-body"><div style="height:220px;"><canvas id="chart-ac-upgrade"></canvas></div>
     <div class="insight-bar">Estas comunas tienen cargadores pero de muy baja potencia (≤22 kW). Con la masificación del EV se requiere al menos un punto de <strong>44–60 kW</strong> para reducir tiempos de carga.</div>
-    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci</div></div></div>
+    <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div></div></div>
 </div>
 <!-- FIN AC RECS -->
 <!-- GAP ANALYSIS -->
@@ -896,7 +897,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
       </div>
       <div id="mapa-gaps" style="height:520px;width:100%;"></div>
       <div style="padding:6px 14px;font-size:10px;color:#555;border-top:1px solid #f0f0f0;">Tamaño proporcional al kW · Clic para ver detalle</div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci — Análisis haversine</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC — Análisis haversine</div>
     </div></div>
 </div>
 <div class="grid" style="grid-template-columns:1fr;">
@@ -915,7 +916,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
           <tbody id="gap-tbody"></tbody>
         </table>
       </div>
-      <div style="font-size:10px;color:#888;text-align:right;padding:4px 0 0;font-style:italic;">Fuente: Conectores - Cargadores Ubicaci — 116 puntos evaluados · distancia haversine</div>
+      <div style="font-size:10px;color:#888;text-align:right;padding:4px 0 0;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC — 116 puntos evaluados · distancia haversine</div>
     </div></div>
 </div>
 <!-- FIN GAP ANALYSIS -->
