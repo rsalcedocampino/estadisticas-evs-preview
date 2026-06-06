@@ -70,12 +70,14 @@ var REGIONES_YEARLY={"2016":{"labels":["Metropolitana","Valparaíso","Maule","Co
 
   .update-tip { background: #E8F5E9; border: 1px dashed #66BB6A; border-radius: 8px; margin: 12px 24px 0; padding: 10px 16px; font-size: 11px; color: #1ABBA8; display: flex; gap: 10px; align-items: center; }
   .update-tip code { background: #C8E6C9; border-radius: 4px; padding: 1px 6px; font-size: 10px; }
-  .sec-btn{display:flex;align-items:center;justify-content:space-between;background:#2B5BA8;color:#fff;padding:10px 16px;border-radius:8px;cursor:pointer;margin:10px 0 2px;user-select:none;transition:background 0.2s;}
-  .sec-btn:hover{background:#1ABBA8;}
-  .sec-lbl{font-size:13px;font-weight:700;}
-  .sec-sub{font-size:11px;opacity:0.7;margin-left:8px;font-weight:400;}
-  .sec-arrow{font-size:14px;transition:transform 0.3s;}
-  .sec-btn.open .sec-arrow{transform:rotate(180deg);}
+  .sec-btn{display:flex;align-items:center;justify-content:space-between;background:#fff;color:#1E3D7A;padding:14px 18px;border-radius:10px;cursor:pointer;margin:6px 0 2px;user-select:none;border:1.5px solid #DCE6F5;box-shadow:0 2px 8px rgba(43,91,168,0.06);transition:all 0.2s;}
+  .sec-btn:hover{border-color:#4A90D9;background:#F5F8FF;box-shadow:0 4px 14px rgba(43,91,168,0.12);}
+  .sec-btn.open{border-color:#2B5BA8;border-left:4px solid #F5A623;background:#F5F8FF;}
+  .sec-icon{font-size:20px;margin-right:10px;}
+  .sec-lbl{font-size:14px;font-weight:700;color:#1E3D7A;}
+  .sec-sub{font-size:11px;color:#7A9CC8;margin-left:8px;font-weight:400;}
+  .sec-arrow{font-size:16px;color:#4A90D9;transition:transform 0.3s;margin-left:8px;}
+  .sec-btn.open .sec-arrow{transform:rotate(180deg);color:#F5A623;}
   .sec-panel{overflow:hidden;max-height:0;transition:max-height 0.5s ease;}
   .sec-panel.open{max-height:30000px;}
 </style>
@@ -157,7 +159,7 @@ function fmtCL(n,dec){
 <div style="background:#E8F5E9;border-left:4px solid #1ABBA8;padding:10px 16px;margin:0 0 4px;font-size:11px;color:#2B5BA8;line-height:1.7;"><strong>Energías Futuro Data Lab</strong> — Plataforma de inteligencia territorial y energética para identificar brechas, oportunidades de inversión y tendencias en electromovilidad, infraestructura de carga y energías renovables en Chile. Análisis de ventas EV, cargadores públicos, permisos de circulación, proyectos ERNC y brechas territoriales. <a href="mailto:rsalcedocampino@gmail.com?subject=Consulta%20Observatorio%20EV" style="color:#2B5BA8;font-weight:700;">Solicitar asesoría →</a></div>
 
 
-<div class="sec-btn" id="btn-ev" onclick="secBtn('ev')"><span><span class="sec-lbl">EVs & Mercado</span><span class="sec-sub">Ventas, Penetración, Marcas, Regiones, Flota</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ev">
+<div class="sec-btn" id="btn-ev" onclick="secBtn('ev')"><span style="display:flex;align-items:center;"><span class="sec-icon">🚗</span><span><span class="sec-lbl">EVs & Mercado</span><span class="sec-sub">Ventas, Penetración, Marcas, Regiones, Flota</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ev">
 <!-- FILA 1 -->
 <div class="grid">
   <!-- CHART:ventas -->
@@ -244,7 +246,7 @@ function fmtCL(n,dec){
 
 
 </div>
-<div class="sec-btn" id="btn-infra" onclick="secBtn('infra')"><span><span class="sec-lbl">Red de Carga e Infraestructura</span><span class="sec-sub">Cargadores, Conectores, Energía MW, Ratio</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-infra">
+<div class="sec-btn" id="btn-infra" onclick="secBtn('infra')"><span style="display:flex;align-items:center;"><span class="sec-icon">⚡</span><span><span class="sec-lbl">Red de Carga e Infraestructura</span><span class="sec-sub">Cargadores, Conectores, Energía MW, Ratio</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-infra">
 <!-- FILA 3b: Conectores + MW -->
 <div class="grid-full">
   <!-- CHART:conectoresMW -->
@@ -361,7 +363,7 @@ function fmtCL(n,dec){
 <!-- ═══════════════ SECCIÓN: CARGADORES PÚBLICOS ═══════════════════════ -->
 <!-- 
 </div>
-<div class="sec-btn" id="btn-carg" onclick="secBtn('carg')"><span><span class="sec-lbl">Análisis de Cargadores Públicos</span><span class="sec-sub">Cuota, Análisis comunas, Cobertura</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-carg">
+<div class="sec-btn" id="btn-carg" onclick="secBtn('carg')"><span style="display:flex;align-items:center;"><span class="sec-icon">🔌</span><span><span class="sec-lbl">Análisis de Cargadores Públicos</span><span class="sec-sub">Cuota, Análisis comunas, Cobertura</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-carg">
 SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="grid">
   <div class="card">
@@ -431,7 +433,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 
 </div>
 </div>
-<div class="sec-btn" id="btn-mapa" onclick="secBtn('mapa')"><span><span class="sec-lbl">Mapa Nacional de Infraestructura</span><span class="sec-sub">Mapa interactivo, 3.115 puntos, Filtros</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-mapa">
+<div class="sec-btn" id="btn-mapa" onclick="secBtn('mapa')"><span style="display:flex;align-items:center;"><span class="sec-icon">🗺</span><span><span class="sec-lbl">Mapa Nacional de Infraestructura</span><span class="sec-sub">Mapa interactivo, 3.115 puntos, Filtros</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-mapa">
 <div class="grid">
   <div class="card" style="grid-column:span 2;">
     <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE<span class="insight">3.115 conectores · AC=verde · DC=naranja</span></div>
@@ -508,7 +510,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 
 
 </div>
-<div class="sec-btn" id="btn-ernc" onclick="secBtn('ernc')"><span><span class="sec-lbl">Solar & ERNC</span><span class="sec-sub">Potencia solar, Pipeline, Proyectos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ernc">
+<div class="sec-btn" id="btn-ernc" onclick="secBtn('ernc')"><span style="display:flex;align-items:center;"><span class="sec-icon">☀️</span><span><span class="sec-lbl">Solar & ERNC</span><span class="sec-sub">Potencia solar, Pipeline, Proyectos</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ernc">
 <!-- ═══════ SECCIÓN ERNC ═══════ -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 ENERGÍAS RENOVABLES NO CONVENCIONALES (ERNC) — PIPELINE Y OPERACIÓN</div>
 
@@ -875,7 +877,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 </script>
 
 </div>
-<div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span><span class="sec-lbl">Oportunidades e Inversión</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
+<div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span style="display:flex;align-items:center;"><span class="sec-icon">📍</span><span><span class="sec-lbl">Oportunidades e Inversión</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
 <!-- AC CHARGER RECS -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 Dónde Invertir en Infraestructura de Carga en Chile</div>
 <div style="padding:4px 8px 8px;font-size:11px;color:#1E3D7A;font-style:italic;">Priorización territorial según flota EV, cobertura actual, potencia disponible y distancia a cargadores rápidos existentes.</div>
@@ -970,7 +972,7 @@ setTimeout(_sortGapTable,200);
 </div>
 
 <!-- CALCULADORA DE OPORTUNIDADES -->
-<div class="sec-btn" id="btn-calc" onclick="secBtn('calc')"><span><span class="sec-lbl">📊 Calculadora de Oportunidades de Inversión en Carga EV</span><span class="sec-sub"> · Ranking dinámico por variables ajustables</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-calc">
+<div class="sec-btn" id="btn-calc" onclick="secBtn('calc')"><span style="display:flex;align-items:center;"><span class="sec-icon">📊</span><span><span class="sec-lbl">📊 Calculadora de Oportunidades de Inversión en Carga EV</span><span class="sec-sub"> · Ranking dinámico por variables ajustables</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-calc">
 <div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(43,91,168,0.08);border:1px solid #dce6f5;padding:14px 16px;margin-bottom:8px;">
   <div style="background:#FFF8E1;border-left:3px solid #F5A623;padding:7px 12px;margin-bottom:10px;font-size:10px;color:#795548;border-radius:0 4px 4px 0;">📅 <strong>Nota metodológica:</strong> El análisis utiliza los últimos datos disponibles de Permisos de Circulación (INE/Min. Transporte, último registro: 2024) y el Registro de Cargadores Públicos SEC. Las variables sin dato directo (cercanía a ruta, turismo) se estiman con proxies basados en flota EV relativa.</div>
   <div style="font-size:12px;color:#1E3D7A;margin-bottom:12px;line-height:1.6;">Ajusta los pesos de cada variable para personalizar el ranking de comunas con mayor oportunidad de inversión en infraestructura de carga. El puntaje total siempre suma 100%.</div>
