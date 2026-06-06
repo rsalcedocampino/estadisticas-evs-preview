@@ -253,7 +253,7 @@ var _fbAuth = firebase.auth();
 var _fbDb   = firebase.firestore();
 
 // Secciones protegidas (requieren login + aprobaci&#243;n)
-var _AUTH_PROTECTED = ['calc'];
+var _AUTH_PROTECTED = ['brec','calc'];
 
 // Estado global
 window._fbUserApproved   = false;
@@ -1133,7 +1133,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 </script>
 
 </div>
-<div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span style="display:flex;align-items:center;"><span class="sec-icon">📍</span><span><span class="sec-lbl">Oportunidades e Inversión</span><span class="sec-sub">Recomendaciones, Mapa, Tabla 116 puntos</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
+<div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span style="display:flex;align-items:center;"><span class="sec-icon">📍</span><span><span class="sec-lbl">Oportunidades e Inversión <span style="font-size:10px;background:#F57C00;color:#fff;border-radius:4px;padding:1px 5px;vertical-align:middle;font-weight:700;">&#128274;</span></span><span class="sec-sub">Requiere cuenta &middot; Recomendaciones, Mapa, Tabla 116 puntos</span></span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
 <!-- AC CHARGER RECS -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 Dónde Invertir en Infraestructura de Carga en Chile</div>
 <div style="padding:4px 8px 8px;font-size:11px;color:#1E3D7A;font-style:italic;">Priorización territorial según flota EV, cobertura actual, potencia disponible y distancia a cargadores rápidos existentes.</div>
@@ -1614,9 +1614,4 @@ function _initCargadores() {
     el._chartInstance=chart;
   });
 }
-if(document.readyState==='complete'){setTimeout(_initCargadores,500);}
-else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);});}
-</script>
-
-<!-- MAPA AL FINAL --></body>
-</html>
+if(document.readyState=
