@@ -970,48 +970,49 @@ setTimeout(_sortGapTable,200);
 </div>
 
 <!-- CALCULADORA DE OPORTUNIDADES -->
-<div style="margin:10px 0 4px;padding:6px 16px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;border-radius:8px;font-size:14px;font-weight:700;">📊 Calculadora de Oportunidades de Inversión en Carga EV</div>
+<div class="sec-btn" id="btn-calc" onclick="secBtn('calc')"><span><span class="sec-lbl">📊 Calculadora de Oportunidades de Inversión en Carga EV</span><span class="sec-sub"> · Ranking dinámico por variables ajustables</span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-calc">
 <div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(43,91,168,0.08);border:1px solid #dce6f5;padding:14px 16px;margin-bottom:8px;">
+  <div style="background:#FFF8E1;border-left:3px solid #F5A623;padding:7px 12px;margin-bottom:10px;font-size:10px;color:#795548;border-radius:0 4px 4px 0;">📅 <strong>Nota metodológica:</strong> El análisis utiliza los últimos datos disponibles de Permisos de Circulación (INE/Min. Transporte, último registro: 2024) y el Registro de Cargadores Públicos SEC. Las variables sin dato directo (cercanía a ruta, turismo) se estiman con proxies basados en flota EV relativa.</div>
   <div style="font-size:12px;color:#1E3D7A;margin-bottom:12px;line-height:1.6;">Ajusta los pesos de cada variable para personalizar el ranking de comunas con mayor oportunidad de inversión en infraestructura de carga. El puntaje total siempre suma 100%.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;" id="calc-weights">
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">EVs con permiso en la comuna</span>
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">EVs con Permiso de Circulación &mdash; <small style="font-weight:400;opacity:0.75;">Nú de vehículos eléctricos con permiso vigente en la comuna (INE/Min. Transporte 2024).</small></span>
         <span id="w_evs-val" style="font-size:13px;font-weight:700;color:#2B5BA8;">30%</span>
       </div>
       <input type="range" id="w_evs" min="0" max="60" value="30" step="1" style="width:100%;accent-color:#2B5BA8;" oninput="updateCalc()"/>
     </div>
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Sin cargadores públicos</span>
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Sin Cargadores Públicos &mdash; <small style="font-weight:400;opacity:0.75;">La comuna no tiene ningún conector público registrado en SEC.</small></span>
         <span id="w_nocarg-val" style="font-size:13px;font-weight:700;color:#1ABBA8;">25%</span>
       </div>
       <input type="range" id="w_nocarg" min="0" max="60" value="25" step="1" style="width:100%;accent-color:#1ABBA8;" oninput="updateCalc()"/>
     </div>
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Solo cargadores AC ≤22 kW</span>
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Solo AC ≤22 kW (sin DC) &mdash; <small style="font-weight:400;opacity:0.75;">La comuna tiene cargadores pero todos son lentos (&le;22 kW), sin carga rápida DC.</small></span>
         <span id="w_upgrade-val" style="font-size:13px;font-weight:700;color:#F5A623;">15%</span>
       </div>
       <input type="range" id="w_upgrade" min="0" max="60" value="15" step="1" style="width:100%;accent-color:#F5A623;" oninput="updateCalc()"/>
     </div>
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Cercanía a ruta o corredor</span>
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Cercanía a Ruta o Corredor &mdash; <small style="font-weight:400;opacity:0.75;">Proximidad estimada a rutas principales o corredores de movilidad (proxy: densidad EV relativa).</small></span>
         <span id="w_ruta-val" style="font-size:13px;font-weight:700;color:#4A90D9;">15%</span>
       </div>
       <input type="range" id="w_ruta" min="0" max="60" value="15" step="1" style="width:100%;accent-color:#4A90D9;" oninput="updateCalc()"/>
     </div>
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Actividad turística/comercial</span>
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Actividad Turística/Comercial &mdash; <small style="font-weight:400;opacity:0.75;">La comuna tiene perfil turístico o comercial relevante (reconocido como destino nacional).</small></span>
         <span id="w_turismo-val" style="font-size:13px;font-weight:700;color:#E8890A;">10%</span>
       </div>
       <input type="range" id="w_turismo" min="0" max="60" value="10" step="1" style="width:100%;accent-color:#E8890A;" oninput="updateCalc()"/>
     </div>
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Potencia ERNC disponible</span>
+        <span style="font-size:11px;font-weight:600;color:#1E3D7A;">Potencia ERNC Disponible &mdash; <small style="font-weight:400;opacity:0.75;">Disponibilidad de energía renovable en la región para alimentar infraestructura de carga.</small></span>
         <span id="w_ernc-val" style="font-size:13px;font-weight:700;color:#7A9CC8;">5%</span>
       </div>
       <input type="range" id="w_ernc" min="0" max="60" value="5" step="1" style="width:100%;accent-color:#7A9CC8;" oninput="updateCalc()"/>
@@ -1024,13 +1025,14 @@ setTimeout(_sortGapTable,200);
   <div style="overflow-x:auto;max-height:480px;overflow-y:auto;">
     <table style="width:100%;border-collapse:collapse;font-size:11px;">
       <thead style="position:sticky;top:0;background:#1E3D7A;color:#fff;z-index:1;">
-        <tr><th style="padding:7px 8px;text-align:left;">#</th><th style="padding:7px 8px;text-align:left;">Comuna</th><th style="padding:7px 8px;">Región</th><th style="padding:7px 8px;text-align:right;">EVs 2024</th><th style="padding:7px 8px;text-align:right;">Cargadores</th><th style="padding:7px 8px;text-align:right;">kW máx.</th><th style="padding:7px 8px;text-align:right;">Puntaje</th><th style="padding:7px 8px;">Oportunidad</th></tr>
+        <tr><th style="padding:7px 8px;text-align:left;">#</th><th style="padding:7px 8px;text-align:left;">Comuna</th><th style="padding:7px 8px;">Región</th><th style="padding:7px 8px;text-align:right;">Permiso Circulación EVs</th><th style="padding:7px 8px;text-align:right;">Cargadores</th><th style="padding:7px 8px;text-align:right;">kW máx.</th><th style="padding:7px 8px;text-align:right;">Puntaje</th><th style="padding:7px 8px;">Oportunidad</th></tr>
       </thead>
       <tbody id="calc-tbody"></tbody>
     </table>
   </div>
   <div style="font-size:10px;color:#888;text-align:right;padding-top:6px;">Fuente: Permiso de Circulación 2024 + Registro de Cargadores Públicos SEC</div>
 </div>
+</div><!-- /pan-calc -->
 <!-- /CALCULADORA -->
 
 <script>
