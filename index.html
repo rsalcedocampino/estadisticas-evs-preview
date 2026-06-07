@@ -184,6 +184,11 @@ function fmtCL(n,dec){
   CONFIG.acdcRegion = {"labels":["Metropolitana","Valparaíso","O’Higgins","Maule","Biobío","Los Lagos","La Araucanía","Coquimbo"],"AC":[1460,113,71,30,54,55,35,33],"DC":[592,99,65,64,39,33,40,41]};
   CONFIG.tiposConector = {"labels":["Tipo 2 (Menneke)","Combo T2 (CCS Tipo 2)","CHAdeMO","Tipo 2 Socket (T2SC)","Tesla (Roadster)","Tipo 1 (SAE J1772)","GB/T DC","GB/T AC"],"vals":[1757,731,228,186,102,44,16,7]};
   CONFIG.potenciaInstalador = {"labels":["Trolebuses de Chile","Enex","Copec","Enel","Saesa","Chass"],"vals":[171.3,58.0,45.5,26.1,22.0,15.8]};
+  // KPI ventas: ultimos 12 meses moviles (EV NO y Enchu. Venta Mensual)
+  CONFIG.kpis.ventasAnuales.valor = '47.604';
+  CONFIG.kpis.ventasAnuales.subtitulo = 'Ventas EVs \u00DAlt. 12 Meses';
+  CONFIG.kpis.ventasAnuales.detalle = 'May-2025 a Abr-2026 \u00B7 todos los tipos';
+  CONFIG.kpis.ventasAnuales.variacion = '\u25B2 +99% vs 12 meses previos';
   CONFIG.kpis.cargadores.valor = '7.104';
   CONFIG.kpis.energiaMW.valor = '221,5 MW';
   CONFIG.kpis.energiaMW.variacion = '\u25B2 +289% vs 2024';
@@ -466,7 +471,7 @@ function _authErrMsg(code){
 <div id="kpi-legend" style="margin:0 24px 10px;background:#fff;border:1.5px solid #1ABBA8;border-radius:8px;overflow:hidden;">
 <div onclick="var b=document.getElementById('kpi-legend-body');var a=document.getElementById('kpi-legend-arrow');var o=b.style.display==='none';b.style.display=o?'block':'none';a.textContent=o?'▲':'▼';" style="cursor:pointer;padding:8px 14px;font-size:12px;font-weight:700;color:#1ABBA8;display:flex;justify-content:space-between;align-items:center;"><span>ℹ Ver indicaciones</span><span id="kpi-legend-arrow" style="font-size:10px;">▼</span></div>
 <div id="kpi-legend-body" style="display:none;padding:4px 16px 12px;font-size:11.5px;color:#444;line-height:1.7;border-top:1px solid #E0F2F1;">
-<div><strong>Ventas EVs 2025</strong> — Unidades vendidas en el año (BEV, PHEV, MHEV, HEV, e-buses y e-trucks). <em>Pestaña: EV NO y Enchu. Venta Anual</em></div>
+<div><strong>Ventas EVs Últ. 12 Meses</strong> — Unidades vendidas en los últimos 12 meses con dato (May-2025 a Abr-2026), todas las tecnologías (BEV, PHEV, MHEV, HEV, e-buses y e-trucks), comparadas contra los 12 meses anteriores (May-2024 a Abr-2025: 23.947 un.). <em>Pestaña: EV NO y Enchu. Venta Mensual</em></div>
 <div><strong>Penetración</strong> — Porcentaje de las ventas mensuales del mercado que corresponde a vehículos no convencionales (híbridos + enchufables). <em>Pestaña: Evolucion tipos Vehiculos</em></div>
 <div><strong>Cargadores Acumulados</strong> — Total de cargadores instalados 2018–2026 en todas las categorías (público, privado, CC T.Público, electroterminal). <em>Pestaña: Cargador Cantidad Mes</em></div>
 <div><strong>Energía Instalada</strong> — Potencia total acumulada de la red de carga del país. <em>Pestaña: Energia MW Cargador Mes</em></div>
