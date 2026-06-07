@@ -116,6 +116,16 @@ function secBtn(id){
         if(typeof _GMAP!=='undefined'&&_GMAP){_GMAP.invalidateSize();}
         else if(typeof window.initGapMap==='function'&&!_secInited[id]){window.initGapMap();_secInited[id]=1;}
       }
+      // Lazy-init carg charts (por si acaso no corrió aún)
+      if(id==='carg'&&typeof _initCargadores==='function'&&!_secInited[id]){_initCargadores();_secInited[id]=1;}
+      // Redimensionar TODOS los canvas Chart.js del panel ahora visible
+      var _p=document.getElementById('pan-'+id);
+      if(_p&&typeof Chart!=='undefined'&&Chart.getChart){
+        _p.querySelectorAll('canvas').forEach(function(cv){
+          var ch=cv._chartInstance||(Chart.getChart?Chart.getChart(cv):null);
+          if(ch)ch.resize();
+        });
+      }
     },600);
   }
 }
@@ -1614,4 +1624,9 @@ function _initCargadores() {
     el._chartInstance=chart;
   });
 }
-if(document.readyState=
+if(document.readyState==='complete'){setTimeout(_initCargadores,500);}
+else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);});}
+</script>
+
+<!-- MAPA AL FINAL --></body>
+</html>
