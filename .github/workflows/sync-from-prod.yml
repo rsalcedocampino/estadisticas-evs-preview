@@ -1,0 +1,38 @@
+name: Sync desde estadisticas-evs (manteniendo logins)
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'   # revisa cada 15 minutos
+  workflow_dispatch:          # permite ejecutarlo manualmente
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Comparar con produccion y sincronizar
+        run: |
+          git clone --depth 1 https://github.com/rsalcedocampino/estadisticas-evs.git /tmp/prod
+          PROD_SHA=$(git -C /tmp/prod rev-parse HEAD)
+          LAST=$(cat .sync-prod-sha 2>/dev/null || echo "ninguno")
+          echo "Produccion: $PROD_SHA | Ultimo sincronizado: $LAST"
+          if [ "$PROD_SHA" = "$LAST" ]; then
+            echo "Sin cambios en produccion. Nada que hacer."
+            exit 0
+          fi
+          cp /tmp/prod/index.html index.html
+          python3 sync_transform.py
+          echo "$PROD_SHA" > .sync-prod-sha
+          git config user.name "sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html .sync-prod-sha
+          if git diff --cached --quiet; then
+            echo "Sin diferencias tras transformar."
+          else
+            git commit -m "sync: cambios de estadisticas-evs ($PROD_SHA) con logins de preview"
+            git push
+          fi
