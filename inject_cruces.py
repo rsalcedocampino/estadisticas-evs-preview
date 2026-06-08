@@ -43,17 +43,21 @@ def main():
     block = block.replace('@LEASN@', str(data['leasn']))
     block = block.replace('@POB@', js(data['CRUCE_POB']))
     block = block.replace('@PEOR@', js(data['CRUCE_PEOR']))
-    anchor = '<!-- FIN GAP ANALYSIS -->'
+    seccion = ('<div class="sec-btn" id="btn-terr" onclick="secBtn(\'terr\')">'
+      '<span style="display:flex;align-items:center;"><span class="sec-icon">\U0001F3D9\uFE0F</span>'
+      '<span><span class="sec-lbl">Territorio \u2014 Poblaci\u00f3n y Cobertura</span>'
+      '<span class="sec-sub">EVs por habitante, comunas grandes sin cargador (INE Censo 2024)</span></span></span>'
+      '<span class="sec-arrow">&#9660;</span></div>'
+      '<div class="sec-panel" id="pan-terr">\n<!-- ' + MARK + ' -->\n' + block + '\n</div>')
+    anchor = '<div class="sec-btn" id="btn-brec"'
     if anchor in html:
-        html = html.replace(anchor, block + '\n' + anchor, 1)
+        html = html.replace(anchor, seccion + '\n' + anchor, 1)
     else:
-        alt = '<!-- CALCULADORA DE OPORTUNIDADES -->'
-        html = html.replace(alt, block + '\n' + alt, 1) if alt in html else html + block
+        html += seccion
     io.open('index.html', 'w', encoding='utf-8').write(html)
     print('cruces inyectados OK')
 
-TERRITORIO_TPL = '''<!-- CRUCE-DEV-DATOS-PUBLICOS: TERRITORIO POBLACION -->
-<div style="background:#fff;border:1.5px solid #2B5BA8;border-radius:10px;margin:14px 0;padding:14px 16px;">
+TERRITORIO_TPL = '''<div style="background:#fff;border:1.5px solid #2B5BA8;border-radius:10px;margin:14px 0;padding:14px 16px;">
   <div style="background:#2B5BA8;color:#fff;border-radius:8px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
     <span style="font-weight:800;">\U0001F3D9️ TERRITORIO — POBLACIÓN Y COBERTURA POR COMUNA</span>
     <span style="font-size:11px;background:rgba(255,255,255,.18);border-radius:6px;padding:2px 8px;">Cruce INE Censo 2024 + SEC + Permisos de Circulación 2024</span>
