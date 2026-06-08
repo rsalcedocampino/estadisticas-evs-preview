@@ -36,3 +36,21 @@ else:
     print('decorador ya presente')
 
 io.open('index.html', 'w', encoding='utf-8').write(html)
+
+
+# --- Fix bug heredado de produccion: apostrofes sin escapar en KPI 12M ---
+import io as _io
+_h=_io.open('index.html',encoding='utf-8').read()
+_bad="'<div class=\"sub-val\">Jun '25\u2013May '26 \u00b7 Red de carga</div>'"
+if _bad in _h:
+    _good="'<div class=\"sub-val\">Jun \\'25\u2013May \\'26 \u00b7 Red de carga</div>'"
+    _h=_h.replace(_bad,_good)
+    _io.open('index.html','w',encoding='utf-8').write(_h)
+    print('fix apostrofe KPI 12M aplicado')
+
+# --- Inyeccion de cruces DEV (datos publicos) tras forzar login ---
+try:
+    import inject_cruces
+    inject_cruces.main()
+except Exception as e:
+    print('aviso: inject_cruces fallo:', e)
