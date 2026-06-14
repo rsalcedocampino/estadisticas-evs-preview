@@ -2547,9 +2547,19 @@ else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);}
     }
   ];
 
+  var allPanels = [];
+  var allBtns   = [];
+
+  function setAll(open){
+    allPanels.forEach(function(p){ p.classList.toggle('open', open); });
+    allBtns.forEach(function(b){ b.classList.toggle('active', open); });
+  }
+
   function inject(){
     var cards = document.querySelectorAll('.kpi');
     if(!cards.length) return false;
+    allPanels = [];
+    allBtns   = [];
     cards.forEach(function(card, i){
       if(card.querySelector('.kpi-info-btn')) return;
       var info = INFO[i]; if(!info) return;
@@ -2563,10 +2573,12 @@ else{window.addEventListener('load',function(){setTimeout(_initCargadores,500);}
         '<div><b>Cálculo:</b> '+info.calc+'</div>'+
         '<div style="margin-top:5px"><b>Fuente:</b> '+info.fuente+'</div>'+
         '<div style="margin-top:5px"><b>Cruce de datos:</b> '+info.cruce+'</div>';
+      allPanels.push(panel);
+      allBtns.push(btn);
       btn.addEventListener('click', function(e){
         e.stopPropagation();
-        var open = panel.classList.toggle('open');
-        btn.classList.toggle('active', open);
+        var willOpen = !panel.classList.contains('open');
+        setAll(willOpen);
       });
       card.appendChild(btn);
       card.appendChild(panel);
