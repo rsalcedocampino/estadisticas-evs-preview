@@ -1527,6 +1527,36 @@ var HOMOL_DATA=[
 <div class="sec-btn" id="btn-fichas" onclick="secBtn('fichas')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">INFORMACIÓN DE VEHÍCULOS ELÉCTRICOS</span><span class="sec-sub">Vehículos Homologados CPCC · Fichas de Seguridad PDF SEC</span></span></span><span class="sec-arrow">&#9660;</span></div>
 
 <div class="sec-panel" id="pan-fichas">
+<!-- BUSCADOR-VEHICULOS-MARCA-MODELO -->
+<div class="card" style="margin-bottom:16px;">
+  <div class="card-header">BUSCADOR DE VEHÍCULOS POR MARCA Y MODELO</div>
+  <div class="card-body">
+    <input id="veh-search" oninput="vehBuscar()" placeholder="Escribe marca o modelo (ej. BYD, Tesla, Outlander, Dolphin)..." style="width:100%;box-sizing:border-box;font-size:14px;padding:9px 12px;border:1.5px solid #2B5BA8;border-radius:7px;outline:none;color:#333;margin-bottom:4px;">
+    <div style="font-size:10px;color:#888;margin-bottom:8px;">Busca entre los vehículos homologados en Chile (CPCC) y abre su ficha de seguridad PDF de la SEC cuando esté disponible.</div>
+    <div id="veh-search-results"><div style="font-size:12px;color:#999;padding:14px;text-align:center;">Escribe al menos 2 caracteres para buscar.</div></div>
+  </div>
+</div>
+<script>
+function vehBuscar(){
+  var q=(document.getElementById('veh-search').value||'').trim().toLowerCase();
+  var cont=document.getElementById('veh-search-results');
+  if(!cont)return;
+  if(q.length<2){cont.innerHTML='<div style="font-size:12px;color:#999;padding:14px;text-align:center;">Escribe al menos 2 caracteres para buscar.</div>';return;}
+  var res=(typeof HOMOL_DATA!=='undefined'?HOMOL_DATA:[]).filter(function(v){return ((v[0]||'')+' '+(v[1]||'')).toLowerCase().indexOf(q)>=0;});
+  if(!res.length){cont.innerHTML='<div style="font-size:12px;color:#C62828;padding:14px;text-align:center;">Sin resultados para "'+q+'".</div>';return;}
+  res.sort(function(a,b){return (a[0]||'').localeCompare(b[0]||'')||(a[1]||'').localeCompare(b[1]||'');});
+  var n=res.length, lim=res.slice(0,120);
+  var h='<div style="font-size:11px;color:#2B5BA8;font-weight:700;margin-bottom:5px;">'+n+' vehículo'+(n!=1?'s':'')+' encontrado'+(n!=1?'s':'')+(n>120?' (mostrando 120)':'')+'</div>';
+  h+='<div style="overflow-x:auto;max-height:420px;overflow-y:auto;"><table style="width:100%;border-collapse:collapse;font-size:11px;"><thead style="position:sticky;top:0;background:#f5f5f5;"><tr style="border-bottom:2px solid #ddd;"><th style="padding:5px 8px;text-align:left;">Marca</th><th style="padding:5px 8px;text-align:left;">Modelo</th><th style="padding:5px 8px;text-align:left;">Tecnología</th><th style="padding:5px 8px;text-align:left;">Carrocería</th><th style="padding:5px 8px;text-align:right;">Año</th><th style="padding:5px 8px;text-align:left;">Importador</th><th style="padding:5px 8px;text-align:center;">Ficha seguridad</th></tr></thead><tbody>';
+  lim.forEach(function(v,i){
+    var link=(v[6]&&v[6].length>5)?'<a href="'+v[6]+'" target="_blank" rel="noopener" style="color:#1565C0;font-weight:700;text-decoration:none;">Ver PDF SEC</a>':'<span style="color:#bbb;">—</span>';
+    h+='<tr style="border-bottom:1px solid #eee;'+(i%2?'background:#fafafa;':'')+'"><td style="padding:4px 8px;font-weight:700;color:#2B5BA8;">'+(v[0]||'')+'</td><td style="padding:4px 8px;">'+(v[1]||'')+'</td><td style="padding:4px 8px;">'+(v[2]||'')+'</td><td style="padding:4px 8px;">'+(v[3]||'')+'</td><td style="padding:4px 8px;text-align:right;">'+(v[4]||'')+'</td><td style="padding:4px 8px;color:#555;">'+(v[5]||'')+'</td><td style="padding:4px 8px;text-align:center;">'+link+'</td></tr>';
+  });
+  h+='</tbody></table></div><div style="font-size:10px;color:#888;text-align:right;font-style:italic;margin-top:5px;">Fuente: Vehículos Homologados CPCC + Fichas de Seguridad PDF SEC</div>';
+  cont.innerHTML=h;
+}
+</script>
+
   <!-- DASHBOARD 1: Vehículos Homologados (954) sin columna ficha -->
   <div class="card" style="margin-bottom:16px;">
     <div class="card-header">🚗 VEHÍCULOS HOMOLOGADOS EN CHILE
