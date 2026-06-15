@@ -3035,12 +3035,12 @@ else{window.addEventListener('load',_renderEdadSec);}
 
 </div>
 
-<div class="sec-btn" id="btn-ficha" onclick="secBtn('ficha')"><span style="display:flex;align-items:center;"><span class="sec-icon">📋</span><span><span class="sec-lbl">Ficha Regional y Comunal</span><span class="sec-sub">Selecciona región y comuna para ver su ficha completa</span></span></span><span class="sec-arrow">&#9660;</span></div>
+<div class="sec-btn" id="btn-ficha" onclick="secBtn('ficha')"><span style="display:flex;align-items:center;"><span class="sec-icon"></span><span><span class="sec-lbl">Ficha Regional y Comunal</span><span class="sec-sub">Selecciona región y comuna para ver su ficha completa</span></span></span><span class="sec-arrow">&#9660;</span></div>
 <div class="sec-panel" id="pan-ficha">
 <!-- FICHA-REGIONAL-COMUNAL -->
 <div style="padding:6px 2px 12px;">
   <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
-    <span style="font-size:13px;font-weight:700;color:#2B5BA8;">🔍 Región:</span>
+    <span style="font-size:13px;font-weight:700;color:#2B5BA8;">Región:</span>
     <select id="ficha-reg-sel" onchange="fichaRender()" style="font-size:13px;padding:6px 10px;border:1.5px solid #2B5BA8;border-radius:6px;background:#fff;color:#333;min-width:200px;"><option value="">— Elige una región —</option></select>
     <span style="font-size:13px;font-weight:700;color:#E65100;">Comuna:</span>
     <select id="ficha-com-sel" onchange="fichaRenderComuna()" style="font-size:13px;padding:6px 10px;border:1.5px solid #E65100;border-radius:6px;background:#fff;color:#333;min-width:200px;"><option value="">— Toda la región —</option></select>
@@ -3067,8 +3067,8 @@ function fichaPrecio(pr,ambito){
   h+=fichaKpi('Precio máximo','$'+_fmt(pr.max),'CLP por kWh','#C62828');
   h+='</div>';
   // leyenda con direccion de los dos precios
-  h+='<div style="background:#F1F8E9;border-left:3px solid #2E7D32;font-size:11px;color:#33691E;padding:5px 10px;margin-top:6px;border-radius:0 6px 6px 0;">🟢 <b>Más barato ($'+_fmt(pr.min)+'/kWh):</b> '+pr.minloc+(pr.mincom&&ambito.indexOf('región')>=0?' ('+pr.mincom+')':'')+(pr.mindesc?'<br><span style="color:#558B2F;">🔌 '+pr.mindesc+'</span>':'')+'</div>';
-  h+='<div style="background:#FFEBEE;border-left:3px solid #C62828;font-size:11px;color:#B71C1C;padding:5px 10px;margin-top:4px;border-radius:0 6px 6px 0;">🔴 <b>Más caro ($'+_fmt(pr.max)+'/kWh):</b> '+pr.maxloc+(pr.maxcom&&ambito.indexOf('región')>=0?' ('+pr.maxcom+')':'')+(pr.maxdesc?'<br><span style="color:#C62828;">🔌 '+pr.maxdesc+'</span>':'')+'</div>';
+  h+='<div style="background:#F1F8E9;border-left:3px solid #2E7D32;font-size:11px;color:#33691E;padding:5px 10px;margin-top:6px;border-radius:0 6px 6px 0;"><b>Más barato ($'+_fmt(pr.min)+'/kWh):</b> '+pr.minloc+(pr.mincom&&ambito.indexOf('región')>=0?' ('+pr.mincom+')':'')+(pr.mindesc?'<br><span style="color:#558B2F;">'+pr.mindesc+'</span>':'')+'</div>';
+  h+='<div style="background:#FFEBEE;border-left:3px solid #C62828;font-size:11px;color:#B71C1C;padding:5px 10px;margin-top:4px;border-radius:0 6px 6px 0;"><b>Más caro ($'+_fmt(pr.max)+'/kWh):</b> '+pr.maxloc+(pr.maxcom&&ambito.indexOf('región')>=0?' ('+pr.maxcom+')':'')+(pr.maxdesc?'<br><span style="color:#C62828;">'+pr.maxdesc+'</span>':'')+'</div>';
   return h;
 }
 function fichaRender(){
@@ -3086,7 +3086,7 @@ function fichaRender(){
 }
 function fichaRegional(reg){
   var R=FICHA_REG[reg];
-  var html='<div style="background:#2B5BA8;color:#fff;border-radius:8px;padding:8px 14px;font-weight:800;margin-bottom:10px;">📍 Región '+reg+' — '+R.comunas+' comunas</div>';
+  var html='<div style="background:#2B5BA8;color:#fff;border-radius:8px;padding:8px 14px;font-weight:800;margin-bottom:10px;">Región '+reg+' — '+R.comunas+' comunas</div>';
   html+='<div style="font-size:11px;font-weight:700;color:#888;margin:8px 0 4px;">POBLACIÓN Y FLOTA EV</div><div style="display:flex;gap:8px;flex-wrap:wrap;">';
   html+=fichaKpi('Población censada',_fmt(R.pob),'Censo 2024','#2B5BA8');
   html+=fichaKpi('EVs en circulación',_fmt(R.evs),'Permisos 2024','#1565C0');
@@ -3116,7 +3116,7 @@ function fichaRenderComuna(){
   var x=FICHA_COM.filter(function(y){return y.c===com && y.r===reg;})[0];
   var R=FICHA_REG[reg];
   if(!x){ fichaRegional(reg); return; }
-  var html='<div style="background:#E65100;color:#fff;border-radius:8px;padding:8px 14px;font-weight:800;margin-bottom:10px;">🏙️ '+x.c+' <span style="font-weight:400;opacity:.85;">· Región '+reg+'</span></div>';
+  var html='<div style="background:#E65100;color:#fff;border-radius:8px;padding:8px 14px;font-weight:800;margin-bottom:10px;">'+x.c+' <span style="font-weight:400;opacity:.85;">· Región '+reg+'</span></div>';
   html+='<div style="font-size:11px;font-weight:700;color:#888;margin:8px 0 4px;">POBLACIÓN Y FLOTA EV</div><div style="display:flex;gap:8px;flex-wrap:wrap;">';
   html+=fichaKpi('Población censada',_fmt(x.p),'Censo 2024','#2B5BA8');
   html+=fichaKpi('EVs en circulación',_fmt(x.e),'Permisos 2024','#1565C0');
