@@ -3722,6 +3722,18 @@ function _applyMapFilters() {
     return true;
   });
   _renderMapMarkers(filtered);
+  // Zoom automatico a la region/comuna filtrada
+  try{
+    if(typeof _mapaMap!=='undefined' && _mapaMap){
+      if((region||comuna) && filtered.length){
+        var _pts=filtered.filter(function(p){return p.lat&&p.lng;}).map(function(p){return [p.lat,p.lng];});
+        if(_pts.length===1){ _mapaMap.setView(_pts[0],12,{animate:true}); }
+        else if(_pts.length>1){ _mapaMap.fitBounds(_pts,{padding:[30,30],maxZoom:13}); }
+      } else if(!region && !comuna){
+        _mapaMap.setView([-35.5,-71],4,{animate:true});
+      }
+    }
+  }catch(e){}
   // Update comuna dropdown based on region
   if(region) {
     var comOpts = ['<option value="">Todas las comunas</option>'];
