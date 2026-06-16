@@ -2564,6 +2564,10 @@ function _updateCensoVivMap(){
       .addTo(_censoMapViv);
     _censoVivMark.push(m);
   });
+  try{
+    if(fR){var _fc=null;for(var _k in CENSO_COORDS){if(_k.toLowerCase().indexOf(fR.toLowerCase())>=0){_fc=CENSO_COORDS[_k];break;}}if(_fc)_censoMapViv.setView(_fc,6,{animate:true});}
+    else{_censoMapViv.setView([-35.5,-71],4,{animate:true});}
+  }catch(e){}
 }
 
 /* ═══ MAPA PERSONAS ═════════════════════════════════════════════ */
@@ -2601,6 +2605,10 @@ function _updateCensoPersMap(){
       .addTo(_censoMapPers);
     _censoPersCirc.push(m);
   });
+  try{
+    if(fR){var _fc=null;for(var _k in CENSO_COORDS){if(_k.toLowerCase().indexOf(fR.toLowerCase())>=0){_fc=CENSO_COORDS[_k];break;}}if(_fc)_censoMapPers.setView(_fc,6,{animate:true});}
+    else{_censoMapPers.setView([-35.5,-71],4,{animate:true});}
+  }catch(e){}
 }
 
 /* ═══ FILTROS VIVIENDAS (con enlace entre selects) ══════════════ */
@@ -2964,6 +2972,10 @@ function _updateEdadMap(){
       .addTo(_censoMapEdad);
     _censoEdadMark.push(m);
   });
+  try{
+    if(fR){var _fc=null;for(var _k in CENSO_COORDS){if(_k.toLowerCase().indexOf(fR.toLowerCase())>=0){_fc=CENSO_COORDS[_k];break;}}if(_fc)_censoMapEdad.setView(_fc,6,{animate:true});}
+    else{_censoMapEdad.setView([-35.5,-71],4,{animate:true});}
+  }catch(e){}
 }
 
 /* ── sync filtros edad ↔ segmento ───────────────────────────── */
