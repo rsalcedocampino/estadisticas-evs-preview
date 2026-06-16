@@ -457,7 +457,7 @@ function _authErrMsg(code){
   </div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
     <div class="badge" id="badge-fecha"></div>
-    <a href="https://www.linkedin.com/in/rsalcedoc" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.5);border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;color:white;text-decoration:none;white-space:nowrap;letter-spacing:0.3px;">✉ Contacto</a>
+    <a href="https://www.linkedin.com/in/rsalcedoc" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.5);border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;color:white;text-decoration:none;white-space:nowrap;letter-spacing:0.3px;">Contacto</a>
 
     <button id="btn-logout" onclick="authLogout()" style="display:none;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:white;cursor:pointer;white-space:nowrap;">&#8859; Cerrar Sesi&#243;n</button>
   </div>
@@ -473,7 +473,7 @@ function _authErrMsg(code){
 <div class="grid">
   
 <div class="card">
-    <div class="card-header">📈 VENTAS ANUALES POR TECNOLOGÍA<span class="insight">MHEV lidera en volumen · BEV crece más rápido</span></div>
+    <div class="card-header">VENTAS ANUALES POR TECNOLOGÍA<span class="insight">MHEV lidera en volumen · BEV crece más rápido</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartVentas"></canvas></div>
       <div class="insight-bar">En 2025 se vendieron <strong>37.613 EVs</strong>. MHEV domina (16.729) pero BEV sube a 5.512. Los PHEV casi igualan a BEV en 2026.</div>
@@ -483,7 +483,7 @@ function _authErrMsg(code){
 
   
 <div class="card">
-    <div class="card-header">🎯 PENETRACIÓN DE MERCADO (% MENSUAL)<span class="insight">De 0,3% en 2018 a 18,3% en abr-2026</span></div>
+    <div class="card-header">PENETRACIÓN DE MERCADO (% MENSUAL)<span class="insight">De 0,3% en 2018 a 18,3% en abr-2026</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartPenetracion"></canvas></div>
       <div class="insight-bar">La electrificación del mercado se <strong>aceleró</strong> desde 2024. En abril 2026, solo el 81,7% del mercado es combustión.</div>
@@ -497,10 +497,10 @@ function _authErrMsg(code){
 <div class="grid">
   
 <div class="card">
-    <div class="card-header">🏆 TOP MARCAS POR TECNOLOGÍA<span data-marcas-hdr style="font-weight:400;"> · Abr-2026</span><span class="insight" id="marcas-insight-hdr">Todas las tecnologías electrificadas</span></div>
+    <div class="card-header">TOP MARCAS POR TECNOLOGÍA<span data-marcas-hdr style="font-weight:400;"> · Abr-2026</span><span class="insight" id="marcas-insight-hdr">Todas las tecnologías electrificadas</span></div>
     <div class="card-body">
       <div style="padding:6px 14px 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">🔋 Tecnología:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">Tecnología:</span>
         <button onclick="_setMarcasTech('BEV+PHEV')" id="mbt-bevphev" style="font-size:10.5px;padding:3px 9px;border:1px solid #ccc;border-radius:12px;cursor:pointer;background:#fff;color:#333;font-weight:400;">BEV+PHEV</button>
         <button onclick="_setMarcasTech('BEV')" id="mbt-bev" style="font-size:10.5px;padding:3px 9px;border:1px solid #ccc;border-radius:12px;cursor:pointer;background:#fff;color:#333;">BEV</button>
         <button onclick="_setMarcasTech('PHEV + PEREV')" id="mbt-phev" style="font-size:10.5px;padding:3px 9px;border:1px solid #ccc;border-radius:12px;cursor:pointer;background:#fff;color:#333;">PHEV+PEREV</button>
@@ -509,10 +509,10 @@ function _authErrMsg(code){
         <button onclick="_setMarcasTech('Todas')" id="mbt-todas" style="font-size:10.5px;padding:3px 9px;border:1px solid #2B5BA8;border-radius:12px;cursor:pointer;background:#2B5BA8;color:#fff;font-weight:600;">Todas</button>
       </div>
       <div style="padding:2px 14px 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">📅 Período:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">Período:</span>
         <select id="marcas-mes-sel" onchange="_updateMarcasChart(this.value,null)" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="2024-01">Ene-24</option><option value="2024-02">Feb-24</option><option value="2024-03">Mar-24</option><option value="2024-04">Abr-24</option><option value="2024-05">May-24</option><option value="2024-06">Jun-24</option><option value="2024-07">Jul-24</option><option value="2024-08">Ago-24</option><option value="2024-09">Sep-24</option><option value="2024-10">Oct-24</option><option value="2024-11">Nov-24</option><option value="2024-12">Dic-24</option><option value="2025-02">Feb-25</option><option value="2025-03">Mar-25</option><option value="2025-04">Abr-25</option><option value="2025-05">May-25</option><option value="2025-06">Jun-25</option><option value="2025-07">Jul-25</option><option value="2025-08">Ago-25</option><option value="2025-09">Sep-25</option><option value="2025-10">Oct-25</option><option value="2025-11">Nov-25</option><option value="2025-12">Dic-25</option><option value="2026-01">Ene-26</option><option value="2026-02">Feb-26</option><option value="2026-03">Mar-26</option><option value="2026-04" selected>Abr-26</option></select>
         <span id="marcas-total-label" style="font-size:11px;color:#666;"></span>
-        <span id="marcas-data-note" style="font-size:10px;color:#e07000;display:none;">✅ Datos disponibles desde Ene-2024</span>
+        <span id="marcas-data-note" style="font-size:10px;color:#e07000;display:none;">Datos disponibles desde Ene-2024</span>
       </div>
       <div class="chart-wrap tall"><canvas id="chartMarcas"></canvas></div>
       <div class="insight-bar" id="marcas-insight-bar">En <strong>Abr-2026</strong>: <strong>SUZUKI</strong> lidera el total (4.226 MHEV), <strong>CHANGAN</strong> en PHEV+PEREV (644), <strong>TESLA</strong> en BEV (779). Selecciona tecnología para ver el ranking de cada segmento.</div>
@@ -522,7 +522,7 @@ function _authErrMsg(code){
 
   
 <div class="card">
-    <div class="card-header">🔌 CARGADORES INSTALADOS POR TIPO Y AÑO<span class="insight">Privado = 60% del total acumulado</span></div>
+    <div class="card-header">CARGADORES INSTALADOS POR TIPO Y AÑO<span class="insight">Privado = 60% del total acumulado</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartCargadores"></canvas></div>
       <div class="insight-bar">El sector <strong>Privado</strong> domina con 4.261 cargadores (60%). En 2025 instaló 1.754 unidades, el 68% del año.</div>
@@ -536,7 +536,7 @@ function _authErrMsg(code){
 <div class="grid">
   
 <div class="card">
-    <div class="card-header">⚡ RATIO EVs POR CONECTOR (ACUMULADO)<span class="insight">BEV+PHEV vs conectores públicos</span></div>
+    <div class="card-header">RATIO EVs POR CONECTOR (ACUMULADO)<span class="insight">BEV+PHEV vs conectores públicos</span></div>
     <div class="card-body">
       <div class="chart-wrap"><canvas id="chartRatio"></canvas></div>
       <div class="insight-bar">En 2026 hay <strong>~12 BEV+PHEV por cada conector público</strong>. La brecha creció desde 8x en 2024 — la flota enchufable escala más rápido que la infraestructura pública.</div>
@@ -546,10 +546,10 @@ function _authErrMsg(code){
 
   
 <div class="card">
-    <div class="card-header">🗺 PERMISOS EV POR REGIÓN – <span id="anio-regiones-header"></span><span class="insight">RM concentra el 65% de la flota EV</span></div>
+    <div class="card-header">PERMISOS EV POR REGIÓN – <span id="anio-regiones-header"></span><span class="insight">RM concentra el 65% de la flota EV</span></div>
     <div class="card-body" style="padding:0;">
       <div style="padding:10px 16px 8px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">📅 Año:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">Año:</span>
         <select id="regiones-year-sel" onchange="_updateRegionesChart(this.value)" style="font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024" selected>2024</option></select>
         <span id="regiones-total-label" style="font-size:11px;color:#666;font-weight:600;"></span>
       </div>
@@ -1595,12 +1595,12 @@ function vehBuscar(){
 
   <!-- DASHBOARD 1: Vehículos Homologados (954) sin columna ficha -->
   <div class="card" style="margin-bottom:16px;">
-    <div class="card-header">🚗 VEHÍCULOS HOMOLOGADOS EN CHILE
+    <div class="card-header">VEHÍCULOS HOMOLOGADOS EN CHILE
       <span class="insight">954 vehículos · BEV, PHEV, HEV, MHEV · CPCC</span>
     </div>
     <div class="card-body">
       <div class="homol-filter-btns" style="flex-wrap:wrap;gap:4px 6px;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;align-self:center;">⚡ Tecnología:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;align-self:center;">Tecnología:</span>
         <button class="hv-tech-btn active" data-tech="HV-Todas" onclick="_filterHomolVeh('Todas','HV-Todas')">Todas</button>
         <button class="hv-tech-btn" data-tech="HV-BEV" onclick="_filterHomolVeh('BEV','HV-BEV')">BEV (350)</button>
         <button class="hv-tech-btn" data-tech="HV-PHEV" onclick="_filterHomolVeh('PHEV + PEREV','HV-PHEV')">PHEV (194)</button>
@@ -1609,7 +1609,7 @@ function vehBuscar(){
         <span id="homolv-count" style="font-size:11px;color:#666;margin-left:8px;align-self:center;">954 vehículos</span>
       </div>
       <div class="homol-filter-btns" style="flex-wrap:wrap;gap:4px 6px;margin-top:4px;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;align-self:center;">🏷️ Carrocería:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;align-self:center;">Carrocería:</span>
         <button class="hv-cat-btn active" data-cat="Todas" onclick="_setHomolVehCat('Todas')">Todas</button>
         <button class="hv-cat-btn" data-cat="Sedán" onclick="_setHomolVehCat('Sedán')">Sedán</button>
         <button class="hv-cat-btn" data-cat="Hatchback" onclick="_setHomolVehCat('Hatchback')">Hatchback</button>
@@ -1638,12 +1638,12 @@ function vehBuscar(){
 
   <!-- DASHBOARD 2: Fichas de Seguridad SEC (379 con link) -->
   <div class="card">
-    <div class="card-header">📄 FICHAS DE SEGURIDAD · SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES
+    <div class="card-header">FICHAS DE SEGURIDAD · SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES
       <span class="insight">379 fichas PDF disponibles · BEV (229) · PHEV + PEREV (130) · HEV - EREV (20)</span>
     </div>
     <div class="card-body">
       <div class="homol-filter-btns" style="flex-wrap:wrap;gap:4px 6px;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;align-self:center;">⚡ Tecnología:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;align-self:center;">Tecnología:</span>
         <button class="homol-tech-btn active" data-tech="F-Todas" onclick="_filterFichas('Todas','F-Todas')">Todas (379)</button>
         <button class="homol-tech-btn" data-tech="F-BEV" onclick="_filterFichas('BEV','F-BEV')">BEV (229)</button>
         <button class="homol-tech-btn" data-tech="F-PHEV" onclick="_filterFichas('PHEV + PEREV','F-PHEV')">PHEV + PEREV (130)</button>
@@ -1672,7 +1672,7 @@ function vehBuscar(){
 <div class="grid-full">
   
 <div class="card">
-    <div class="card-header">🔌 CONECTORES NUEVOS POR AÑO Y ENERGÍA MW INSTALADA<span class="insight">2025: año récord — 3.819 conectores y 96 MW</span></div>
+    <div class="card-header">CONECTORES NUEVOS POR AÑO Y ENERGÍA MW INSTALADA<span class="insight">2025: año récord — 3.819 conectores y 96 MW</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartConectoresMW"></canvas></div>
       <div class="insight-bar">En <strong>2025</strong> se instalaron 3.819 conectores nuevos (+88% vs 2024) y 96,4 MW de potencia — el mayor año de la historia. La potencia media acumulada se mantiene estable en ~<strong>21 kW/conector</strong>, aunque los cargadores privados y públicos dominan el volumen mientras los CC T.Público aportan la mayor densidad de potencia.</div>
@@ -1686,7 +1686,7 @@ function vehBuscar(){
 <div class="grid-full">
   
 <div class="card">
-    <div class="card-header">🚗 FLOTA EV CON PERMISO DE CIRCULACIÓN (STOCK ACUMULADO)<span class="insight">Se duplicó entre 2023 y 2024 · llega a 33.853 vehículos</span></div>
+    <div class="card-header">FLOTA EV CON PERMISO DE CIRCULACIÓN (STOCK ACUMULADO)<span class="insight">Se duplicó entre 2023 y 2024 · llega a 33.853 vehículos</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartPermisosEV"></canvas></div>
       <div class="insight-bar">En <strong>2024</strong> circulan <strong>33.853 EVs</strong> con permiso vigente (+101% vs 2023), representando el <strong>0,51% de la flota total</strong> de 6,6 M de vehículos. El mayor salto ocurrió en 2018 (+172%) con la llegada masiva de las primeras flotas. Los datos de permisos tienen un rezago de ~12 meses respecto a las ventas.</div>
@@ -1701,7 +1701,7 @@ function vehBuscar(){
 <div class="grid-full">
   
 <div class="card">
-    <div class="card-header">📊 EVOLUCIÓN BEV vs PHEV vs HEV vs MHEV — VENTAS ANUALES<span class="insight">MHEV explota en 2024–2025 · PHEV se acelera en 2026</span></div>
+    <div class="card-header">EVOLUCIÓN BEV vs PHEV vs HEV vs MHEV — VENTAS ANUALES<span class="insight">MHEV explota en 2024–2025 · PHEV se acelera en 2026</span></div>
     <div class="card-body">
       <div class="chart-wrap"><canvas id="chartLineas"></canvas></div>
       <div class="insight-bar">
@@ -1720,7 +1720,7 @@ function vehBuscar(){
 <div class="grid">
   
 <div class="card">
-    <div class="card-header">🔋 EVs ENCHUFABLES vs CONECTORES PÚBLICOS — POR REGIÓN<span class="insight">EVs: flota 2024 · Conectores: registro SEC acum. 2026</span></div>
+    <div class="card-header">EVs ENCHUFABLES vs CONECTORES PÚBLICOS — POR REGIÓN<span class="insight">EVs: flota 2024 · Conectores: registro SEC acum. 2026</span></div>
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chartCruceRegional"></canvas></div>
       <div class="insight-bar">Maule acumula <strong>3.482 EVs en circulación (2024)</strong> con solo <strong>47 conectores públicos disponibles (2026)</strong> — ratio de 74x, el más alto del país. Metropolitana concentra el 70% de los conectores nacionales (1.353), mientras Aysén tiene la mejor cobertura relativa (5x). <em>Nota: datos EVs corresponden a permisos de circulación 2024, último año disponible.</em></div>
@@ -1730,7 +1730,7 @@ function vehBuscar(){
 
   
 <div class="card">
-    <div class="card-header">⚠️ ÍNDICE DE PRESIÓN — EVs POR CONECTOR PÚBLICO, POR REGIÓN<span class="insight">Ordenado por brecha · Rojo = zona crítica</span></div>
+    <div class="card-header">ÍNDICE DE PRESIÓN — EVs POR CONECTOR PÚBLICO, POR REGIÓN<span class="insight">Ordenado por brecha · Rojo = zona crítica</span></div>
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chartPresionRegional"></canvas></div>
       <div class="insight-bar"><strong>Maule (74x)</strong> es la región más crítica del país — cuatro veces más presión que la Metropolitana (16x). <strong>Biobío (26x)</strong> y <strong>Coquimbo (21x)</strong> también superan el umbral alto. Las regiones del sur tienen mejor cobertura relativa: Aysén (5x), Los Lagos (8x) y Araucanía (9x). <em>Colores: rojo oscuro ≥ 50x · rojo ≥ 25x · naranja ≥ 15x · amarillo ≥ 10x · verde &lt; 10x.</em></div>
@@ -1745,7 +1745,7 @@ function vehBuscar(){
 <div class="grid-full">
   
 <div class="card">
-    <div class="card-header">🚌 E-BUSES vs CONECTORES CC T.PÚBLICO + ELECTROTERMINAL — ACUMULADO HISTÓRICO<span class="insight">Ratio actual ~1,5 buses/conector · Infraestructura bien dimensionada</span></div>
+    <div class="card-header">E-BUSES vs CONECTORES CC T.PÚBLICO + ELECTROTERMINAL — ACUMULADO HISTÓRICO<span class="insight">Ratio actual ~1,5 buses/conector · Infraestructura bien dimensionada</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartEbusesCruce"></canvas></div>
       <div class="insight-bar">A diferencia de los vehículos particulares (14,5 EVs/cargador), los e-buses muestran una cobertura de infraestructura muy superior: <strong>solo 1,5 buses por conector CC o Electroterminal</strong>. En 2025, la red de carga para buses alcanzó <strong>3.504 conectores acumulados</strong>, creciendo más rápido que la flota. El peak de 2023 (1.427 nuevos buses) fue absorbido sin deteriorar el ratio.</div>
@@ -1759,7 +1759,7 @@ function vehBuscar(){
 <div class="grid">
   
 <div class="card">
-    <div class="card-header">🗺️ CC T.PÚBLICO + ELECTROTERMINAL POR MACRO-REGIÓN — ACUMULADO 2026<span class="insight">Valparaíso-Maule concentra el 82% de la infraestructura de buses</span></div>
+    <div class="card-header">CC T.PÚBLICO + ELECTROTERMINAL POR MACRO-REGIÓN — ACUMULADO 2026<span class="insight">Valparaíso-Maule concentra el 82% de la infraestructura de buses</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartEbusesRegion"></canvas></div>
       <div class="insight-bar"><strong>Valparaíso-Maule</strong> concentra 108 instalaciones (52 CC Público + 56 Electroterminal), reflejo del gran despliegue de buses eléctricos en la Región Metropolitana (que queda agrupada en esta zona). Las regiones del sur (Biobío-Los Lagos) tienen solo 7 instalaciones. Aysén-Magallanes no registra infraestructura dedicada para buses.</div>
@@ -1769,7 +1769,7 @@ function vehBuscar(){
 
   
 <div class="card">
-    <div class="card-header">⚡ POTENCIA INSTALADA CC+ELECTROTERMINAL (MW) vs E-BUSES NUEVOS — ANUAL<span class="insight">2025: peak histórico de potencia instalada · 46,7 MW solo de CC</span></div>
+    <div class="card-header">POTENCIA INSTALADA CC+ELECTROTERMINAL (MW) vs E-BUSES NUEVOS — ANUAL<span class="insight">2025: peak histórico de potencia instalada · 46,7 MW solo de CC</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chartEbusesMW"></canvas></div>
       <div class="insight-bar">En 2025 se instalaron <strong>54,8 MW</strong> de potencia de carga para buses (46,7 MW en CC Público + 8,1 MW en Electroterminal), acompañando los <strong>2.009 nuevos e-buses</strong> del año. El año 2020 fue excepcional en CC Público (12 MW) por el despliegue inicial de Transantiago eléctrico. En 2026*, los datos son parciales (ene–may).</div>
@@ -1788,7 +1788,7 @@ function vehBuscar(){
 SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="grid">
   <div class="card">
-    <div class="card-header">🏙️ COBERTURA COMUNAL<span class="insight">178 / 346 comunas con cargador público (51,4%)</span></div>
+    <div class="card-header">COBERTURA COMUNAL<span class="insight">178 / 346 comunas con cargador público (51,4%)</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cobertura"></canvas></div>
       <div class="insight-bar"><b>178 comunas</b> tienen al menos un conector público registrado (51,4% de cobertura nacional). <b>168 comunas</b> aún no cuentan con carga pública. Chile tiene 346 comunas en total. registrado en SEC.</div>
@@ -1796,7 +1796,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     </div>
   </div>
   <div class="card">
-    <div class="card-header">🏢 CUOTA DE MERCADO — QUIÉN INSTALA<span class="insight">Enel + Copec = 89% del mercado</span></div>
+    <div class="card-header">CUOTA DE MERCADO — QUIÉN INSTALA<span class="insight">Enel + Copec = 89% del mercado</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-cuota"></canvas></div>
       <div class="insight-bar">Dos operadores dominan la red pública. <b>Enel</b> lidera con 1.289 conectores, seguido de <b>Copec</b> con 945.</div>
@@ -1807,13 +1807,13 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 
 <div class="grid">
   <div class="card">
-    <div class="card-header">🏆 TOP 20 COMUNAS POR CONECTORES PÚBLICOS<span class="insight">Las Condes lidera con 336</span></div>
+    <div class="card-header">TOP 20 COMUNAS POR CONECTORES PÚBLICOS<span class="insight">Las Condes lidera con 336</span></div>
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chart-top-comunas"></canvas></div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header">⚡ AC vs DC POR REGIÓN<span class="insight">DC = carga rápida · concentrado en RM</span></div>
+    <div class="card-header">AC vs DC POR REGIÓN<span class="insight">DC = carga rápida · concentrado en RM</span></div>
     <div class="card-body">
       <div class="chart-wrap xl"><canvas id="chart-acdc"></canvas></div>
       <div class="insight-bar">La <b>Región Metropolitana</b> concentra el mayor volumen de conectores DC de alta potencia. Las regiones del sur tienen predominio casi exclusivo de AC.</div>
@@ -1825,7 +1825,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 
 <div class="grid">
   <div class="card">
-    <div class="card-header">🔌 TIPOS DE CONECTOR<span class="insight">Tipo 2 AC domina · CCS2 crece con BEV</span></div>
+    <div class="card-header">TIPOS DE CONECTOR<span class="insight">Tipo 2 AC domina · CCS2 crece con BEV</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-conectores-tipo"></canvas></div>
       <div class="insight-bar"><b>AC Tipo 2</b> domina con 1.312 puntos. El estándar <b>CCS Tipo 2</b> (carga rápida DC) crece a medida que aumenta la flota BEV.</div>
@@ -1833,7 +1833,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     </div>
   </div>
   <div class="card">
-    <div class="card-header">💡 POTENCIA PROMEDIO POR INSTALADOR (kW)<span class="insight">Trolebuses y Enex = cargadores más rápidos</span></div>
+    <div class="card-header">POTENCIA PROMEDIO POR INSTALADOR (kW)<span class="insight">Trolebuses y Enex = cargadores más rápidos</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-potencia-inst"></canvas></div>
       <div class="insight-bar"><b>Shell (71,5 kW)</b> y <b>Enex (68 kW)</b> tienen la mayor potencia media — cargadores rápidos DC. <b>Enel</b> y <b>Copec</b> tienen red más grande pero con mezcla AC/DC.</div>
@@ -1844,7 +1844,7 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 
 <div class="grid" style="grid-template-columns:1fr;">
   <div class="card">
-    <div class="card-header">📈 EVOLUCIÓN DE POTENCIA INSTALADA ANUAL (kW)<span class="insight">2025: récord histórico de potencia instalada</span></div>
+    <div class="card-header">EVOLUCIÓN DE POTENCIA INSTALADA ANUAL (kW)<span class="insight">2025: récord histórico de potencia instalada</span></div>
     <div class="card-body">
       <div class="chart-wrap" style="height:240px;"><canvas id="chart-evol-potencia"></canvas></div>
       <div class="insight-bar">En <b>2025</b> se alcanzó el mayor nivel de potencia instalada en un año, impulsado por la expansión masiva de cargadores rápidos DC en la red pública.</div>
@@ -1857,13 +1857,13 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
 <div class="sec-btn" id="btn-mapa" onclick="secBtn('mapa')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">MAPA NACIONAL DE INFRAESTRUCTURA</span><span class="sec-sub">Mapa interactivo · Conectores EV · Filtros por región</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-mapa">
 <div class="grid">
   <div class="card" style="grid-column:span 2;">
-    <div class="card-header">🗺️ MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE</div>
+    <div class="card-header">MAPA INTERACTIVO — CARGADORES PÚBLICOS CHILE</div>
     <div class="card-body" style="padding:0;">
       <!-- FILTROS MAPA -->
       
-      <div style="background:#EEF2FB;border-left:4px solid #F5A623;padding:8px 14px;font-size:11px;color:#1E3D7A;"><strong>📋 Cómo usar este mapa:</strong> Filtra por región, comuna, tipo de conector, instalador o infraestructura para identificar cobertura pública, zonas sin carga rápida y oportunidades de expansión. — Conectores PÚBLICOS · Fuente: <a href="https://cargadorespublicos.cl/" target="_blank" rel="noopener" style="color:#1E3D7A;font-weight:700;">SEC · cargadorespublicos.cl</a> · Junio 2026</div>
+      <div style="background:#EEF2FB;border-left:4px solid #F5A623;padding:8px 14px;font-size:11px;color:#1E3D7A;"><strong>Cómo usar este mapa:</strong> Filtra por región, comuna, tipo de conector, instalador o infraestructura para identificar cobertura pública, zonas sin carga rápida y oportunidades de expansión. — Conectores PÚBLICOS · Fuente: <a href="https://cargadorespublicos.cl/" target="_blank" rel="noopener" style="color:#1E3D7A;font-weight:700;">SEC · cargadorespublicos.cl</a> · Junio 2026</div>
 <div id="mapa-filtros" style="background:#f8f9fa;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;white-space:nowrap;">🔍 Filtros:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;white-space:nowrap;">Filtros:</span>
         <select id="f-region" onchange="_applyMapFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;">
           <option value="">Todas las regiones</option>
           <option>Metropolitana</option><option>Valparaíso</option><option>O’Higgins</option>
@@ -1957,7 +1957,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 <div class="sec-btn" id="btn-ernc" onclick="secBtn('ernc')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">SOLAR FOTOVOLTAICA</span><span class="sec-sub">Generación distribuida, PMGD, Potencia solar</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-ernc">
 <!-- ═══════ SECCIÓN ENERGÍA SOLAR ═══════ -->
 <div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">
-  ☀️ ENERGÍA SOLAR FOTOVOLTAICA — GENERACIÓN DISTRIBUIDA Y PMGD
+  ENERGÍA SOLAR FOTOVOLTAICA — GENERACIÓN DISTRIBUIDA Y PMGD
 </div>
 
 
@@ -1982,16 +1982,16 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 
 <div class="grid">
   <div class="card">
-    <div class="card-header">📈 POTENCIA SOLAR INSCRITA POR AÑO (MW)<span class="insight">2025 bate récord con 136,4 MW inscritos</span></div>
+    <div class="card-header">POTENCIA SOLAR INSCRITA POR AÑO (MW)<span class="insight">2025 bate récord con 136,4 MW inscritos</span></div>
     <div class="card-body">
-      <div style="padding:8px 14px 6px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;"><span style="font-size:11px;font-weight:700;color:#2B5BA8;">🗺 Región:</span><select id="solar-region-sel" onchange="_updateSolarInscrita(this.value)" style="font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="Todas" selected>Todas</option><option value="Antofagasta">Antofagasta</option><option value="Arica y Parinacota">Arica y Parinacota</option><option value="Atacama">Atacama</option><option value="Aysén">Aysén</option><option value="Biobío">Biobío</option><option value="Coquimbo">Coquimbo</option><option value="La Araucanía">La Araucanía</option><option value="Los Lagos">Los Lagos</option><option value="Los Lagos / Los Ríos">Los Lagos / Los Ríos</option><option value="Los Ríos">Los Ríos</option><option value="Los Ríos / La Araucanía">Los Ríos / La Araucanía</option><option value="Los Ríos / Los Lagos">Los Ríos / Los Lagos</option><option value="Magallanes">Magallanes</option><option value="Maule">Maule</option><option value="Metropolitana">Metropolitana</option><option value="Metropolitana / O’Higgins">Metropolitana / O’Higgins</option><option value="Metropolitana / Valparaíso">Metropolitana / Valparaíso</option><option value="O’Higgins">O’Higgins</option><option value="O’Higgins / Maule">O’Higgins / Maule</option><option value="Sin coordenada visible">Sin coordenada visible</option><option value="Tarapacá">Tarapacá</option><option value="Valparaíso">Valparaíso</option><option value="Valparaíso / Metropolitana">Valparaíso / Metropolitana</option><option value="Ñuble">Ñuble</option><option value="Ñuble / Biobío">Ñuble / Biobío</option></select><span id="solar-region-total" style="font-size:11px;color:#666;font-weight:600;margin-left:6px;"></span></div>
+      <div style="padding:8px 14px 6px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;"><span style="font-size:11px;font-weight:700;color:#2B5BA8;">Región:</span><select id="solar-region-sel" onchange="_updateSolarInscrita(this.value)" style="font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="Todas" selected>Todas</option><option value="Antofagasta">Antofagasta</option><option value="Arica y Parinacota">Arica y Parinacota</option><option value="Atacama">Atacama</option><option value="Aysén">Aysén</option><option value="Biobío">Biobío</option><option value="Coquimbo">Coquimbo</option><option value="La Araucanía">La Araucanía</option><option value="Los Lagos">Los Lagos</option><option value="Los Lagos / Los Ríos">Los Lagos / Los Ríos</option><option value="Los Ríos">Los Ríos</option><option value="Los Ríos / La Araucanía">Los Ríos / La Araucanía</option><option value="Los Ríos / Los Lagos">Los Ríos / Los Lagos</option><option value="Magallanes">Magallanes</option><option value="Maule">Maule</option><option value="Metropolitana">Metropolitana</option><option value="Metropolitana / O’Higgins">Metropolitana / O’Higgins</option><option value="Metropolitana / Valparaíso">Metropolitana / Valparaíso</option><option value="O’Higgins">O’Higgins</option><option value="O’Higgins / Maule">O’Higgins / Maule</option><option value="Sin coordenada visible">Sin coordenada visible</option><option value="Tarapacá">Tarapacá</option><option value="Valparaíso">Valparaíso</option><option value="Valparaíso / Metropolitana">Valparaíso / Metropolitana</option><option value="Ñuble">Ñuble</option><option value="Ñuble / Biobío">Ñuble / Biobío</option></select><span id="solar-region-total" style="font-size:11px;color:#666;font-weight:600;margin-left:6px;"></span></div>
       <div class="chart-wrap tall"><canvas id="chart-solar-inscrita"></canvas></div>
       <div class="insight-bar" id="solar-inscrita-insight">La potencia solar inscrita creció <strong>+130x</strong> desde 2015 (1 MW) hasta 2025 (136,4 MW). Antofagasta y Atacama concentran los proyectos de mayor escala.</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Poten. - Gener. - Año - Region</div>
     </div>
   </div>
   <div class="card">
-    <div class="card-header">🏗️ NUEVAS INSTALACIONES SOLARES POR AÑO<span class="insight">2025: 10.822 nuevas instalaciones</span></div>
+    <div class="card-header">NUEVAS INSTALACIONES SOLARES POR AÑO<span class="insight">2025: 10.822 nuevas instalaciones</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-solar-instal"></canvas></div>
       <div class="insight-bar">Las instalaciones solares nuevas se multiplicaron <strong>142x</strong> entre 2015 y 2025. El 99% corresponde a sistemas fotovoltaicos.</div>
@@ -2003,7 +2003,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 
 <div class="grid">
   <div class="card">
-    <div class="card-header">⚡ MW SOLARES ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">2024 lidera con 1.192,7 MW</span></div>
+    <div class="card-header">MW SOLARES ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">2024 lidera con 1.192,7 MW</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-solar-mwyr"></canvas></div>
       <div class="insight-bar">En 2024 entraron en operación <strong>1.192,7 MW</strong> solares, el mayor año de la historia. Capacidad solar total operativa en Chile: <strong>11.653,2 MW</strong> (incluye todos los proyectos históricos).</div>
@@ -2011,7 +2011,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
     </div>
   </div>
   <div class="card">
-    <div class="card-header">🗺 POTENCIA SOLAR OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande concentra el 62% del total</span></div>
+    <div class="card-header">POTENCIA SOLAR OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande concentra el 62% del total</span></div>
     <div class="card-body">
       <div class="chart-wrap tall"><canvas id="chart-solar-region"></canvas></div>
       <div class="insight-bar">Antofagasta lidera con <strong>4.266,6 MW</strong>, seguida de Atacama (2.929,2 MW). El norte aprovecha la mayor radiación solar del planeta.</div>
@@ -2023,7 +2023,7 @@ var BESS_MAPA_DATA=[{"lat":-37.09651,"lng":-72.38933,"nombre":"Parque Fotovoltai
 
 <div class="grid" style="grid-template-columns:1fr;">
   <div class="card">
-    <div class="card-header">🔋 CRUCE: POTENCIA SOLAR (MW) vs EVs CON PERMISO — POR REGIÓN<span class="insight">RM lidera en EVs · Norte lidera en solar</span></div>
+    <div class="card-header">CRUCE: POTENCIA SOLAR (MW) vs EVs CON PERMISO — POR REGIÓN<span class="insight">RM lidera en EVs · Norte lidera en solar</span></div>
     <div class="card-body">
       <div class="chart-wrap"><canvas id="chart-solar-ev-cruce"></canvas></div>
       <div class="insight-bar">Contraste notable: <strong>Antofagasta</strong> tiene 4.266 MW solares pero solo 605 EVs, mientras <strong>Metropolitana</strong> tiene 21.971 EVs con 951 MW. El norte genera energía solar que puede impulsar la electromovilidad del país.</div>
@@ -2183,7 +2183,7 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 
 <div class="sec-btn" id="btn-bess" onclick="secBtn('bess')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">BESS & ERNC</span><span class="sec-sub">Pipeline ERNC · Proyectos · Almacenamiento</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-bess">
 <!-- ═══════ SECCIÓN BESS & ERNC ═══════ -->
-<div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🔋 BESS & ENERGÍAS RENOVABLES — PIPELINE, PROYECTOS Y ALMACENAMIENTO</div>
+<div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">BESS & ENERGÍAS RENOVABLES — PIPELINE, PROYECTOS Y ALMACENAMIENTO</div>
 
 <div style="background:#EEF2FB;border-left:4px solid #1ABBA8;padding:10px 16px;margin:4px 0 8px;font-size:11px;color:#1E3D7A;line-height:1.7;">La electromovilidad no escala solo con vehículos y cargadores. También requiere <strong>energía disponible, generación limpia, almacenamiento y planificación territorial</strong>. Esta sección conecta la infraestructura de carga con la capacidad renovable y solar del país, entregando una lectura integral del ecosistema energético.</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
@@ -2193,21 +2193,21 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
   <div class="card" style="text-align:center;padding:12px 8px;"><div style="font-size:20px;font-weight:800;color:#1976D2;">1.030</div><div style="font-size:11px;color:#555;">Proyectos En Operación</div><div style="font-size:10px;color:#888;margin-top:2px;">Ubicación Generación - BESS</div></div>
 </div>
 <div class="grid">
-  <div class="card"><div class="card-header">🔋 POTENCIA ERNC POR ESTADO (MW)<span class="insight">19.889 MW operativos · 33.390 MW aprobados</span></div>
+  <div class="card"><div class="card-header">POTENCIA ERNC POR ESTADO (MW)<span class="insight">19.889 MW operativos · 33.390 MW aprobados</span></div>
     <div class="card-body"><div class="chart-wrap tall"><canvas id="chart-bess-estado"></canvas></div>
     <div class="insight-bar">Pipeline ERNC total: <strong>78.192 MW</strong>. Los aprobados (33.390 MW) representan el futuro inmediato de la capacidad renovable.</div>
     <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
-  <div class="card"><div class="card-header">🗺 POTENCIA ERNC OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande lidera el parque ERNC</span></div>
+  <div class="card"><div class="card-header">POTENCIA ERNC OPERATIVA POR REGIÓN (MW)<span class="insight">Norte Grande lidera el parque ERNC</span></div>
     <div class="card-body"><div class="chart-wrap tall"><canvas id="chart-bess-region"></canvas></div>
     <div class="insight-bar"><strong>Antofagasta</strong> lidera con 6.920 MW, seguida de Atacama (3.861 MW). El norte concentra el mayor recurso solar y eólico.</div>
     <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
 </div>
 <div class="grid">
-  <div class="card"><div class="card-header">⚡ MW ERNC POR TECNOLOGÍA (PIPELINE TOTAL)<span class="insight">Solar fotovoltaica domina con 42.118 MW</span></div>
+  <div class="card"><div class="card-header">MW ERNC POR TECNOLOGÍA (PIPELINE TOTAL)<span class="insight">Solar fotovoltaica domina con 42.118 MW</span></div>
     <div class="card-body"><div class="chart-wrap"><canvas id="chart-bess-tech"></canvas></div>
     <div class="insight-bar">Solar fotovoltaica (42.118 MW), eólica (17.156 MW) y BESS puro (12.727 MW). Chile se consolida como líder latinoamericano en renovables.</div>
     <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
-  <div class="card"><div class="card-header">📈 MW ERNC ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">Crecimiento acelerado desde 2022</span></div>
+  <div class="card"><div class="card-header">MW ERNC ENTRANDO EN OPERACIÓN POR AÑO<span class="insight">Crecimiento acelerado desde 2022</span></div>
     <div class="card-body"><div class="chart-wrap"><canvas id="chart-bess-anio"></canvas></div>
     <div class="insight-bar">La capacidad ERNC operativa ha crecido fuertemente desde 2022, impulsada por proyectos solares y eólicos de gran escala.</div>
     <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ubicación Generación - BESS</div></div></div>
@@ -2216,10 +2216,10 @@ else{window.addEventListener("load",function(){setTimeout(_initACCharts,1000);})
 
 <div class="grid" style="grid-template-columns:1fr;">
   <div class="card">
-    <div class="card-header">🗺 MAPA INTERACTIVO — PROYECTOS ERNC CHILE<span class="insight">1.156 proyectos con coordenadas · color por estado</span></div>
+    <div class="card-header">MAPA INTERACTIVO — PROYECTOS ERNC CHILE<span class="insight">1.156 proyectos con coordenadas · color por estado</span></div>
     <div class="card-body" style="padding:0;">
       <div style="padding:10px 14px 6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid #f0f0f0;">
-        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">🔍 Filtros:</span>
+        <span style="font-size:11px;font-weight:700;color:#2B5BA8;">Filtros:</span>
         <select id="bm-estado" onchange="_applyBESSFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="">Todos los estados</option><option value="En Operación">En Operación</option><option value="Aprobado">Aprobado</option><option value="En Construcción">En Construcción</option><option value="En Calificación">En Calificación</option><option value="En Pruebas">En Pruebas</option></select>
         <select id="bm-tech" onchange="_applyBESSFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;max-width:170px;"><option value="">Todas las tecnologías</option><option value="BESS">BESS</option><option value="Batería de Carnot">Batería de Carnot</option><option value="Biogás">Biogás</option><option value="Biomasa">Biomasa</option><option value="Eólica">Eólica</option><option value="Eólica + H2">Eólica + H2</option><option value="Geotérmica">Geotérmica</option><option value="LAES">LAES</option><option value="Mini Hidráulica Pasada">Mini Hidráulica Pasada</option><option value="Solar fotovoltaica">Solar fotovoltaica</option><option value="Solar fotovoltaica + Eólica">Solar fotovoltaica + Eólica</option><option value="Termosolar">Termosolar</option></select>
         <select id="bm-region" onchange="_applyBESSFilters()" style="font-size:11px;padding:4px 8px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#333;cursor:pointer;"><option value="">Todas las regiones</option><option value="Antofagasta">Antofagasta</option><option value="Arica y Parinacota">Arica y Parinacota</option><option value="Atacama">Atacama</option><option value="Aysén">Aysén</option><option value="Biobío">Biobío</option><option value="Coquimbo">Coquimbo</option><option value="La Araucanía">La Araucanía</option><option value="Los Lagos">Los Lagos</option><option value="Los Ríos">Los Ríos</option><option value="Magallanes">Magallanes</option><option value="Maule">Maule</option><option value="Metropolitana">Metropolitana</option><option value="O’Higgins">O’Higgins</option><option value="Tarapacá">Tarapacá</option><option value="Valparaíso">Valparaíso</option><option value="Ñuble">Ñuble</option></select>
@@ -2268,11 +2268,11 @@ function _applyBESSFilters() {
     var r = Math.min(Math.max(Math.sqrt(p.mw)*0.9, 4), 18);
     var icon = L.divIcon({className:'',html:'<div style="width:'+r*2+'px;height:'+r*2+'px;border-radius:50%;background:'+color+';border:1.5px solid #fff;opacity:0.85;"></div>',iconSize:[r*2,r*2]});
     var popup = '<b>'+p.nombre+'</b><br>'
-      +'<span style="color:#555;">📍 '+p.region+(p.segmento?' · '+p.segmento:'')+'</span><br>'
-      +'⚡ '+p.mw+' MW<br>'
-      +'🔋 '+p.tech+'<br>'
+      +'<span style="color:#555;">'+p.region+(p.segmento?' · '+p.segmento:'')+'</span><br>'
+      +''+p.mw+' MW<br>'
+      +''+p.tech+'<br>'
       +'<span style="font-weight:600;color:'+color+';">● '+p.estado+'</span>'
-      +(p.almac==='Sí'?'<br>🔋 Incluye almacenamiento':'');
+      +(p.almac==='Sí'?'<br>Incluye almacenamiento':'');
     var mk = L.marker([p.lat,p.lng],{icon:icon}).bindPopup(popup);
     mk.addTo(_bessMapInstance);
     _bessMarkers.push(mk);
@@ -2327,7 +2327,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
 
 <div class="sec-btn" id="btn-censo" onclick="secBtn('censo')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">CENSO & ELECTROMOVILIDAD</span><span class="sec-sub">Viviendas · Personas · Carga domiciliaria · Mercado EV por región</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-censo">
 <!-- ═══════ SECCIÓN CENSO 2024 ═══════ -->
-<div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">🏘️ CENSO CHILE 2024 — INFRAESTRUCTURA DOMICILIARIA Y MERCADO POTENCIAL EV</div>
+<div style="margin:12px 0 4px;padding:4px 8px;background:#2B5BA8;color:#fff;font-size:13px;font-weight:700;border-radius:6px;">CENSO CHILE 2024 — INFRAESTRUCTURA DOMICILIARIA Y MERCADO POTENCIAL EV</div>
 
 <div style="background:#EEF2FB;border-left:4px solid #1ABBA8;padding:10px 16px;margin:4px 0 8px;font-size:11px;color:#1E3D7A;line-height:1.7;">El CENSO 2024 revela el potencial real de carga domiciliaria en Chile. Con <strong>1.05M viviendas analizadas</strong>, el 99.2% puede instalar un cargador técnicamente. La principal barrera no es eléctrica ni estructural: es <strong>administrativa</strong> — el 21.4% vive en departamentos y necesita permiso de la comunidad. Además, de los <strong>18.5M habitantes</strong>, el 75.7% ya tiene licencia de conducir, definiendo el mercado potencial EV por región.</div>
 
@@ -2359,7 +2359,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
 
 <!-- ══ VIVIENDAS ══════════════════════════════════════════════ -->
 <div style="background:#E3F2FD;border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #BBDEFB;">
-  <span style="font-size:11px;font-weight:700;color:#0D47A1;">🔍 Filtrar viviendas:</span>
+  <span style="font-size:11px;font-weight:700;color:#0D47A1;">Filtrar viviendas:</span>
   <select id="cf-region" onchange="_renderCensoTable()" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Todas las regiones</option>
     <option value="Arica">Arica y Parinacota</option>
@@ -2381,31 +2381,31 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
   </select>
   <select id="cf-tipo" onchange="_syncCensoFilters(this.id)" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Tipo de vivienda: Todas</option>
-    <option value="casa">🏠 Casa / vivienda individual</option>
-    <option value="dpto">🏢 Departamento</option>
+    <option value="casa">Casa / vivienda individual</option>
+    <option value="dpto">Departamento</option>
   </select>
   <select id="cf-elec" onchange="_syncCensoFilters(this.id)" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Electricidad: Todas</option>
-    <option value="red">⚡ Red eléctrica</option>
-    <option value="solar">☀️ Solar / Generador</option>
-    <option value="sin">🚫 Sin electricidad</option>
+    <option value="red">Red eléctrica</option>
+    <option value="solar">Solar / Generador</option>
+    <option value="sin">Sin electricidad</option>
   </select>
   <select id="cf-permiso" onchange="_syncCensoFilters(this.id)" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Permiso comunidad: Todos</option>
-    <option value="si">🔒 Requiere permiso</option>
-    <option value="no">✓ Sin permiso requerido</option>
+    <option value="si">Requiere permiso</option>
+    <option value="no">Sin permiso requerido</option>
   </select>
   <select id="cf-reco" onchange="_syncCensoFilters(this.id)" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Recomendable: Todos</option>
-    <option value="si">✅ Sí recomendable</option>
-    <option value="cond">⚡ Condicionado</option>
-    <option value="no">❌ No recomendable</option>
+    <option value="si">Sí recomendable</option>
+    <option value="cond">Condicionado</option>
+    <option value="no">No recomendable</option>
   </select>
   <button onclick="_resetCensoFilters()" style="font-size:11px;padding:3px 10px;border:1px solid #90CAF9;border-radius:5px;background:#fff;color:#0D47A1;cursor:pointer;">↺ Reset</button>
   <span id="cf-counter" style="font-size:11px;font-weight:700;color:#0D47A1;margin-left:4px;"></span>
 </div>
 
-<div style="background:#1565C0;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px 6px 0 0;">🏠 Viviendas por Región — Potencial Carga Domiciliaria</div>
+<div style="background:#1565C0;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px 6px 0 0;">Viviendas por Región — Potencial Carga Domiciliaria</div>
 <div style="overflow-x:auto;"><div id="censo-viv-wrap"></div></div>
 <div id="censo-mapa-viv" style="height:290px;border-radius:0 0 6px 6px;margin-bottom:4px;border:1px solid #BBDEFB;"></div>
 <div style="font-size:10px;color:#888;margin-bottom:14px;font-style:italic;">Fuente: CENSO Chile 2024 · Hoja Viviendas · 1,048,575 registros procesados</div>
@@ -2414,7 +2414,7 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
 
 <!-- ══ PERSONAS ═══════════════════════════════════════════════ -->
 <div style="background:#E8F5E9;border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #C8E6C9;">
-  <span style="font-size:11px;font-weight:700;color:#1B5E20;">🔍 Filtrar personas:</span>
+  <span style="font-size:11px;font-weight:700;color:#1B5E20;">Filtrar personas:</span>
   <select id="pf-region" onchange="_renderPersonasTable()" style="font-size:11px;padding:3px 8px;border:1px solid #A5D6A7;border-radius:5px;color:#1B5E20;">
     <option value="">Todas las regiones</option>
     <option value="Arica">Arica y Parinacota</option>
@@ -2436,24 +2436,24 @@ else{window.addEventListener("load",function(){setTimeout(_initBESSCharts,700);}
   </select>
   <select id="pf-licencia" onchange="_syncPersFilters(this.id)" style="font-size:11px;padding:3px 8px;border:1px solid #A5D6A7;border-radius:5px;color:#1B5E20;">
     <option value="">Licencia: Todos</option>
-    <option value="si">🚗 Pueden obtener (18+)</option>
-    <option value="prox">📋 Próximamente (15-17)</option>
-    <option value="no">🔞 No pueden aún (0-14)</option>
+    <option value="si">Pueden obtener (18+)</option>
+    <option value="prox">Próximamente (15-17)</option>
+    <option value="no">No pueden aún (0-14)</option>
   </select>
   <select id="pf-edad" onchange="_syncPersFilters(this.id)" style="font-size:11px;padding:3px 8px;border:1px solid #A5D6A7;border-radius:5px;color:#1B5E20;">
     <option value="">Rango de edad: Todos</option>
-    <option value="0_14">👶 0–14 años</option>
-    <option value="15_17">🎓 15–17 años</option>
-    <option value="18_29">👩 18–29 años</option>
-    <option value="30_44">🧑 30–44 años</option>
-    <option value="45_59">👨 45–59 años</option>
-    <option value="60plus">🧓 60+ años</option>
+    <option value="0_14">0–14 años</option>
+    <option value="15_17">15–17 años</option>
+    <option value="18_29">18–29 años</option>
+    <option value="30_44">30–44 años</option>
+    <option value="45_59">45–59 años</option>
+    <option value="60plus">60+ años</option>
   </select>
   <button onclick="_resetPersFilters()" style="font-size:11px;padding:3px 10px;border:1px solid #A5D6A7;border-radius:5px;background:#fff;color:#1B5E20;cursor:pointer;">↺ Reset</button>
   <span id="pf-counter" style="font-size:11px;font-weight:700;color:#1B5E20;margin-left:4px;"></span>
 </div>
 
-<div style="background:#1B5E20;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px 6px 0 0;">👥 Personas por Región — Mercado Potencial EV</div>
+<div style="background:#1B5E20;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px 6px 0 0;">Personas por Región — Mercado Potencial EV</div>
 <div style="overflow-x:auto;"><div id="censo-pers-wrap"></div></div>
 <div id="censo-mapa-pers" style="height:290px;border-radius:0 0 6px 6px;margin-bottom:4px;border:1px solid #C8E6C9;"></div>
 <div style="font-size:10px;color:#888;margin-bottom:6px;font-style:italic;">Fuente: CENSO Chile 2024 · Hoja Personas · 18,480,432 personas procesadas</div>
@@ -2676,7 +2676,7 @@ function _renderCensoTable(){
   var tbody='';
   rows.forEach(function(row,idx){
     var d=row.d,bg=idx%2===0?'':'background:#fafbff;';
-    var ico='';if(!isF){var pS=d.sinElec/d.tot;ico=pS>0.05?' <span style="font-size:9px;color:#C62828;">❌</span>':d.dpto>25?' <span style="font-size:9px;color:#F57C00;">⚡</span>':' <span style="font-size:9px;color:#2E7D32;">✅</span>';}
+    var ico='';if(!isF){var pS=d.sinElec/d.tot;ico=pS>0.05?' <span style="font-size:9px;color:#C62828;"></span>':d.dpto>25?' <span style="font-size:9px;color:#F57C00;"></span>':' <span style="font-size:9px;color:#2E7D32;"></span>';}
     tbody+='<tr style="border-bottom:1px solid #e8eaf0;'+bg+'"><td style="padding:4px 6px;font-weight:600;color:#1a237e;">'+d.r+ico+'</td>';
     if(isF)tbody+='<td style="padding:4px;text-align:right;font-weight:700;color:#2E7D32;">'+fmtCL(row.filt)+'</td>';
     tbody+='<td style="padding:4px;text-align:right;">'+fmtCL(d.tot)+'</td><td style="padding:4px;text-align:right;color:#2E7D32;">'+d.inst.toFixed(1)+'%</td><td style="padding:4px;text-align:right;color:#E65100;">'+d.perm.toFixed(1)+'%</td><td style="padding:4px;text-align:right;">'+d.urb.toFixed(1)+'%</td><td style="padding:4px;text-align:right;">'+d.dpto.toFixed(1)+'%</td><td style="padding:4px;text-align:right;color:#C62828;">'+fmtCL(d.sinElec)+'</td></tr>';
@@ -2794,42 +2794,42 @@ else{window.addEventListener('load',_initCensoTables);}
 </script>
 
 <!-- Insights y cruces -->
-<div style="background:#0D47A1;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;margin-bottom:8px;">💡 Cruces de Datos CENSO × Movilidad Eléctrica</div>
+<div style="background:#0D47A1;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;margin-bottom:8px;">Cruces de Datos CENSO × Movilidad Eléctrica</div>
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;">
   <div style="background:#E3F2FD;border-radius:6px;padding:10px 12px;border-left:3px solid #0D47A1;">
-    <div style="font-size:11px;font-weight:700;color:#0D47A1;margin-bottom:4px;">🏢 Barrera en Departamentos</div>
+    <div style="font-size:11px;font-weight:700;color:#0D47A1;margin-bottom:4px;">Barrera en Departamentos</div>
     <div style="font-size:11px;color:#333;line-height:1.6;">La RM concentra <strong>138,171 viviendas</strong> que necesitan permiso de la comunidad para instalar cargador — el 36.5% de sus hogares. Esto genera mayor demanda de <strong>carga pública y en estacionamientos</strong>.</div>
   </div>
   <div style="background:#E8F5E9;border-radius:6px;padding:10px 12px;border-left:3px solid #2E7D32;">
-    <div style="font-size:11px;font-weight:700;color:#2E7D32;margin-bottom:4px;">☀️ Energías Alternativas</div>
+    <div style="font-size:11px;font-weight:700;color:#2E7D32;margin-bottom:4px;">Energías Alternativas</div>
     <div style="font-size:11px;color:#333;line-height:1.6;"><strong>4,413 viviendas con placa solar</strong> y 2,202 con generador son candidatos ideales para integración <strong>solar + BESS + EV</strong>. El norte concentra mayor potencial fotovoltaico.</div>
   </div>
   <div style="background:#FFF8E1;border-radius:6px;padding:10px 12px;border-left:3px solid #F57F17;">
-    <div style="font-size:11px;font-weight:700;color:#E65100;margin-bottom:4px;">🌾 Brecha Rural</div>
+    <div style="font-size:11px;font-weight:700;color:#E65100;margin-bottom:4px;">Brecha Rural</div>
     <div style="font-size:11px;color:#333;line-height:1.6;">Ñuble (39%), Araucanía (37%), Los Ríos (38.5%) y Los Lagos (35.3%) son las regiones más rurales. Sin acceso domiciliario, dependen de <strong>carga DC de corredor</strong> para la adopción EV.</div>
   </div>
   <div style="background:#F3E5F5;border-radius:6px;padding:10px 12px;border-left:3px solid #7B1FA2;">
-    <div style="font-size:11px;font-weight:700;color:#7B1FA2;margin-bottom:4px;">👤 Segmento Core EV (30–44 años)</div>
+    <div style="font-size:11px;font-weight:700;color:#7B1FA2;margin-bottom:4px;">Segmento Core EV (30–44 años)</div>
     <div style="font-size:11px;color:#333;line-height:1.6;">El grupo de mayor ingreso disponible para comprar EV suma <strong>4.2M personas (22.8%)</strong>. Es el target primario para estrategias de incentivo y leasing.</div>
   </div>
   <div style="background:#E8F5E9;border-radius:6px;padding:10px 12px;border-left:3px solid #1B5E20;">
-    <div style="font-size:11px;font-weight:700;color:#1B5E20;margin-bottom:4px;">🔜 Próxima Generación (15–19 años)</div>
+    <div style="font-size:11px;font-weight:700;color:#1B5E20;margin-bottom:4px;">Próxima Generación (15–19 años)</div>
     <div style="font-size:11px;color:#333;line-height:1.6;"><strong>1.2M jóvenes</strong> obtendrán licencia en los próximos 1–5 años. Clave para proyectar demanda EV hacia <strong>2028–2032</strong>.</div>
   </div>
   <div style="background:#FFEBEE;border-radius:6px;padding:10px 12px;border-left:3px solid #C62828;">
-    <div style="font-size:11px;font-weight:700;color:#C62828;margin-bottom:4px;">⚡ Sin Electricidad → Prioridad Social</div>
+    <div style="font-size:11px;font-weight:700;color:#C62828;margin-bottom:4px;">Sin Electricidad → Prioridad Social</div>
     <div style="font-size:11px;color:#333;line-height:1.6;"><strong>3,339 viviendas sin electricidad</strong> (0.32%). La Araucanía lidera con 732 casos. Estas comunidades requieren electrificación antes que cualquier estrategia EV.</div>
   </div>
 </div>
 
 <!-- Distribución etaria -->
 <div style="background:#1565C0;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;margin-bottom:8px;">
-  📊 Distribución Etaria — Perfil del Comprador EV
+  Distribución Etaria — Perfil del Comprador EV
 </div>
 
 <!-- filtros edad -->
 <div style="background:#E3F2FD;border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #BBDEFB;">
-  <span style="font-size:11px;font-weight:700;color:#0D47A1;">🔍 Filtrar:</span>
+  <span style="font-size:11px;font-weight:700;color:#0D47A1;">Filtrar:</span>
   <select id="ef-region" onchange="_renderEdadSec()" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">🇨🇱 Nacional (18.5M)</option>
     <option value="Arica">Arica y Parinacota</option>
@@ -2851,20 +2851,20 @@ else{window.addEventListener('load',_initCensoTables);}
   </select>
   <select id="ef-edad" onchange="_syncEdadFilters('ef-edad')" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Todos los grupos</option>
-    <option value="0_14">👶 0–14 años</option>
-    <option value="15_17">🎓 15–17 años</option>
-    <option value="18_29">👩 18–29 años</option>
-    <option value="30_44">🧑 30–44 años</option>
-    <option value="45_59">👨 45–59 años</option>
-    <option value="60plus">🧓 60+ años</option>
+    <option value="0_14">0–14 años</option>
+    <option value="15_17">15–17 años</option>
+    <option value="18_29">18–29 años</option>
+    <option value="30_44">30–44 años</option>
+    <option value="45_59">45–59 años</option>
+    <option value="60plus">60+ años</option>
   </select>
   <select id="ef-segmento" onchange="_syncEdadFilters('ef-segmento')" style="font-size:11px;padding:3px 8px;border:1px solid #90CAF9;border-radius:5px;color:#0D47A1;">
     <option value="">Todos los segmentos</option>
-    <option value="core">⭐ Core EV Buyers (30–44)</option>
-    <option value="early">🚀 Early Adopters (18–29)</option>
-    <option value="prox">🔜 Próxima Generación (15–17)</option>
-    <option value="silver">👴 Silver Segment (60+)</option>
-    <option value="edu">📚 Educación y Nuevas Energías (0–14)</option>
+    <option value="core">Core EV Buyers (30–44)</option>
+    <option value="early">Early Adopters (18–29)</option>
+    <option value="prox">Próxima Generación (15–17)</option>
+    <option value="silver">Silver Segment (60+)</option>
+    <option value="edu">Educación y Nuevas Energías (0–14)</option>
   </select>
   <button onclick="_resetEdadFilters()" style="font-size:11px;padding:3px 10px;border:1px solid #90CAF9;border-radius:5px;background:#fff;color:#0D47A1;cursor:pointer;">↺ Reset</button>
   <span id="ef-counter" style="font-size:11px;font-weight:700;color:#0D47A1;margin-left:4px;"></span>
@@ -2908,15 +2908,15 @@ var AGE_NAT_5Y=[
 
 /* Definición de segmentos EV */
 var _EV_SEGS=[
-  {id:'core',  icon:'⭐',label:'Core EV Buyers',  ages:'30–44',col:'#0D47A1',bg:'#dce8ff',key:'a30',
+  {id:'core',  icon:'',label:'Core EV Buyers',  ages:'30–44',col:'#0D47A1',bg:'#dce8ff',key:'a30',
    desc:'Mayor ingreso disponible · Target principal EV masivo · Segmento más rentable'},
-  {id:'early', icon:'🚀',label:'Early Adopters',  ages:'18–29',col:'#2E7D32',bg:'#e8f5e9',key:'a18',
+  {id:'early', icon:'',label:'Early Adopters',  ages:'18–29',col:'#2E7D32',bg:'#e8f5e9',key:'a18',
    desc:'Digital natives · Primeros compradores · Alto engagement digital'},
-  {id:'prox',  icon:'🔜',label:'Próxima Generación',ages:'15–17',col:'#E65100',bg:'#fff8e1',key:'a15',
+  {id:'prox',  icon:'',label:'Próxima Generación',ages:'15–17',col:'#E65100',bg:'#fff8e1',key:'a15',
    desc:'Licencia en 1–5 años · Proyecta demanda futura · Influye en decisión familiar'},
-  {id:'silver',icon:'👴',label:'Silver Segment',  ages:'60+',  col:'#7B1FA2',bg:'#f3e5f5',key:'a60',
+  {id:'silver',icon:'',label:'Silver Segment',  ages:'60+',  col:'#7B1FA2',bg:'#f3e5f5',key:'a60',
    desc:'PHEV y EV premium · Adopción gradual · Alto poder adquisitivo acumulado'},
-  {id:'edu',   icon:'📚',label:'Educación y Nuevas Energías',ages:'0–14',col:'#00838F',bg:'#e0f7fa',key:'a0',
+  {id:'edu',   icon:'',label:'Educación y Nuevas Energías',ages:'0–14',col:'#00838F',bg:'#e0f7fa',key:'a0',
    desc:'Generación que crecerá con los EVs · Formación temprana en movilidad sostenible · Futuros compradores y decisores'}
 ];
 var _SEG_TO_EDAD={core:'30_44',early:'18_29',prox:'15_17',silver:'60plus',edu:'0_14'};
@@ -3096,7 +3096,7 @@ else{window.addEventListener('load',_renderEdadSec);}
 </script>
 
 <div style="font-size:10px;color:#888;padding:4px 8px;background:#f5f5f5;border-radius:4px;line-height:1.6;margin-top:6px;">
-  ℹ️ <strong>Fuente:</strong> Instituto Nacional de Estadísticas (INE) · CENSO Chile 2024 · Procesamiento: 1,048,575 registros de viviendas · 18,480,432 personas · Método: análisis XML directo con mmap+regex · Fecha proceso: Junio 2026
+  <strong>Fuente:</strong> Instituto Nacional de Estadísticas (INE) · CENSO Chile 2024 · Procesamiento: 1,048,575 registros de viviendas · 18,480,432 personas · Método: análisis XML directo con mmap+regex · Fecha proceso: Junio 2026
 </div>
 
 </div>
@@ -3208,7 +3208,7 @@ document.addEventListener('DOMContentLoaded',function(){fichaInitSel();});
 </script>
 <div class="sec-btn" id="btn-brec" onclick="secBtn('brec')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">OPORTUNIDADES E INVERSIÓN <span style="font-size:10px;background:#F57C00;color:#fff;border-radius:4px;padding:1px 5px;vertical-align:middle;font-weight:700;">&#128274;</span></span><span class="sec-sub">Requiere cuenta · Recomendaciones, Mapa, Tabla de Brechas</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-brec">
 
-<div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 Dónde Invertir en Infraestructura de Carga en Chile</div>
+<div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#1E3D7A,#2B5BA8);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">Dónde Invertir en Infraestructura de Carga en Chile</div>
 <div style="padding:4px 8px 8px;font-size:11px;color:#1E3D7A;font-style:italic;">Priorización territorial según flota EV, cobertura actual, potencia disponible y distancia a cargadores rápidos existentes.</div>
 <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #1565C0;"><div style="font-size:22px;font-weight:800;color:#1565C0;">58</div><div style="font-size:11px;color:#555;">Comunas sin cargador con EVs</div><div style="font-size:10px;color:#888;">Fuente: Permiso de Circulación 2024</div></div>
@@ -3216,18 +3216,18 @@ document.addEventListener('DOMContentLoaded',function(){fichaInitSel();});
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #E65100;"><div style="font-size:22px;font-weight:800;color:#E65100;">20</div><div style="font-size:11px;color:#555;">Com. con solo cargadores ≤22 kW</div><div style="font-size:10px;color:#888;">Candidatas a upgrade de potencia</div></div>
 </div>
 <div class="grid">
-  <div class="card"><div class="card-header">🏙️ TOP 20 COMUNAS SIN CARGADOR — ORDENADAS POR EVs CON PERMISO 2024<span class="insight">Villa Alemana, Coronel y Chiguayante: prioridad máxima</span></div>
+  <div class="card"><div class="card-header">TOP 20 COMUNAS SIN CARGADOR — ORDENADAS POR EVs CON PERMISO 2024<span class="insight">Villa Alemana, Coronel y Chiguayante: prioridad máxima</span></div>
     <div class="card-body"><div style="height:340px;"><canvas id="chart-ac-sin-carg"></canvas></div>
     <div class="insight-bar"><strong>Villa Alemana</strong> (269 EVs), <strong>Coronel</strong> (224) y <strong>Chiguayante</strong> (202) son las comunas con más EVs y cero cargadores. Se recomienda instalar <strong>60 kW</strong> en las 3 primeras y <strong>22–44 kW</strong> en las restantes.</div>
     <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC + Permiso de Circulación Total</div></div></div>
-  <div class="card"><div class="card-header">⬆️ COMUNAS CON SOLO CARGADORES ≤22 kW — REQUIEREN UPGRADE<span class="insight">Pichilemu, Santa Cruz: destinos turísticos sin DC</span></div>
+  <div class="card"><div class="card-header">COMUNAS CON SOLO CARGADORES ≤22 kW — REQUIEREN UPGRADE<span class="insight">Pichilemu, Santa Cruz: destinos turísticos sin DC</span></div>
     <div class="card-body"><div style="height:220px;"><canvas id="chart-ac-upgrade"></canvas></div>
     <div class="insight-bar">Estas comunas tienen cargadores pero de muy baja potencia (≤22 kW). Con la masificación del EV se requiere al menos un punto de <strong>44–60 kW</strong> para reducir tiempos de carga.</div>
     <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC</div></div></div>
 </div>
 
 
-<div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#C62828,#E65100);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">📍 Dónde Instalar Cargadores Rápidos (>150 kW) — Brechas Territoriales</div>
+<div style="margin:12px 0 4px;padding:4px 8px;background:linear-gradient(90deg,#C62828,#E65100);color:#fff;font-size:13px;font-weight:700;border-radius:6px;">Dónde Instalar Cargadores Rápidos (>150 kW) — Brechas Territoriales</div>
 <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px;">
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #C62828;"><div style="font-size:22px;font-weight:800;color:#C62828;">16</div><div style="font-size:11px;color:#555;">Puntos Prioridad ALTA</div><div style="font-size:10px;color:#888;">>200 km sin cargador >150 kW</div></div>
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #E65100;"><div style="font-size:22px;font-weight:800;color:#E65100;">21</div><div style="font-size:11px;color:#555;">Puntos Prioridad MEDIA</div><div style="font-size:10px;color:#888;">100–200 km sin cargador >150 kW</div></div>
@@ -3235,7 +3235,7 @@ document.addEventListener('DOMContentLoaded',function(){fichaInitSel();});
   <div class="card" style="text-align:center;padding:12px 8px;border-left:4px solid #1ABBA8;"><div style="font-size:22px;font-weight:800;color:#1ABBA8;">218</div><div style="font-size:11px;color:#555;">Cargadores ≥150 kW activos</div><div style="font-size:10px;color:#888;">Puntos de referencia del análisis</div></div>
 </div>
 <div class="grid" style="grid-template-columns:1fr;">
-  <div class="card"><div class="card-header">🗺 MAPA DE BRECHAS — UBICACIONES RECOMENDADAS<span class="insight">🔴 ALTA ·🟠 MEDIA ·⚪ BAJA ·🟢 Cargador ≥150 kW</span></div>
+  <div class="card"><div class="card-header">MAPA DE BRECHAS — UBICACIONES RECOMENDADAS<span class="insight">🔴 ALTA ·🟠 MEDIA ·⚪ BAJA ·🟢 Cargador ≥150 kW</span></div>
     <div class="card-body" style="padding:0;">
       <div style="padding:8px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid #f0f0f0;">
         <span style="font-size:11px;font-weight:700;color:#2B5BA8;">Filtrar:</span>
@@ -3246,12 +3246,12 @@ document.addEventListener('DOMContentLoaded',function(){fichaInitSel();});
         <span id="gf-count" style="font-size:11px;color:#2B5BA8;font-weight:600;"></span>
       </div>
       <div id="mapa-gaps" style="height:520px;width:100%;"></div>
-      <div style="padding:6px 14px;font-size:10px;color:#555;border-top:1px solid #f0f0f0;">\U0001f534 Prioridad Alta &nbsp; \U0001f7e0 Prioridad Media &nbsp; ⚪ Prioridad Baja &nbsp;|⚡ Tamaño ∝ kW recomendado · \U0001f7e2 Cargador ≥150 kW existente</div>
+      <div style="padding:6px 14px;font-size:10px;color:#555;border-top:1px solid #f0f0f0;">\U0001f534 Prioridad Alta &nbsp; \U0001f7e0 Prioridad Media &nbsp; ⚪ Prioridad Baja &nbsp;|Tamaño ∝ kW recomendado · \U0001f7e2 Cargador ≥150 kW existente</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Registro de Cargadores Públicos SEC — Análisis haversine</div>
     </div></div>
 </div>
 <div class="grid" style="grid-template-columns:1fr;">
-  <div class="card"><div class="card-header">📋 TABLA DE RECOMENDACIONES<span class="insight">116 puntos · ordenar y filtrar interactivamente</span></div>
+  <div class="card"><div class="card-header">TABLA DE RECOMENDACIONES<span class="insight">116 puntos · ordenar y filtrar interactivamente</span></div>
     <div class="card-body" style="padding:8px;">
       <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center;">
         <span style="font-size:11px;font-weight:700;color:#2B5BA8;">Ordenar:</span>
@@ -3303,7 +3303,7 @@ setTimeout(_sortGapTable,200);
 <!-- CALCULADORA DE OPORTUNIDADES -->
 <div class="sec-btn" id="btn-calc" onclick="secBtn('calc')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">CALCULADORA DE OPORTUNIDADES DE INVERSIÓN EN CARGA EV <span style="font-size:10px;background:#F57C00;color:#fff;border-radius:4px;padding:1px 5px;vertical-align:middle;font-weight:700;">&#128274;</span></span><span class="sec-sub">Requiere cuenta · Ranking dinámico por variables ajustables</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-calc">
 <div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(43,91,168,0.08);border:1px solid #dce6f5;padding:14px 16px;margin-bottom:8px;">
-  <div style="background:#FFF8E1;border-left:3px solid #F5A623;padding:7px 12px;margin-bottom:10px;font-size:10px;color:#795548;border-radius:0 4px 4px 0;">📅 <strong>Nota metodológica:</strong> El análisis utiliza los últimos datos disponibles de Permisos de Circulación (INE/Min. Transporte, último registro: 2024) y el Registro de Cargadores Públicos SEC. Las variables sin dato directo (cercanía a ruta, turismo) se estiman con proxies basados en flota EV relativa.</div>
+  <div style="background:#FFF8E1;border-left:3px solid #F5A623;padding:7px 12px;margin-bottom:10px;font-size:10px;color:#795548;border-radius:0 4px 4px 0;"><strong>Nota metodológica:</strong> El análisis utiliza los últimos datos disponibles de Permisos de Circulación (INE/Min. Transporte, último registro: 2024) y el Registro de Cargadores Públicos SEC. Las variables sin dato directo (cercanía a ruta, turismo) se estiman con proxies basados en flota EV relativa.</div>
   <div style="font-size:12px;color:#1E3D7A;margin-bottom:12px;line-height:1.6;">Ajusta los pesos de cada variable para personalizar el ranking de comunas con mayor oportunidad de inversión en infraestructura de carga. El puntaje total siempre suma 100%.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;" id="calc-weights">
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
@@ -3350,7 +3350,7 @@ setTimeout(_sortGapTable,200);
     </div>
   </div>
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-    <div id="calc-total-bar" style="font-size:11px;color:#666;">Total: <strong id="calc-total-pct" style="color:#2B5BA8;">100%</strong> <span id="calc-total-warn" style="color:#C62828;display:none;">⚠ Ajusta los pesos para sumar 100%</span></div>
+    <div id="calc-total-bar" style="font-size:11px;color:#666;">Total: <strong id="calc-total-pct" style="color:#2B5BA8;">100%</strong> <span id="calc-total-warn" style="color:#C62828;display:none;">Ajusta los pesos para sumar 100%</span></div>
     <button onclick="resetCalcWeights()" style="background:#EEF2FB;color:#2B5BA8;border:1px solid #4A90D9;border-radius:6px;padding:4px 12px;font-size:11px;cursor:pointer;">↺ Restablecer</button>
   </div>
   <div style="overflow-x:auto;max-height:480px;overflow-y:auto;">
@@ -3993,7 +3993,7 @@ function _filterFichas(tech, btnKey){
   filtered.forEach(function(h){
     var techBadge = badges[h[2]] || h[2];
     var rendTd = h[7] ? '<td class="rend-cell">'+h[7]+' <small>km/kWh</small></td>' : '<td style="color:#bbb;">—</td>';
-    var linkTd = '<td><a href="'+h[6]+'" target="_blank" class="ficha-link">📄 Descargar</a></td>';
+    var linkTd = '<td><a href="'+h[6]+'" target="_blank" class="ficha-link">Descargar</a></td>';
     var tr = document.createElement('tr');
     tr.innerHTML = '<td>'+techBadge+'</td><td><strong>'+h[0]+'</strong></td><td>'+h[1]+'</td><td>'+h[3]+'</td><td>'+h[4]+'</td>'+rendTd+linkTd;
     tbody.appendChild(tr);
