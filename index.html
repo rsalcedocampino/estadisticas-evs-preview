@@ -4016,14 +4016,14 @@ function _setFichasSort(s){
 <!-- MEJORA-PRESENTACION -->
 <style id="mejora-presentacion-css">
 /* Menu de navegacion sticky */
-#nav-secciones{position:sticky;top:0;z-index:900;background:rgba(255,255,255,0.97);backdrop-filter:blur(6px);border-bottom:1.5px solid #DCE6F5;box-shadow:0 2px 10px rgba(43,91,168,0.08);padding:7px 10px;margin:0 -16px 10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;align-items:center;}
+#nav-secciones{position:sticky;top:0;z-index:900;background:rgba(255,255,255,0.97);backdrop-filter:blur(6px);border-bottom:1.5px solid #DCE6F5;box-shadow:0 2px 10px rgba(43,91,168,0.08);padding:8px 14px;margin:0 0 12px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;align-items:center;border-radius:10px;border:1.5px solid #DCE6F5;scroll-padding-left:14px;}
 #nav-secciones::-webkit-scrollbar{height:5px;}
 #nav-secciones::-webkit-scrollbar-thumb{background:#c3d4ee;border-radius:3px;}
 .nav-chip{flex:0 0 auto;font-size:11px;font-weight:700;color:#2B5BA8;text-transform:uppercase;letter-spacing:.3px;background:#F2F7FF;border:1px solid #DCE6F5;border-radius:18px;padding:6px 13px;cursor:pointer;white-space:nowrap;transition:all .15s;display:flex;align-items:center;gap:5px;}
 .nav-chip:hover{background:#2B5BA8;color:#fff;border-color:#2B5BA8;transform:translateY(-1px);}
 .nav-chip.lock{border-color:#F5A623;border-width:1.5px;}
 .nav-chip.lock::after{content:"\2022";color:#F5A623;font-size:14px;line-height:0;}
-.nav-title{flex:0 0 auto;font-size:11px;font-weight:800;color:#1E3D7A;letter-spacing:.5px;text-transform:uppercase;padding-right:4px;border-right:1.5px solid #DCE6F5;margin-right:2px;}
+.nav-title{flex:0 0 auto;position:sticky;left:0;background:#fff;z-index:1;padding-left:2px;font-size:11px;font-weight:800;color:#1E3D7A;letter-spacing:.5px;text-transform:uppercase;padding-right:4px;border-right:1.5px solid #DCE6F5;margin-right:2px;}
 /* KPI hover lift */
 .kpi{transition:transform .18s,box-shadow .18s;}
 .kpi:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(43,91,168,0.16) !important;}
@@ -4041,7 +4041,7 @@ function _setFichasSort(s){
   .kpi-row{padding:10px 4px 2px !important;gap:8px !important;}
   .kpi{min-width:calc(50% - 6px) !important;flex:1 1 calc(50% - 6px) !important;padding:10px 11px !important;}
   .kpi .val,.kpi-val{font-size:20px !important;}
-  #nav-secciones{margin:0 -10px 10px;}
+  #nav-secciones{padding:7px 10px;margin:0 0 10px;}
   .nav-title{display:none;}
   .sec-btn{padding:11px 13px !important;}
   .sec-lbl{font-size:12.5px !important;}
