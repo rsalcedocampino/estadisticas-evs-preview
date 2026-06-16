@@ -2277,6 +2277,13 @@ function _applyBESSFilters() {
     mk.addTo(_bessMapInstance);
     _bessMarkers.push(mk);
   });
+  try{
+    if(region && filtered.length){
+      var _bp=filtered.filter(function(p){return p.lat&&p.lng;}).map(function(p){return [p.lat,p.lng];});
+      if(_bp.length===1)_bessMapInstance.setView(_bp[0],10,{animate:true});
+      else if(_bp.length>1)_bessMapInstance.fitBounds(_bp,{padding:[30,30],maxZoom:11});
+    } else if(!region){ _bessMapInstance.setView([-33.45,-70.65],5,{animate:true}); }
+  }catch(e){}
   var el = document.getElementById('bm-counter');
   if(el) el.textContent = filtered.length + ' proyectos';
 }
@@ -3611,6 +3618,13 @@ window.gapMapFilter=function(){
       .bindPopup("<b>"+p.lugar+"</b><br>"+p.region+"<br><b>"+p.prioridad+"</b><br>"+p.kw_recom+" kW recomendado<br>Dist. carg: "+p.dist_cercano+" km<br>Dist >150kW: "+p.dist_hp+" km");
     m.addTo(_GMAP);_GM.push(m);
   });
+  try{
+    if(fR && data.length){
+      var _gp=data.filter(function(p){return p.lat&&p.lng;}).map(function(p){return [p.lat,p.lng];});
+      if(_gp.length===1)_GMAP.setView(_gp[0],10,{animate:true});
+      else if(_gp.length>1)_GMAP.fitBounds(_gp,{padding:[30,30],maxZoom:11});
+    } else if(!fR){ _GMAP.setView([-38,-71],5,{animate:true}); }
+  }catch(e){}
   var cnt=document.getElementById("gf-count");
   if(cnt)cnt.textContent=data.length+" puntos";
 };
