@@ -4056,6 +4056,28 @@ function _setFichasSort(s){
 </style>
 <script id="mejora-presentacion-js">
 (function(){
+  // Acordeon: al abrir una seccion, cerrar las demas abiertas
+  function instalarAcordeon(){
+    if(typeof window.secBtn!=='function'){setTimeout(instalarAcordeon,300);return;}
+    if(window._acordeonOK)return; window._acordeonOK=true;
+    var orig=window.secBtn;
+    window.secBtn=function(id){
+      try{
+        var prot=(typeof _AUTH_PROTECTED!=='undefined')&&_AUTH_PROTECTED.indexOf(id)>=0;
+        var aprob=window._fbUserApproved;
+        var btn=document.getElementById('btn-'+id);
+        var abierta=btn&&btn.classList.contains('open');
+        if(!abierta&&(!prot||aprob)){
+          document.querySelectorAll('.sec-btn.open').forEach(function(b){
+            var oid=(b.id||'').replace('btn-','');
+            if(oid&&oid!==id){ try{orig(oid);}catch(e){} }
+          });
+        }
+      }catch(e){}
+      return orig(id);
+    };
+  }
+  instalarAcordeon();
   function buildNav(){
     if(document.getElementById('nav-secciones'))return;
     var btns=document.querySelectorAll('.sec-btn');
