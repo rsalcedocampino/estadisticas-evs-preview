@@ -515,7 +515,7 @@ function _authErrMsg(code){
         <span id="marcas-data-note" style="font-size:10px;color:#e07000;display:none;">Datos disponibles desde Ene-2024</span>
       </div>
       <div class="chart-wrap tall"><canvas id="chartMarcas"></canvas></div>
-      <div class="insight-bar" id="marcas-insight-bar">En <strong>Abr-2026</strong>: <strong>SUZUKI</strong> lidera el total (4.226 MHEV), <strong>CHANGAN</strong> en PHEV+PEREV (644), <strong>TESLA</strong> en BEV (779). Selecciona tecnología para ver el ranking de cada segmento.</div>
+      <div class="insight-bar" id="marcas-insight-bar">Cargando datos...</div>
       <div style="font-size:10px;color:#888;text-align:right;padding:2px 14px 6px;font-style:italic;">Fuente: Ventas por Modelo y Marcas de EVs · Chile</div>
     </div>
   </div>
@@ -3521,36 +3521,56 @@ function _updateMarcasChart(ym,tech){
     chart.data.datasets=[{label:activeTech,data:data,backgroundColor:'#2B5BA8',borderRadius:3}];
   } else if(MARCAS_MONTHLY[ym]){
     var dm=MARCAS_MONTHLY[ym];
+    // Sort brands descending by sum of the specified arrays, reindex all arrays
+    var _sortBrands=function(baseLabels,sortArrs,allArrs){
+      var combined=baseLabels.map(function(l,i){
+        var s=0; sortArrs.forEach(function(a){s+=(a[i]||0);}); return {i:i,l:l,s:s};
+      }).sort(function(a,b){return b.s-a.s;});
+      var idx=combined.map(function(x){return x.i;});
+      var res={labels:combined.map(function(x){return x.l;})};
+      allArrs.forEach(function(o){res[o.k]=idx.map(function(i){return (o.a[i]||0);});});
+      return res;
+    };
     if(activeTech==='BEV'){
-      labels=dm.labels; data=dm.BEV||[]; total=data.reduce(function(a,b){return a+b;},0);
+      var rawB=dm.BEV||[];
+      var sB=_sortBrands(dm.labels,[rawB],[{k:'d',a:rawB}]);
+      labels=sB.labels; data=sB.d; total=data.reduce(function(a,b){return a+b;},0);
       chart.data.datasets=[{label:'BEV',data:data,backgroundColor:'#2B5BA8',borderRadius:3}];
     } else if(activeTech==='PHEV + PEREV'){
-      labels=dm.labels; data=dm.PHEV||[]; total=data.reduce(function(a,b){return a+b;},0);
+      var rawP=dm.PHEV||[];
+      var sP=_sortBrands(dm.labels,[rawP],[{k:'d',a:rawP}]);
+      labels=sP.labels; data=sP.d; total=data.reduce(function(a,b){return a+b;},0);
       chart.data.datasets=[{label:'PHEV+PEREV',data:data,backgroundColor:'#22a06b',borderRadius:3}];
     } else if(activeTech==='MHEV'){
-      labels=dm.labels; data=dm.MHEV||[]; total=data.reduce(function(a,b){return a+b;},0);
+      var rawM=dm.MHEV||[];
+      var sM=_sortBrands(dm.labels,[rawM],[{k:'d',a:rawM}]);
+      labels=sM.labels; data=sM.d; total=data.reduce(function(a,b){return a+b;},0);
       chart.data.datasets=[{label:'MHEV',data:data,backgroundColor:'#e07000',borderRadius:3}];
     } else if(activeTech==='HEV + EREV'){
-      labels=dm.labels; data=dm.HEV||[]; total=data.reduce(function(a,b){return a+b;},0);
+      var rawH=dm.HEV||[];
+      var sH=_sortBrands(dm.labels,[rawH],[{k:'d',a:rawH}]);
+      labels=sH.labels; data=sH.d; total=data.reduce(function(a,b){return a+b;},0);
       chart.data.datasets=[{label:'HEV+EREV',data:data,backgroundColor:'#9b59b6',borderRadius:3}];
     } else if(activeTech==='Todas'){
-      labels=dm.labels;
-      var bev=dm.BEV||[]; var phev=dm.PHEV||[]; var mhev=dm.MHEV||[]; var hev=dm.HEV||[];
-      total=bev.reduce(function(a,b){return a+b;},0)+phev.reduce(function(a,b){return a+b;},0)+mhev.reduce(function(a,b){return a+b;},0)+hev.reduce(function(a,b){return a+b;},0);
+      var bevT=dm.BEV||[]; var phevT=dm.PHEV||[]; var mhevT=dm.MHEV||[]; var hevT=dm.HEV||[];
+      var sT=_sortBrands(dm.labels,[bevT,phevT,mhevT,hevT],[{k:'bev',a:bevT},{k:'phev',a:phevT},{k:'mhev',a:mhevT},{k:'hev',a:hevT}]);
+      labels=sT.labels;
+      total=sT.bev.reduce(function(a,b){return a+b;},0)+sT.phev.reduce(function(a,b){return a+b;},0)+sT.mhev.reduce(function(a,b){return a+b;},0)+sT.hev.reduce(function(a,b){return a+b;},0);
       chart.data.datasets=[
-        {label:'MHEV',data:mhev,backgroundColor:'#e07000',borderRadius:3},
-        {label:'HEV',data:hev,backgroundColor:'#9b59b6',borderRadius:3},
-        {label:'BEV',data:bev,backgroundColor:'#2B5BA8',borderRadius:3},
-        {label:'PHEV',data:phev,backgroundColor:'#22a06b',borderRadius:3}
+        {label:'MHEV',data:sT.mhev,backgroundColor:'#e07000',borderRadius:3},
+        {label:'HEV',data:sT.hev,backgroundColor:'#9b59b6',borderRadius:3},
+        {label:'BEV',data:sT.bev,backgroundColor:'#2B5BA8',borderRadius:3},
+        {label:'PHEV',data:sT.phev,backgroundColor:'#22a06b',borderRadius:3}
       ];
     } else {
-      // BEV+PHEV default stacked
+      // BEV+PHEV stacked — sort by BEV+PHEV total
       var bev=dm.BEV||[]; var phev=dm.PHEV||[];
-      labels=dm.labels;
-      total=bev.reduce(function(a,b){return a+b;},0)+phev.reduce(function(a,b){return a+b;},0);
+      var sBP=_sortBrands(dm.labels,[bev,phev],[{k:'bev',a:bev},{k:'phev',a:phev}]);
+      labels=sBP.labels;
+      total=sBP.bev.reduce(function(a,b){return a+b;},0)+sBP.phev.reduce(function(a,b){return a+b;},0);
       chart.data.datasets=[
-        {label:'BEV',data:bev,backgroundColor:'#2B5BA8',borderRadius:3},
-        {label:'PHEV',data:phev,backgroundColor:'#22a06b',borderRadius:3}
+        {label:'BEV',data:sBP.bev,backgroundColor:'#2B5BA8',borderRadius:3},
+        {label:'PHEV',data:sBP.phev,backgroundColor:'#22a06b',borderRadius:3}
       ];
     }
     chart.data.labels=labels;
@@ -3560,6 +3580,20 @@ function _updateMarcasChart(ym,tech){
   chart.update('none');
   var el=document.getElementById('marcas-total-label');
   if(el) el.textContent=total.toLocaleString('es-CL',{useGrouping:true})+' veh.';
+  // Update insight header (top-right of card)
+  var insHdr=document.getElementById('marcas-insight-hdr');
+  if(insHdr){
+    var _techNames={'BEV+PHEV':'BEV + PHEV enchufables','BEV':'Solo BEV (eléctricos puros)','PHEV + PEREV':'Solo PHEV + PEREV','MHEV':'Solo híbridos leves (MHEV)','HEV + EREV':'Solo HEV + EREV','Todas':'Todas las tecnologías electrificadas'};
+    insHdr.textContent=_techNames[activeTech]||activeTech;
+  }
+  // Update insight bar with top brand for selected tech
+  var insBar=document.getElementById('marcas-insight-bar');
+  if(insBar&&labels&&labels.length>0){
+    var topBrand=labels[0];
+    var topVal=chart.data.datasets.reduce(function(sum,ds){return sum+(ds.data[0]||0);},0);
+    var techDisp=activeTech==='Todas'?'total general':activeTech;
+    insBar.innerHTML='En <strong>'+perLabel+'</strong>: <strong>'+topBrand+'</strong> lidera en '+techDisp+' con <strong>'+topVal.toLocaleString('es-CL')+'</strong> veh. Total período: <strong>'+total.toLocaleString('es-CL')+'</strong> veh.';
+  }
 }
 
 function _setTextos() {
