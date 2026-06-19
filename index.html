@@ -1997,10 +1997,10 @@ SECCIÓN: CARGADORES PÚBLICOS UBICACIÓN -->
     </div>
 
     <!-- TABLA DETALLE -->
-    <div style="overflow-x:auto;">
+    <div style="overflow-x:auto;overflow-y:auto;max-height:420px;border:1px solid #dce6f5;border-radius:6px;">
       <table id="pr-table" style="width:100%;border-collapse:collapse;font-size:11px;">
         <thead>
-          <tr style="background:#2B5BA8;color:#fff;">
+          <tr style="background:#2B5BA8;color:#fff;position:sticky;top:0;z-index:2;">
             <th style="padding:7px 10px;text-align:left;border-radius:4px 0 0 0;">COMUNA / REGIÓN</th>
             <th style="padding:7px 10px;text-align:center;">CONECTORES CON PRECIO</th>
             <th style="padding:7px 10px;text-align:center;color:#A5D6A7;">POTENCIA (kW)</th>
@@ -3638,7 +3638,7 @@ setTimeout(_sortGapTable,200);
 <!-- CALCULADORA DE OPORTUNIDADES -->
 <div class="sec-btn" id="btn-calc" onclick="secBtn('calc')"><span style="display:flex;align-items:center;"><span><span class="sec-lbl">CALCULADORA DE OPORTUNIDADES DE INVERSIÓN EN CARGA EV <span style="font-size:10px;background:#F57C00;color:#fff;border-radius:4px;padding:1px 5px;vertical-align:middle;font-weight:700;">&#128274;</span></span><span class="sec-sub">Requiere cuenta · Ranking dinámico por variables ajustables</span></span></span><span class="sec-arrow">&#9660;</span></div><div class="sec-panel" id="pan-calc">
 <div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(43,91,168,0.08);border:1px solid #dce6f5;padding:14px 16px;margin-bottom:8px;">
-  <div style="background:#FFF8E1;border-left:3px solid #F5A623;padding:7px 12px;margin-bottom:10px;font-size:10px;color:#795548;border-radius:0 4px 4px 0;"><strong>Nota metodológica:</strong> El análisis utiliza los últimos datos disponibles de Permisos de Circulación (INE/Min. Transporte, último registro: 2024) y el Registro de Cargadores Públicos SEC. Las variables sin dato directo (cercanía a ruta, turismo) se estiman con proxies basados en flota EV relativa.</div>
+  <div style="background:#FFF8E1;border-left:3px solid #F5A623;padding:7px 12px;margin-bottom:10px;font-size:10px;color:#795548;border-radius:0 4px 4px 0;"><strong>Nota metodológica:</strong> El análisis utiliza los últimos datos disponibles de Permisos de Circulación (INE/Min. Transporte, último registro: 2024) y el Registro de Cargadores Públicos SEC. Las variables sin dato directo (cercanía a ruta, turismo) se estiman con proxies basados en flota EV relativa. <strong>Importante:</strong> Los Permisos de Circulación pueden obtenerse en cualquier municipalidad del país, independientemente del lugar de residencia o circulación habitual del vehículo. Por esta razón, el número de EVs asociado a una comuna no implica que esos vehículos circulen exclusivamente en dicha comuna o región — es una aproximación de la demanda potencial, no un registro de ubicación.</div>
   <div style="font-size:12px;color:#1E3D7A;margin-bottom:12px;line-height:1.6;">Ajusta los pesos de cada variable para personalizar el ranking de comunas con mayor oportunidad de inversión en infraestructura de carga. El puntaje total siempre suma 100%.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;" id="calc-weights">
     <div style="background:#F5F8FF;border-radius:8px;padding:10px 12px;">
