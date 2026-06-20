@@ -158,8 +158,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-go]'); if(
 
 /* boot */
 Promise.all([
-  fetch('data/datos.json').then(r=>r.json()),
-  fetch('data/cargadores.json').then(r=>r.json())
+  fetch('data/datos.json?v=1781928227').then(r=>r.json()),
+  fetch('data/cargadores.json?v=1781928227').then(r=>r.json())
 ]).then(([d,c])=>{
   DB=d; CARG=c;
   $('#foot-fuentes').textContent=d.fuentes;
