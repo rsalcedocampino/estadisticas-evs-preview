@@ -137,5 +137,55 @@
   "Los Lagos",
   "Aysén",
   "Magallanes"
+ ],
+ "kpis_inicio": [
+  {
+   "t": "VTA. ÚLT. 12 MESES",
+   "v": "15.940",
+   "sub": "Jun-25 → May-26",
+   "delta": "+121% vs 12m ant.",
+   "c": "#2563EB",
+   "info": "Ventas de vehículos enchufables (BEV+PHEV) en los últimos 12 meses."
+  },
+  {
+   "t": "PENETRACIÓN MAY-2026",
+   "v": "11,7%",
+   "sub": "Del mercado total",
+   "delta": "+1,7 pp vs May-2025",
+   "c": "#F59E0B",
+   "info": "Participación de electrificados sobre el total de ventas del mes."
+  },
+  {
+   "t": "CARGADORES ACUMULADOS",
+   "v": "7.104",
+   "sub": "Total 2018–2026",
+   "delta": "+95% vs 2024",
+   "c": "#0EA5E9",
+   "info": "Conectores de carga acumulados desde 2018."
+  },
+  {
+   "t": "ENERGÍA INSTALADA",
+   "v": "217,6 MW",
+   "sub": "Capacidad total red de carga",
+   "delta": "+44% vs 2024",
+   "c": "#16A34A",
+   "info": "Potencia total instalada en la red pública de carga."
+  },
+  {
+   "t": "INSTALACIONES ÚNICAS",
+   "v": "3.943",
+   "sub": "Ubicaciones de carga",
+   "delta": "+99% vs 2024",
+   "c": "#7C3AED",
+   "info": "Puntos físicos (ubicaciones) con infraestructura de carga."
+  },
+  {
+   "t": "BEV+PHEV / CONECTOR PÚBLICO",
+   "v": "~12x",
+   "sub": "Ratio enchufables / infraestructura pública",
+   "delta": "de 8x en 2024 a 12x en 2026",
+   "c": "#F97316",
+   "info": "Vehículos enchufables por cada conector público disponible."
+  }
  ]
 }
