@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781931503';
+const V='1781963899';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -51,11 +51,11 @@ function tabResumenMapa(){const f=F.resumen;
   return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Red nacional de carga pública</h3><div class="subtitle">${fint(CARG.filter(c=>!f.region||c.r===f.region).length)} conectores en ${f.region||'todo Chile'}.</div><div id="rs-map" style="height:480px;border-radius:12px;border:1px solid var(--line)"></div><div style="display:flex;gap:18px;margin-top:10px;font-size:12.5px;flex-wrap:wrap"><span class="legrow"><i class="dot" style="background:#16A34A"></i> AC lenta</span><span class="legrow"><i class="dot" style="background:#2563EB"></i> AC semi</span><span class="legrow"><i class="dot" style="background:#EF4444"></i> DC rápida</span></div><div class="card-src">Fuente: SEC · ${DB.fecha}</div></div>`;}
 
 /* ===== INFRAESTRUCTURA (tabs) ===== */
-function pageInfra(){F.infra=F.infra||{region:'',vel:''};TAB.infra=TAB.infra||'mapa';
+async function pageInfra(){await load('infra_extra');F.infra=F.infra||{region:'',vel:''};TAB.infra=TAB.infra||'mapa';
   return `<div class="page-head"><h1>Infraestructura de Carga</h1><p class="sub">Distribución, tecnología y operadores de la red pública de carga.</p></div>
    <div class="filterbar"><div class="fgroup"><label>Región</label><select id="if-reg"><option value="">Todo Chile</option>${fopt(REGS(),F.infra.region)}</select></div><div class="fgroup"><label>Velocidad de carga</label><select id="if-vel"><option value="">Todas</option><option value="AC_lenta"${F.infra.vel==='AC_lenta'?' selected':''}>AC lenta (≤7 kW)</option><option value="AC_semi"${F.infra.vel==='AC_semi'?' selected':''}>AC semi (7–22 kW)</option><option value="DC"${F.infra.vel==='DC'?' selected':''}>DC rápida (≥50 kW)</option></select></div><button class="btn btn-ghost" id="if-reset" style="align-self:flex-end">Limpiar filtros</button></div>
    <div class="grid g4" id="if-kpis" style="margin-bottom:18px"></div>
-   ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'}])}`;}
+   ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'},{id:'evol',label:'Evolución'},{id:'dist',label:'Distribución'}])}`;}
 function infraData(){const f=F.infra;return CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.vel||velOf(c)===f.vel));}
 function bindInfra(){$('#if-reg').onchange=e=>{F.infra.region=e.target.value;infraKpis();renderTab('infra');};$('#if-vel').onchange=e=>{F.infra.vel=e.target.value;infraKpis();renderTab('infra');};$('#if-reset').onclick=()=>{F.infra={region:'',vel:''};$('#if-reg').value='';$('#if-vel').value='';infraKpis();renderTab('infra');};}
 function infraKpis(){const D=infraData(),f=F.infra;const comunas=new Set(D.filter(c=>c.c).map(c=>norm(c.c)));const totCom=f.region?(DB.comunas_por_region[f.region]||0):346;const sin=Math.max(totCom-comunas.size,0);const pot=D.reduce((a,c)=>a+(+c.kw||0),0)/1000;
@@ -72,12 +72,12 @@ function tabInfraOper(){const D=infraData();const op={};D.forEach(c=>{if(c.op)op
 
 /* ===== MERCADO EV (tabs) ===== */
 const TECHS=['BEV','PHEV','HEV','MHEV','EBUS','ETRUCK'];
-async function pageMercado(){const M=await load('mercado');F.merc=F.merc||{anio:'',tech:'',q:'',orden:'anio'};TAB.merc=TAB.merc||'ventas';
+async function pageMercado(){const M=await load('mercado');await load('mercado_extra');F.merc=F.merc||{anio:'',tech:'',q:'',orden:'anio'};TAB.merc=TAB.merc||'ventas';
   const anios=[...new Set(M.meses.map(m=>m.slice(0,4)))].sort();
   return `<div class="page-head"><h1>Mercado EV</h1><p class="sub">Ventas mensuales, penetración por tecnología y catálogo de marcas y modelos.</p></div>
    <div class="filterbar"><div class="fgroup"><label>Año</label><select id="mf-anio"><option value="">Todos</option>${fopt(anios,F.merc.anio)}</select></div><div class="fgroup"><label>Tecnología</label><select id="mf-tech"><option value="">Todas</option>${TECHS.map(t=>`<option value="${t}"${F.merc.tech===t?' selected':''}>${t}</option>`).join('')}</select></div><button class="btn btn-ghost" id="mf-reset" style="align-self:flex-end">Limpiar filtros</button></div>
    <div class="grid g4" id="mc-kpis" style="margin-bottom:18px"></div>
-   ${tabsNav('merc',[{id:'ventas',label:'Ventas'},{id:'tech',label:'Tecnología'},{id:'marcas',label:'Marcas'},{id:'buscador',label:'Buscador de modelos'}])}`;}
+   ${tabsNav('merc',[{id:'ventas',label:'Ventas'},{id:'tech',label:'Tecnología'},{id:'marcas',label:'Marcas'},{id:'region',label:'Por región'},{id:'buscador',label:'Buscador de modelos'}])}`;}
 function mercMeses(){const M=DATA.mercado,f=F.merc;return f.anio?M.serie.filter(s=>s.mes.startsWith(f.anio)):M.serie;}
 function bindMercado(){const re=()=>{mercKpis();renderTab('merc');};$('#mf-anio').onchange=e=>{F.merc.anio=e.target.value;re();};$('#mf-tech').onchange=e=>{F.merc.tech=e.target.value;re();};$('#mf-reset').onclick=()=>{F.merc={anio:'',tech:'',q:'',orden:'anio'};$('#mf-anio').value='';$('#mf-tech').value='';re();};}
 function mercKpis(){const M=DATA.mercado,f=F.merc,meses=mercMeses();const techs=f.tech?[f.tech]:TECHS;const ult=M.serie.at(-1);const ench=(ult.bev||0)+(ult.phev||0);const acum=meses.reduce((a,s)=>a+techs.reduce((x,t)=>x+(s[t.toLowerCase()]||0),0),0);const marcasAct=M.marcas.filter(m=>m.a2026>0).length;
@@ -104,12 +104,12 @@ function renderBuscador(){const M=DATA.mercado,f=F.merc,q=norm(f.q);let rows=M.h
 
 /* ===== ENERGÍA (tabs) ===== */
 const ESTADOS=['En Operación','En Construcción','Aprobado','En Calificación','En Pruebas'];
-async function pageEnergia(){const E=await load('energia');F.ener=F.ener||{region:'',estado:'',fuente:''};TAB.ener=TAB.ener||'mapa';
+async function pageEnergia(){const E=await load('energia');await load('energia_extra');F.ener=F.ener||{region:'',estado:'',fuente:''};TAB.ener=TAB.ener||'mapa';
   const fuentes=[...new Set(E.mapa.map(p=>p.t))].filter(Boolean).sort();
   return `<div class="page-head"><h1>Energía y BESS</h1><p class="sub">Generación renovable, almacenamiento y ubicación de proyectos energéticos.</p></div>
    <div class="filterbar"><div class="fgroup"><label>Región</label><select id="ef-reg"><option value="">Todo Chile</option>${fopt(REGS(),F.ener.region)}</select></div><div class="fgroup"><label>Estado</label><select id="ef-est"><option value="">Todos</option>${ESTADOS.map(s=>`<option value="${s}"${F.ener.estado===s?' selected':''}>${s}</option>`).join('')}</select></div><div class="fgroup"><label>Fuente / Tecnología</label><select id="ef-fue"><option value="">Todas</option>${fuentes.map(s=>`<option value="${s}"${F.ener.fuente===s?' selected':''}>${s}</option>`).join('')}</select></div><button class="btn btn-ghost" id="ef-reset" style="align-self:flex-end">Limpiar filtros</button></div>
    <div class="grid g4" id="en-kpis" style="margin-bottom:18px"></div>
-   ${tabsNav('ener',[{id:'mapa',label:'Mapa de proyectos'},{id:'fuente',label:'Por fuente'},{id:'region',label:'Por región'}])}`;}
+   ${tabsNav('ener',[{id:'mapa',label:'Mapa de proyectos'},{id:'fuente',label:'Por fuente'},{id:'region',label:'Por región'},{id:'bess',label:'BESS'},{id:'solar',label:'Solar'}])}`;}
 function enerData(){const E=DATA.energia,f=F.ener;const mr=pr=>!f.region||norm(pr)===norm(f.region)||norm(pr).includes(norm(f.region));return E.mapa.filter(p=>mr(p.r)&&(!f.estado||p.e===f.estado)&&(!f.fuente||p.t===f.fuente));}
 function fuenteCol(t){t=(t||'').toLowerCase();if(t.includes('solar'))return'#F59E0B';if(t.includes('eól')||t.includes('eol'))return'#0EA5E9';if(t.includes('bess')||t.includes('bater'))return'#7C3AED';return'#16A34A';}
 function bindEnergia(){const re=()=>{enerKpis();renderTab('ener');};$('#ef-reg').onchange=e=>{F.ener.region=e.target.value;re();};$('#ef-est').onchange=e=>{F.ener.estado=e.target.value;re();};$('#ef-fue').onchange=e=>{F.ener.fuente=e.target.value;re();};$('#ef-reset').onclick=()=>{F.ener={region:'',estado:'',fuente:''};$('#ef-reg').value='';$('#ef-est').value='';$('#ef-fue').value='';re();};}
@@ -187,16 +187,17 @@ function pageMetodo(){const fuentes=[['Mercado EV','ANAC — ventas mensuales de
    <div class="card"><h3 style="padding-right:0">Definiciones clave</h3><div class="grid g2" style="margin-top:12px">${defs.map(([t,d])=>`<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px"><b style="font-size:13.5px;color:var(--primary-d)">${t}</b><p style="font-size:12.5px;color:var(--muted);margin-top:4px">${d}</p></div>`).join('')}</div></div>`;}
 
 /* ===== ROUTER ===== */
-const PAGES={inicio:pageInicio,resumen:pageResumen,infra:pageInfra,mercado:pageMercado,energia:pageEnergia,inversion:pageInversion,reportes:pageReportes,calc:pageCalc,metodo:pageMetodo};
+const PAGES={inicio:pageInicio,resumen:pageResumen,infra:pageInfra,mercado:pageMercado,energia:pageEnergia,inversion:pageInversion,reportes:pageReportes,calc:pageCalc,censo:pageCenso,metodo:pageMetodo};
 const BIND={resumen:bindResumen,infra:()=>{bindInfra();infraKpis();},mercado:()=>{bindMercado();mercKpis();},energia:()=>{bindEnergia();enerKpis();},inversion:()=>{bindInversion();invKpis();},reportes:bindReportes,calc:bindCalc};
 const TABFN={
  resumen:{ind:tabResumenInd,mapa:tabResumenMapa},
- infra:{mapa:tabInfraMapa,tech:tabInfraTech,oper:tabInfraOper},
- merc:{ventas:tabMercVentas,tech:tabMercTech,marcas:tabMercMarcas,buscador:tabMercBuscador},
- ener:{mapa:tabEnerMapa,fuente:tabEnerFuente,region:tabEnerRegion},
+ infra:{mapa:tabInfraMapa,tech:tabInfraTech,oper:tabInfraOper,evol:tabInfraEvol,dist:tabInfraDist},
+ merc:{ventas:tabMercVentas,tech:tabMercTech,marcas:tabMercMarcas,region:tabMercRegion,buscador:tabMercBuscador},
+ ener:{mapa:tabEnerMapa,fuente:tabEnerFuente,region:tabEnerRegion,bess:tabEnerBess,solar:tabEnerSolar},
  inv:{mapa:tabInvMapa,cobertura:tabInvCobertura,ranking:tabInvRanking},
  rep:{ficha:tabRepFicha,mapa:tabRepMapa},
- calc:{ranking:tabCalcRanking,mapa:tabCalcMapa,detalle:tabCalcDetalle}
+ calc:{ranking:tabCalcRanking,mapa:tabCalcMapa,detalle:tabCalcDetalle},
+ censo:{viviendas:tabCensoViv,personas:tabCensoPers,mapa:tabCensoMapa}
 };
 function renderTab(sec){killViz();const fn=TABFN[sec]&&TABFN[sec][TAB[sec]];const panel=$('#tabpanel');if(panel&&fn)panel.innerHTML=fn();}
 async function go(id){killViz();const main=$('#main');main.innerHTML='<div style="padding:60px;text-align:center;color:var(--muted)">Cargando…</div>';$$('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.go===id));document.getElementById('navlinks').classList.remove('open');window.scrollTo(0,0);
@@ -208,3 +209,59 @@ async function go(id){killViz();const main=$('#main');main.innerHTML='<div style
   if(TABFN[sk])renderTab(sk);}
 document.addEventListener('click',e=>{const tb=e.target.closest('[data-tab]');if(tb){const[s,i]=tb.dataset.tab.split(':');showTab(s,i);return;}const row=e.target.closest('tr[data-com]');if(row){F.calc.comuna=row.dataset.com;const sel=$('#cf-com');if(sel)sel.value=row.dataset.com;TAB.calc='detalle';$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab==='calc:detalle'));renderTab('calc');return;}const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);}});
 Promise.all([fetch('data/datos.json?v='+V).then(r=>r.json()),fetch('data/cargadores.json?v='+V).then(r=>r.json())]).then(([d,c])=>{DB=d;CARG=c;const ff=$('#foot-fecha');if(ff)ff.textContent='Actualizado '+d.fecha;go('inicio');}).catch(e=>{$('#main').innerHTML='<p style="padding:40px">Error cargando datos: '+e+'</p>';});
+
+/* ===== INFRA: pestañas extra ===== */
+function tabInfraEvol(){const X=DATA.infra_extra.evol;
+  setTimeout(()=>{const cx=$('#if-evol');if(cx)chart(cx,{type:'line',data:{labels:X.labels,datasets:[{label:'Vehículos eléctricos',data:X.evs,borderColor:'#16A34A',backgroundColor:'rgba(22,163,74,.1)',fill:true,tension:.3,yAxisID:'y'},{label:'Conectores públicos',data:X.conect,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.1)',fill:true,tension:.3,yAxisID:'y1'}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{position:'left',title:{display:true,text:'EVs'}},y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Conectores'}}}}});},60);
+  return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Evolución de la red y la flota</h3><div class="subtitle">Vehículos eléctricos y conectores públicos por año (${X.labels[0]}–${X.labels.at(-1)}).</div><div style="position:relative;height:320px"><canvas id="if-evol"></canvas></div><div class="card-src">Fuente: SEC · ANAC · ${DB.fecha}</div></div>`;}
+function tabInfraDist(){const X=DATA.infra_extra;
+  setTimeout(()=>{const a=$('#if-conect');if(a)chart(a,{type:'doughnut',data:{labels:X.conectTipo.labels,datasets:[{data:X.conectTipo.vals,backgroundColor:['#2563EB','#16A34A','#F59E0B','#7C3AED','#EF4444','#0D9488','#64748B'],borderWidth:0}]},options:{cutout:'58%',plugins:{legend:{position:'right',labels:{boxWidth:11,font:{size:10}}}},maintainAspectRatio:false}});
+    const b=$('#if-acdc');if(b)chart(b,{type:'bar',data:{labels:X.acdc.labels,datasets:[{label:'AC',data:X.acdc.ac,backgroundColor:'#2563EB'},{label:'DC',data:X.acdc.dc,backgroundColor:'#EF4444'}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},scales:{x:{stacked:true,ticks:{font:{size:9}}},y:{stacked:true}}}});
+    const c=$('#if-top');if(c)chart(c,{type:'bar',data:{labels:X.top.labels,datasets:[{data:X.top.vals,backgroundColor:'#2563EB'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:9}}}}}});},60);
+  return `<div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Conectores por tipo y por región</h3><div class="subtitle">Tipo de conector y distribución AC/DC por región.</div><div class="grid g2"><div style="position:relative;height:260px"><canvas id="if-conect"></canvas></div><div style="position:relative;height:260px"><canvas id="if-acdc"></canvas></div></div><div class="card-src">Fuente: SEC · ${DB.fecha}</div></div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Top 20 comunas por conectores</h3><div class="subtitle">Comunas con mayor número de conectores públicos.</div><div style="position:relative;height:460px"><canvas id="if-top"></canvas></div><div class="card-src">Fuente: SEC · ${DB.fecha}</div></div>`;}
+
+/* ===== MERCADO: pestaña Por región ===== */
+function tabMercRegion(){const RY=DATA.mercado_extra.regYearly;const yrs=Object.keys(RY).sort();const last=RY[yrs.at(-1)];
+  setTimeout(()=>{const cx=$('#mc-reg');if(cx)chart(cx,{type:'bar',data:{labels:last.labels,datasets:[{data:last.data||last.evs||last.vals,backgroundColor:'#16A34A'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}}}}});
+    const px=$('#mc-pen');if(px){const ps=DB.resumen.penetracion.serie;chart(px,{type:'line',data:{labels:ps.map((_,i)=>i+1),datasets:[{label:'Penetración %',data:ps,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.1)',fill:true,tension:.3}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false}}}});}},60);
+  const dataArr=last.data||last.evs||last.vals||[];
+  return `<div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Vehículos eléctricos por región (${yrs.at(-1)})</h3><div class="subtitle">Flota acumulada por región.</div><div style="position:relative;height:420px"><canvas id="mc-reg"></canvas></div><div class="card-src">Fuente: ANAC · permisos de circulación · ${DB.fecha}</div></div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Penetración EV mensual</h3><div class="subtitle">Participación de electrificados en ventas (últimos meses).</div><div style="position:relative;height:240px"><canvas id="mc-pen"></canvas></div><div class="card-src">Fuente: ANAC · ${DB.fecha}</div></div>`;}
+
+/* ===== ENERGIA: pestañas BESS y Solar ===== */
+function tabEnerBess(){const X=DATA.energia_extra;
+  setTimeout(()=>{const a=$('#en-bess-anio');if(a&&X.bessAnio)chart(a,{type:'bar',data:{labels:X.bessAnio.labels,datasets:[{label:'MW',data:X.bessAnio.mw,backgroundColor:'#7C3AED'}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10}}}}}});
+    const b=$('#en-bess-estado');if(b)chart(b,{type:'doughnut',data:{labels:X.bessEstado.labels,datasets:[{data:X.bessEstado.mwh,backgroundColor:['#94A3B8','#F59E0B','#0EA5E9','#16A34A','#7C3AED'],borderWidth:0}]},options:{cutout:'58%',plugins:{legend:{position:'right',labels:{boxWidth:11,font:{size:10}}}},maintainAspectRatio:false}});
+    const c=$('#en-bess-tech');if(c)chart(c,{type:'bar',data:{labels:X.bessTech.labels,datasets:[{data:X.bessTech.mw,backgroundColor:'#0D9488'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:9}}}}}});},60);
+  return `<div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Almacenamiento BESS</h3><div class="subtitle">${fint(X.bessTot.mwhAlmacenamiento)} MWh en cartera · ${fint(X.bessTot.proyectos)} proyectos. Capacidad por año de entrada y por estado.</div><div class="grid g2"><div style="position:relative;height:260px"><canvas id="en-bess-anio"></canvas></div><div style="position:relative;height:260px"><canvas id="en-bess-estado"></canvas></div></div><div class="card-src">Fuente: CEN · SEIA · ${DB.fecha}</div></div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Capacidad total por tecnología (cartera)</h3><div class="subtitle">MW por fuente en toda la cartera (operativos + en desarrollo).</div><div style="position:relative;height:300px"><canvas id="en-bess-tech"></canvas></div><div class="card-src">Fuente: CEN · ${DB.fecha}</div></div>`;}
+function tabEnerSolar(){const S=DATA.energia_extra.solar;
+  setTimeout(()=>{const a=$('#en-sol-ins');if(a)chart(a,{type:'line',data:{labels:S.solarInscrita.labels,datasets:[{label:'GW inscritos',data:S.solarInscrita.solar,borderColor:'#F59E0B',backgroundColor:'rgba(245,158,11,.12)',fill:true,tension:.3}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+    const b=$('#en-sol-anual');if(b)chart(b,{type:'bar',data:{labels:S.instalAnual.labels,datasets:[{label:'MW/año',data:S.instalAnual.solar,backgroundColor:'#F59E0B'}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9}}}}}});
+    const c=$('#en-sol-reg');if(c)chart(c,{type:'bar',data:{labels:S.solarRegion.labels,datasets:[{data:S.solarRegion.mw,backgroundColor:'#CA8A04'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}}}}});},60);
+  return `<div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Energía solar — capacidad y crecimiento</h3><div class="subtitle">${fint(S.totales.mwOperativo)} MW operativos · ${fint(S.totales.proyectos)} proyectos. Top región: ${S.totales.topRegion}.</div><div class="grid g2"><div style="position:relative;height:250px"><canvas id="en-sol-ins"></canvas></div><div style="position:relative;height:250px"><canvas id="en-sol-anual"></canvas></div></div><div class="card-src">Fuente: CEN · ${DB.fecha}</div></div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Potencia solar por región</h3><div class="subtitle">MW solares operativos por región.</div><div style="position:relative;height:320px"><canvas id="en-sol-reg"></canvas></div><div class="card-src">Fuente: CEN · ${DB.fecha}</div></div>`;}
+
+/* ===== CENSO & ELECTROMOVILIDAD ===== */
+async function pageCenso(){await Promise.all([load('censo'),load('coords').then(d=>COORDS=d)]);F.censo=F.censo||{};TAB.censo=TAB.censo||'viviendas';
+  return `<div class="page-head"><h1>Censo & Electromovilidad</h1><p class="sub">Población, viviendas, licencias de conducir y potencial de carga domiciliaria por región (INE Censo 2024).</p></div>
+   ${tabsNav('censo',[{id:'viviendas',label:'Viviendas'},{id:'personas',label:'Personas y licencias'},{id:'mapa',label:'Mapa por región'}])}`;}
+function tabCensoViv(){const R=DATA.censo.reg;const tot=R.reduce((a,x)=>a+x.tot,0);
+  setTimeout(()=>{const a=$('#cn-viv');if(a)chart(a,{type:'bar',data:{labels:R.map(x=>x.r),datasets:[{label:'Viviendas (miles)',data:R.map(x=>Math.round(x.tot/1000)),backgroundColor:'#2563EB'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:9}}}}}});
+    const b=$('#cn-inst');if(b)chart(b,{type:'bar',data:{labels:R.map(x=>x.r),datasets:[{label:'% con instalación eléctrica adecuada',data:R.map(x=>x.inst),backgroundColor:'#16A34A'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:9}}},x:{max:100}}}});},60);
+  return `<div class="grid g4" style="margin-bottom:16px">${ind('Viviendas totales',fint(tot))}${ind('Regiones',R.length)}${ind('% urbano (prom.)',fmt(R.reduce((a,x)=>a+x.urb,0)/R.length),'%')}${ind('% departamentos (prom.)',fmt(R.reduce((a,x)=>a+x.dpto,0)/R.length),'%')}</div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Viviendas y potencial de carga domiciliaria</h3><div class="subtitle">Total de viviendas y porcentaje con instalación eléctrica adecuada por región.</div><div class="grid g2"><div style="position:relative;height:430px"><canvas id="cn-viv"></canvas></div><div style="position:relative;height:430px"><canvas id="cn-inst"></canvas></div></div><div class="card-src">Fuente: INE Censo 2024 · ${DB.fecha}</div></div>`;}
+function tabCensoPers(){const P=DATA.censo.pers,LA=DATA.censo.licAge;const pop=P.reduce((a,x)=>a+x.pop,0);const cond=P.reduce((a,x)=>a+x.cond,0);
+  setTimeout(()=>{const a=$('#cn-pop');if(a)chart(a,{type:'bar',data:{labels:P.map(x=>x.r),datasets:[{label:'Población (miles)',data:P.map(x=>Math.round(x.pop/1000)),backgroundColor:'#7C3AED'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:9}}}}}});
+    const b=$('#cn-lic');if(b){const ks=Object.keys(LA);const lbl={a0:'<15',a15:'15-17',a18:'18-29',a30:'30-44',a45:'45-59',a60:'60+'};chart(b,{type:'bar',data:{labels:ks.map(k=>lbl[k]||k),datasets:[{label:'Tasa de licencia',data:ks.map(k=>LA[k]),backgroundColor:'#0EA5E9'}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{max:1}}}});}},60);
+  return `<div class="grid g4" style="margin-bottom:16px">${ind('Población total',fint(pop))}${ind('Conductores',fint(cond))}${ind('% con licencia (prom.)',fmt(P.reduce((a,x)=>a+x.lic,0)/P.length),'%')}${ind('Regiones',P.length)}</div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Población y licencias de conducir</h3><div class="subtitle">Población por región y tasa de licencia por grupo de edad.</div><div class="grid g2"><div style="position:relative;height:430px"><canvas id="cn-pop"></canvas></div><div style="position:relative;height:430px"><canvas id="cn-lic"></canvas></div></div><div class="card-src">Fuente: INE Censo 2024 · ${DB.fecha}</div></div>`;}
+function tabCensoMapa(){F.censo.metric=F.censo.metric||'tot';const R=DATA.censo.reg;
+  const metrics={tot:['Viviendas','#2563EB',x=>x.tot],inst:['% instalación eléctrica','#16A34A',x=>x.inst],urb:['% urbano','#F59E0B',x=>x.urb]};
+  setTimeout(()=>{const sel=$('#cn-metric');if(sel)sel.onchange=e=>{F.censo.metric=e.target.value;renderTab('censo');};
+    const m=leaflet('cn-map',[-35.5,-71.3]);const mf=metrics[F.censo.metric];const vals=R.map(mf[2]);const mx=Math.max(...vals);
+    R.forEach(x=>{const co=COORDS.region[x.r];if(!co)return;const v=mf[2](x);L.circleMarker(co,{radius:8+v/mx*22,color:mf[1],fillColor:mf[1],fillOpacity:.5,weight:1.5}).bindPopup(`<b>${x.r}</b><br>Viviendas: ${fint(x.tot)}<br>% instal.: ${x.inst}<br>% urbano: ${x.urb}<br>% deptos: ${x.dpto}`).addTo(m);});},60);
+  return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Mapa por región</h3><div class="subtitle">Tamaño de la burbuja según el indicador seleccionado.</div>
+   <div class="filterbar" style="box-shadow:none;border:none;padding:6px 0;margin:4px 0"><div class="fgroup"><label>Indicador</label><select id="cn-metric"><option value="tot"${F.censo.metric==='tot'?' selected':''}>Viviendas totales</option><option value="inst"${F.censo.metric==='inst'?' selected':''}>% instalación eléctrica</option><option value="urb"${F.censo.metric==='urb'?' selected':''}>% urbano</option></select></div></div>
+   <div id="cn-map" style="height:480px;border-radius:12px;border:1px solid var(--line)"></div><div class="card-src">Fuente: INE Censo 2024 · ${DB.fecha}</div></div>`;}
