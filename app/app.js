@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781970298';
+const V='1781977727';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -30,7 +30,7 @@ function tabsNav(sec,tabs){return `<div class="tabs">${tabs.map(t=>`<button data
 function showTab(sec,id){TAB[sec]=id;$$(`.tabs button`).forEach(b=>b.classList.toggle('active',b.dataset.tab===sec+':'+id));renderTab(sec);}
 
 /* ===== INICIO ===== */
-function pageInicio(){const r=DB.resumen;const K=DB.kpis_inicio||[];const cards=K.map(k=>`<div class="kbar" style="border-left-color:${k.c}"><div class="kbar-top"><span class="kbar-lbl">${k.t}</span><span class="kbar-i" title="${k.info}">i</span></div><div class="kbar-val" style="color:${k.c}">${k.v}</div><div class="kbar-sub">${k.sub}</div><div class="kbar-delta">▲ ${k.delta}</div></div>`).join('');return `<div class="hero"><h1>El observatorio de electromovilidad y energía de Chile</h1><p>Datos oficiales de vehículos eléctricos, infraestructura de carga, generación renovable y almacenamiento — actualizados y listos para decidir dónde invertir.</p><div class="herobtns"><button class="btn btn-primary" data-go="resumen">Ver resumen ejecutivo</button><button class="btn btn-ghost" data-go="infra">Explorar infraestructura</button></div></div>
+function pageInicio(){const r=DB.resumen;const K=DB.kpis_inicio||[];const cards=K.map(k=>`<div class="kbar" style="border-left-color:${k.c}"><div class="kbar-top"><span class="kbar-lbl">${k.t}</span><button class="kbar-i" data-info="${(k.info||'').replace(/"/g,'&quot;')}" aria-label="Más información">i</button></div><div class="kbar-val" style="color:${k.c}">${k.v}</div><div class="kbar-sub">${k.sub}</div>${k.delta?`<div class="kbar-delta">▲ ${k.delta}</div>`:''}</div>`).join('');return `<div class="hero"><h1>El observatorio de electromovilidad y energía de Chile</h1><p>Datos oficiales de vehículos eléctricos, infraestructura de carga, generación renovable y almacenamiento — actualizados y listos para decidir dónde invertir.</p><div class="herobtns"><button class="btn btn-primary" data-go="resumen">Ver resumen ejecutivo</button><button class="btn btn-ghost" data-go="infra">Explorar infraestructura</button></div></div>
   <h2 style="font-size:17px;font-weight:800;margin:24px 0 12px">Indicadores clave</h2>
    <div class="kbar-grid">${cards}</div>`;}
 
@@ -238,7 +238,10 @@ async function go(id){killViz();const main=$('#main');main.innerHTML='<div style
   const SEC={mercado:'merc',energia:'ener',inversion:'inv',reportes:'rep'};
   const sk=SEC[id]||id;
   if(TABFN[sk])renderTab(sk);}
-document.addEventListener('click',e=>{const tb=e.target.closest('[data-tab]');if(tb){const[s,i]=tb.dataset.tab.split(':');showTab(s,i);return;}const row=e.target.closest('tr[data-com]');if(row){F.calc.comuna=row.dataset.com;const sel=$('#cf-com');if(sel)sel.value=row.dataset.com;TAB.calc='detalle';$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab==='calc:detalle'));renderTab('calc');return;}const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);}});
+function hideInfoPop(){const ex=document.getElementById('infopop');if(ex)ex.remove();}
+function showInfoPop(anchor,txt){hideInfoPop();if(!txt)return;const pop=document.createElement('div');pop.id='infopop';pop.textContent=txt;document.body.appendChild(pop);const r=anchor.getBoundingClientRect();const pw=Math.min(260,window.innerWidth-24);pop.style.width=pw+'px';let left=r.left+window.scrollX-pw+r.width;if(left<8)left=8;pop.style.left=left+'px';pop.style.top=(r.bottom+window.scrollY+8)+'px';}
+document.addEventListener('scroll',hideInfoPop,true);
+document.addEventListener('click',e=>{const ib=e.target.closest('.kbar-i');if(ib){e.preventDefault();e.stopPropagation();showInfoPop(ib,ib.dataset.info);return;}if(!e.target.closest('#infopop'))hideInfoPop();const tb=e.target.closest('[data-tab]');if(tb){const[s,i]=tb.dataset.tab.split(':');showTab(s,i);return;}const row=e.target.closest('tr[data-com]');if(row){F.calc.comuna=row.dataset.com;const sel=$('#cf-com');if(sel)sel.value=row.dataset.com;TAB.calc='detalle';$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab==='calc:detalle'));renderTab('calc');return;}const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);}});
 Promise.all([fetch('data/datos.json?v='+V).then(r=>r.json()),fetch('data/cargadores.json?v='+V).then(r=>r.json())]).then(([d,c])=>{DB=d;CARG=c;const ff=$('#foot-fecha');if(ff)ff.textContent='Actualizado '+d.fecha;go('inicio');}).catch(e=>{$('#main').innerHTML='<p style="padding:40px">Error cargando datos: '+e+'</p>';});
 
 /* ===== INFRA: pestañas extra ===== */
