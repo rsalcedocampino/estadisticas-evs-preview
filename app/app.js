@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781969956';
+const V='1781970298';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -52,14 +52,14 @@ function tabResumenMapa(){const f=F.resumen;
   return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Red nacional de carga pública</h3><div class="subtitle">${fint(CARG.filter(c=>!f.region||c.r===f.region).length)} conectores en ${f.region||'todo Chile'}.</div><div id="rs-map" style="height:480px;border-radius:12px;border:1px solid var(--line)"></div><div style="display:flex;gap:18px;margin-top:10px;font-size:12.5px;flex-wrap:wrap"><span class="legrow"><i class="dot" style="background:#16A34A"></i> AC lenta</span><span class="legrow"><i class="dot" style="background:#2563EB"></i> AC semi</span><span class="legrow"><i class="dot" style="background:#EF4444"></i> DC rápida</span></div><div class="card-src">Fuente: SEC · ${DB.fecha}</div></div>`;}
 
 /* ===== INFRAESTRUCTURA (tabs) ===== */
-async function pageInfra(){await load('infra_extra');F.infra=F.infra||{region:'',vel:'',comuna:'',con:''};TAB.infra=TAB.infra||'mapa';
+async function pageInfra(){await load('infra_extra');await load('precios_acdc');F.infra=F.infra||{region:'',vel:'',comuna:'',con:''};TAB.infra=TAB.infra||'mapa';
   const comunas=F.infra.region?[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b)):[];
   const conTipos=[...new Set(CARG.map(c=>c.cn).filter(Boolean))].sort();
   return `<div class="page-head"><h1>Infraestructura de Carga</h1><p class="sub">Distribución, tecnología y operadores de la red pública de carga.</p></div>
    <div class="filterbar"><div class="fgroup"><label>Región</label><select id="if-reg"><option value="">Todo Chile</option>${fopt(REGS(),F.infra.region)}</select></div><div class="fgroup"><label>Comuna</label><select id="if-com"><option value="">Todas</option>${comunas.map(c=>`<option value="${c}"${F.infra.comuna===c?' selected':''}>${c}</option>`).join('')}</select></div><div class="fgroup"><label>Tipo de carga</label><select id="if-vel"><option value="">Todas</option><option value="AC"${F.infra.vel==='AC'?' selected':''}>AC</option><option value="DC"${F.infra.vel==='DC'?' selected':''}>DC</option></select></div><div class="fgroup"><label>Tipo de conector</label><select id="if-con"><option value="">Todos</option>${conTipos.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('')}</select></div><button class="btn btn-ghost" id="if-reset" style="align-self:flex-end">Limpiar filtros</button></div>
    <div class="grid g4" id="if-kpis" style="margin-bottom:16px"></div>
    <div id="if-precios" style="margin-bottom:18px"></div>
-   ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'},{id:'evol',label:'Evolución'},{id:'dist',label:'Distribución'}])}`;}
+   ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'},{id:'evol',label:'Evolución'},{id:'dist',label:'Distribución'},{id:'precios',label:'Precios AC/DC'}])}`;}
 function tipoAD(c){return (c.t==='DC'||(+c.kw||0)>=50)?'DC':'AC';}
 function conesDisp(){const f=F.infra;return [...new Set(CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&c.cn).map(c=>c.cn))].sort();}
 function fillConSelect(){const opts=conesDisp();if(F.infra.con&&!opts.includes(F.infra.con))F.infra.con='';const sel=$('#if-con');if(sel)sel.innerHTML='<option value="">Todos</option>'+opts.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('');}
@@ -86,6 +86,20 @@ function tabInfraTech(){const D=infraData();const v={AC_lenta:0,AC_semi:0,DC:0};
   return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Conectores por velocidad de carga</h3><div class="subtitle">Mix tecnológico de la red en ${F.infra.region||'todo Chile'}.</div><div class="grid g2" style="align-items:center"><div style="position:relative;height:240px"><canvas id="if-donut"></canvas></div><div>${[['#16A34A','AC lenta ≤7 kW',v.AC_lenta],['#2563EB','AC semi 7–22 kW',v.AC_semi],['#EF4444','DC ≥50 kW',v.DC]].map(([c,n,val])=>`<div class="legrow" style="padding:8px 0;border-bottom:1px solid var(--line)"><i class="dot" style="background:${c}"></i><span class="nm">${n}</span><span class="vl">${fint(val)} · ${(val/tot*100).toFixed(0)}%</span></div>`).join('')}</div></div><div class="card-src">Fuente: SEC · ${DB.fecha}</div></div>`;}
 function tabInfraOper(){const D=infraData();const op={};D.forEach(c=>{if(c.op)op[c.op]=(op[c.op]||0)+1;});let arr=Object.entries(op).sort((a,b)=>b[1]-a[1]);const top=arr.slice(0,5),ot=arr.slice(5).reduce((a,x)=>a+x[1],0),tot=arr.reduce((a,x)=>a+x[1],0)||1;const rows=[...top];if(ot>0)rows.push(['Otros',ot]);
   return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Ranking de operadores</h3><div class="subtitle">Participación por número de conectores · ${F.infra.region||'todo Chile'}.</div>${rows.length?rankRows(rows,v=>fint(v)+' · '+(v/tot*100).toFixed(1)+'%'):'<p style="color:var(--muted)">Sin operadores en la selección.</p>'}<div class="card-src">Fuente: SEC, clasificación por instalador · ${DB.fecha}</div></div>`;}
+
+function precioCard(g,carga,col){const loc=x=>`${x.sitio}<br><span style="color:var(--muted)">${x.comuna}, ${x.region}</span>`;
+  return `<div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Precio carga ${carga} <span style="font-weight:600;color:var(--muted);font-size:13px">· nacional</span></h3><div class="subtitle">Según ${fint(g.n)} conectores ${carga} con tarifa publicada. Promedio $${fint(g.avg)}/kWh.</div>
+   <div class="grid g2" style="margin-top:6px">
+     <div style="background:#ECFDF5;border:1px solid #BBF7D0;border-radius:12px;padding:15px 16px"><div style="font-size:11.5px;color:#16A34A;font-weight:800">PRECIO MÍNIMO</div><div style="font-size:30px;font-weight:800;color:#16A34A">$${fint(g.min.precio)}<small style="font-size:12px;color:var(--muted);font-weight:700"> /kWh</small></div>
+       <div style="margin-top:8px;font-size:12px"><b>📍 Ubicación:</b><br>${loc(g.min)}</div>
+       <div style="margin-top:6px;font-size:12px"><b>⚡ Potencia:</b> ${fint(g.min.kw)} kW · ${g.min.conector||'—'}</div></div>
+     <div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:15px 16px"><div style="font-size:11.5px;color:#EF4444;font-weight:800">PRECIO MÁXIMO</div><div style="font-size:30px;font-weight:800;color:#EF4444">$${fint(g.max.precio)}<small style="font-size:12px;color:var(--muted);font-weight:700"> /kWh</small></div>
+       <div style="margin-top:8px;font-size:12px"><b>📍 Ubicación:</b><br>${loc(g.max)}</div>
+       <div style="margin-top:6px;font-size:12px"><b>⚡ Potencia:</b> ${fint(g.max.kw)} kW · ${g.max.conector||'—'}</div></div>
+   </div><div class="card-src">Fuente: SEC, tarifas publicadas por operador · ${DB.fecha}</div></div>`;}
+function tabInfraPrecios(){const P=DATA.precios_acdc;
+  return `<div style="display:grid;gap:16px">${precioCard(P.ac,'AC','#16A34A')}${precioCard(P.dc,'DC','#EF4444')}</div>
+   <div class="insight"><div class="ic">i</div><div><b>Lectura ejecutiva.</b> La carga AC pública va de $${fint(P.ac.min.precio)} (${P.ac.min.comuna}) a $${fint(P.ac.max.precio)} (${P.ac.max.comuna}) por kWh. La carga rápida DC, de $${fint(P.dc.min.precio)} (${P.dc.min.comuna}) a $${fint(P.dc.max.precio)} (${P.dc.max.comuna}). Cada precio indica el sitio y la potencia del conector.</div></div>`;}
 
 /* ===== MERCADO EV (tabs) ===== */
 const TECHS=['BEV','PHEV','HEV','MHEV','EBUS','ETRUCK'];
@@ -208,7 +222,7 @@ const PAGES={inicio:pageInicio,resumen:pageResumen,infra:pageInfra,mercado:pageM
 const BIND={resumen:bindResumen,infra:()=>{bindInfra();infraKpis();},mercado:()=>{bindMercado();mercKpis();},energia:()=>{bindEnergia();enerKpis();},inversion:()=>{bindInversion();invKpis();},reportes:bindReportes,calc:bindCalc};
 const TABFN={
  resumen:{ind:tabResumenInd,mapa:tabResumenMapa},
- infra:{mapa:tabInfraMapa,tech:tabInfraTech,oper:tabInfraOper,evol:tabInfraEvol,dist:tabInfraDist},
+ infra:{mapa:tabInfraMapa,tech:tabInfraTech,oper:tabInfraOper,evol:tabInfraEvol,dist:tabInfraDist,precios:tabInfraPrecios},
  merc:{ventas:tabMercVentas,tech:tabMercTech,marcas:tabMercMarcas,region:tabMercRegion,buscador:tabMercBuscador},
  ener:{mapa:tabEnerMapa,fuente:tabEnerFuente,region:tabEnerRegion,bess:tabEnerBess,solar:tabEnerSolar},
  inv:{mapa:tabInvMapa,cobertura:tabInvCobertura,ranking:tabInvRanking},
