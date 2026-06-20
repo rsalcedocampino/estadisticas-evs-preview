@@ -128,6 +128,7 @@ const PAGES={
 
 function go(id){
   $('#main').innerHTML=PAGES[id]();
+  const sec=$('#main .page'); if(sec) sec.classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.go===id));
   document.getElementById('navlinks').classList.remove('open');
   window.scrollTo(0,0);
