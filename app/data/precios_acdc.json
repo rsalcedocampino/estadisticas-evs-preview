@@ -1,0 +1,43 @@
+{
+ "ac": {
+  "n": 804,
+  "avg": 334,
+  "min": {
+   "precio": 209,
+   "sitio": "Cargadores públicos mall Costanera Center",
+   "comuna": "Providencia",
+   "region": "Metropolitana",
+   "kw": 7,
+   "conector": "Tipo 2"
+  },
+  "max": {
+   "precio": 450,
+   "sitio": "Shell Placilla",
+   "comuna": "Valparaíso",
+   "region": "Valparaíso",
+   "kw": 42,
+   "conector": "Tipo 2"
+  }
+ },
+ "dc": {
+  "n": 560,
+  "avg": 395,
+  "min": {
+   "precio": 309,
+   "sitio": "Enel X - StripCenter Nogales",
+   "comuna": "Machalí",
+   "region": "O'Higgins",
+   "kw": 60,
+   "conector": "CCS 2"
+  },
+  "max": {
+   "precio": 495,
+   "sitio": "SAVE VOLTEX LAGUNA DE CHICUREO EDS 60288",
+   "comuna": "Colina",
+   "region": "Metropolitana",
+   "kw": 240,
+   "conector": "CCS 2"
+  }
+ },
+ "fecha": "19 de junio 2026"
+}
