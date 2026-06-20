@@ -7,7 +7,7 @@ const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781929676';
+const V='1781930056';
 async function load(name){ if(DATA[name])return DATA[name];
   DATA[name]=await fetch(`data/${name}.json?v=${V}`).then(r=>r.json()); return DATA[name]; }
 
@@ -210,6 +210,7 @@ async function pageEnergia(){const E=await load('energia');
    <div class="grid g3" style="grid-template-columns:1.6fr 1fr;margin-bottom:16px">
      <div class="card"><h3>Mapa de proyectos energéticos</h3><div class="csub" id="en-mapsub"></div><div id="emap" style="height:460px;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin-top:12px"></div>
        <div style="display:flex;gap:16px;margin-top:10px;font-size:12.5px;flex-wrap:wrap"><span class="legrow"><i class="dot" style="background:#F59E0B"></i> Solar</span><span class="legrow"><i class="dot" style="background:#0EA5E9"></i> Eólica</span><span class="legrow"><i class="dot" style="background:#7C3AED"></i> BESS</span><span class="legrow"><i class="dot" style="background:#16A34A"></i> Otra</span></div>
+       <div id="en-mapnote" style="margin-top:11px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:11px;padding:11px 14px;font-size:12.5px;color:#92400E;line-height:1.5"></div>
        <div class="card-src">Fuente: Coordinador Eléctrico Nacional (CEN) · SEIA · ${DB.fecha}</div></div>
      <div class="card"><h3>Capacidad por fuente</h3><div class="csub">MW por tecnología (cartera total).</div><div style="position:relative;height:210px;margin-top:10px"><canvas id="en-donut"></canvas></div><div id="en-donleg" style="margin-top:8px"></div><div class="card-src">Fuente: CEN · ${DB.fecha}</div></div></div>
    <div class="card"><h3>Ranking de potencia por región</h3><div class="csub" id="en-ranksub">MW renovables operativos.</div><div style="margin-top:12px" id="en-rank"></div><div class="card-src">Fuente: CEN · ${DB.fecha}</div></div>
@@ -248,6 +249,18 @@ function renderEnergia(){const E=DATA.energia,f=F.ener;
   let rr=Object.entries(byR).sort((a,b)=>b[1]-a[1]).slice(0,10); const mx=rr.length?rr[0][1]:1;
   $('#en-ranksub').textContent=`MW renovables operativos · ${amb}.`;
   $('#en-rank').innerHTML=rr.length?rr.map((o,i)=>`<div class="rank" style="padding:7px 0;border-bottom:1px solid var(--line)"><div class="legrow"><span style="width:20px;font-weight:800;color:var(--muted)">${i+1}</span><span class="nm">${o[0]}</span><span class="vl">${fint(o[1])} MW</span></div><div class="bar"><i style="width:${(o[1]/mx*100).toFixed(0)}%"></i></div></div>`).join(''):'<p style="color:var(--muted)">Sin proyectos operativos en la selección.</p>';
+  // nota de cobertura georreferenciada del mapa
+  const totOpMW=E.totales.mwOperativo, totOpN=E.totales.proyectosOp;
+  const geoOpMW=mwOp, geoOpN=op.length;
+  const note=$('#en-mapnote');
+  if(note){
+    if(!f.region&&!f.estado&&!f.fuente){
+      const faltaMW=Math.max(totOpMW-geoOpMW,0), faltaN=Math.max(totOpN-geoOpN,0);
+      note.innerHTML=`<b>Cobertura del mapa.</b> Del total oficial de ${fint(totOpMW)} MW renovables operativos (CEN · ${fint(totOpN)} proyectos), el mapa georreferencia ${fint(geoOpMW)} MW (${fint(geoOpN)} proyectos). Faltan por sumar <b>${fint(faltaMW)} MW</b> (~${fint(faltaN)} proyectos) que aún no tienen su ubicación georreferenciada disponible.`;
+    } else {
+      note.innerHTML=`Mostrando los proyectos con ubicación georreferenciada de la selección. Pueden existir proyectos adicionales sin coordenadas publicadas.`;
+    }
+  }
   $('#en-insight').innerHTML=`<b>Lectura ejecutiva.</b> En ${amb} hay ${fint(D.length)} proyectos energéticos con ${fint(mwOp)} MW renovables operativos y ${fint(bess.length)} iniciativas de almacenamiento BESS. La cartera total en desarrollo suma ${fint(mwTot)} MW.`;
   // mapa
   if(_emap){try{_emap.remove()}catch(e){}_emap=null;}
