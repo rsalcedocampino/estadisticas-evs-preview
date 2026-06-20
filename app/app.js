@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781965024';
+const V='1781966058';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -55,11 +55,12 @@ async function pageInfra(){await load('infra_extra');F.infra=F.infra||{region:''
   const comunas=F.infra.region?[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b)):[];
   const conTipos=[...new Set(CARG.map(c=>c.cn).filter(Boolean))].sort();
   return `<div class="page-head"><h1>Infraestructura de Carga</h1><p class="sub">Distribución, tecnología y operadores de la red pública de carga.</p></div>
-   <div class="filterbar"><div class="fgroup"><label>Región</label><select id="if-reg"><option value="">Todo Chile</option>${fopt(REGS(),F.infra.region)}</select></div><div class="fgroup"><label>Comuna</label><select id="if-com"><option value="">Todas</option>${comunas.map(c=>`<option value="${c}"${F.infra.comuna===c?' selected':''}>${c}</option>`).join('')}</select></div><div class="fgroup"><label>Tipo de carga</label><select id="if-vel"><option value="">Todas</option><option value="AC_lenta"${F.infra.vel==='AC_lenta'?' selected':''}>AC lenta (≤7 kW)</option><option value="AC_semi"${F.infra.vel==='AC_semi'?' selected':''}>AC semi (7–22 kW)</option><option value="DC"${F.infra.vel==='DC'?' selected':''}>DC rápida (≥50 kW)</option></select></div><div class="fgroup"><label>Tipo de conector</label><select id="if-con"><option value="">Todos</option>${conTipos.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('')}</select></div><button class="btn btn-ghost" id="if-reset" style="align-self:flex-end">Limpiar filtros</button></div>
+   <div class="filterbar"><div class="fgroup"><label>Región</label><select id="if-reg"><option value="">Todo Chile</option>${fopt(REGS(),F.infra.region)}</select></div><div class="fgroup"><label>Comuna</label><select id="if-com"><option value="">Todas</option>${comunas.map(c=>`<option value="${c}"${F.infra.comuna===c?' selected':''}>${c}</option>`).join('')}</select></div><div class="fgroup"><label>Tipo de carga</label><select id="if-vel"><option value="">Todas</option><option value="AC"${F.infra.vel==='AC'?' selected':''}>AC</option><option value="DC"${F.infra.vel==='DC'?' selected':''}>DC</option></select></div><div class="fgroup"><label>Tipo de conector</label><select id="if-con"><option value="">Todos</option>${conTipos.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('')}</select></div><button class="btn btn-ghost" id="if-reset" style="align-self:flex-end">Limpiar filtros</button></div>
    <div class="grid g4" id="if-kpis" style="margin-bottom:16px"></div>
    <div id="if-precios" style="margin-bottom:18px"></div>
    ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'},{id:'evol',label:'Evolución'},{id:'dist',label:'Distribución'}])}`;}
-function infraData(){const f=F.infra;return CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||velOf(c)===f.vel)&&(!f.con||c.cn===f.con));}
+function tipoAD(c){return (c.t==='DC'||(+c.kw||0)>=50)?'DC':'AC';}
+function infraData(){const f=F.infra;return CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&(!f.con||c.cn===f.con));}
 function bindInfra(){const re=()=>{infraKpis();renderTab('infra');};
   $('#if-reg').onchange=e=>{F.infra.region=e.target.value;F.infra.comuna='';const cs=[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b));$('#if-com').innerHTML='<option value="">Todas</option>'+cs.map(c=>`<option value="${c}">${c}</option>`).join('');re();};
   $('#if-com').onchange=e=>{F.infra.comuna=e.target.value;re();};
