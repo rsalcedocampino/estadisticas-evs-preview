@@ -140,6 +140,7 @@
  ],
  "kpis_inicio": [
   {
+   "g": "Mercado y ventas",
    "t": "VTA. ÚLT. 12 MESES",
    "v": "15.940",
    "sub": "Jun-25 → May-26",
@@ -148,6 +149,7 @@
    "info": "Ventas de vehículos enchufables (BEV+PHEV) en los últimos 12 meses."
   },
   {
+   "g": "Mercado y ventas",
    "t": "PENETRACIÓN MAY-2026",
    "v": "11,7%",
    "sub": "Del mercado total",
@@ -156,6 +158,40 @@
    "info": "Participación de electrificados sobre el total de ventas del mes."
   },
   {
+   "g": "Mercado y ventas",
+   "t": "BEV VENDIDOS 2026",
+   "v": "4.168",
+   "sub": "Acumulado ene–may 2026",
+   "c": "#2563EB",
+   "info": "Vehículos 100% eléctricos de batería (BEV) vendidos en 2026 a la fecha."
+  },
+  {
+   "g": "Mercado y ventas",
+   "t": "PHEV VENDIDOS 2026",
+   "v": "3.634",
+   "sub": "Acumulado ene–may 2026",
+   "c": "#16A34A",
+   "info": "Vehículos híbridos enchufables (PHEV) vendidos en 2026 a la fecha."
+  },
+  {
+   "g": "Mercado y ventas",
+   "t": "BEV+PHEV / CONECTOR PÚBLICO",
+   "v": "~12x",
+   "sub": "Ratio enchufables / infraestructura",
+   "delta": "de 8x en 2024 a 12x en 2026",
+   "c": "#F97316",
+   "info": "Vehículos enchufables por cada conector público disponible."
+  },
+  {
+   "g": "Infraestructura de carga",
+   "t": "CONECTORES PÚBLICOS",
+   "v": "2.360",
+   "sub": "Red pública nacional georreferenciada",
+   "c": "#F59E0B",
+   "info": "Conectores de carga públicos con ubicación registrada (SEC)."
+  },
+  {
+   "g": "Infraestructura de carga",
    "t": "CARGADORES ACUMULADOS",
    "v": "7.104",
    "sub": "Total 2018–2026",
@@ -164,14 +200,7 @@
    "info": "Conectores de carga acumulados desde 2018."
   },
   {
-   "t": "ENERGÍA INSTALADA",
-   "v": "217,6 MW",
-   "sub": "Capacidad total red de carga",
-   "delta": "+44% vs 2024",
-   "c": "#16A34A",
-   "info": "Potencia total instalada en la red pública de carga."
-  },
-  {
+   "g": "Infraestructura de carga",
    "t": "INSTALACIONES ÚNICAS",
    "v": "3.943",
    "sub": "Ubicaciones de carga",
@@ -180,61 +209,61 @@
    "info": "Puntos físicos (ubicaciones) con infraestructura de carga."
   },
   {
-   "t": "BEV+PHEV / CONECTOR PÚBLICO",
-   "v": "~12x",
-   "sub": "Ratio enchufables / infraestructura pública",
-   "delta": "de 8x en 2024 a 12x en 2026",
-   "c": "#F97316",
-   "info": "Vehículos enchufables por cada conector público disponible."
+   "g": "Infraestructura de carga",
+   "t": "ENERGÍA INSTALADA",
+   "v": "217,6 MW",
+   "sub": "Capacidad total red de carga",
+   "delta": "+44% vs 2024",
+   "c": "#16A34A",
+   "info": "Potencia total instalada en la red pública de carga."
   },
   {
-   "t": "CONECTORES PÚBLICOS",
-   "v": "2.360",
-   "sub": "Red pública nacional georreferenciada",
-   "c": "#F59E0B",
-   "info": "Conectores de carga públicos con ubicación registrada en el país (SEC)."
+   "g": "Infraestructura de carga",
+   "t": "POTENCIA INSTALADA",
+   "v": "110,3 MW",
+   "sub": "Conectores georreferenciados",
+   "c": "#2563EB",
+   "info": "Suma de potencia (kW) de los conectores públicos georreferenciados."
   },
   {
+   "g": "Infraestructura de carga",
    "t": "COMUNAS CON CARGA",
    "v": "141",
    "sub": "de 346 comunas del país",
    "c": "#16A34A",
-   "info": "Comunas que cuentan con al menos un conector público de carga."
+   "info": "Comunas con al menos un conector público de carga."
   },
   {
+   "g": "Infraestructura de carga",
    "t": "COMUNAS SIN CARGA",
    "v": "205",
-   "sub": "de 346 — oportunidad de despliegue",
+   "sub": "de 346 — oportunidad",
    "c": "#EF4444",
-   "info": "Comunas que aún no tienen ningún cargador público. Principal brecha de cobertura."
+   "info": "Comunas que aún no tienen ningún cargador público."
   },
   {
-   "t": "POTENCIA INSTALADA",
-   "v": "110,3 MW",
-   "sub": "Capacidad total de la red de carga",
-   "c": "#2563EB",
-   "info": "Suma de la potencia (kW) de todos los conectores públicos georreferenciados."
-  },
-  {
-   "t": "PRECIO MÍNIMO CARGA",
+   "g": "Precios de carga",
+   "t": "PRECIO MÍNIMO",
    "v": "$209",
-   "sub": "por kWh · carga pública nacional",
+   "sub": "por kWh · nacional",
    "c": "#16A34A",
-   "info": "Tarifa más baja publicada por kWh entre los conectores públicos del país."
+   "info": "Tarifa más baja publicada por kWh entre los conectores públicos."
   },
   {
-   "t": "PRECIO PROMEDIO CARGA",
+   "g": "Precios de carga",
+   "t": "PRECIO PROMEDIO",
    "v": "$359",
-   "sub": "por kWh · carga pública nacional",
+   "sub": "por kWh · nacional",
    "c": "#2563EB",
-   "info": "Tarifa promedio por kWh entre los 1.364 conectores con tarifa publicada."
+   "info": "Tarifa promedio por kWh entre los conectores con tarifa publicada."
   },
   {
-   "t": "PRECIO MÁXIMO CARGA",
+   "g": "Precios de carga",
+   "t": "PRECIO MÁXIMO",
    "v": "$495",
-   "sub": "por kWh · carga pública nacional",
+   "sub": "por kWh · nacional",
    "c": "#EF4444",
-   "info": "Tarifa más alta publicada por kWh entre los conectores públicos del país."
+   "info": "Tarifa más alta publicada por kWh entre los conectores públicos."
   }
  ]
 }
