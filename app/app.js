@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781931065';
+const V='1781931197';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -204,6 +204,8 @@ async function go(id){killViz();const main=$('#main');main.innerHTML='<div style
   let html;try{html=await PAGES[id]();}catch(e){main.innerHTML='<p style="padding:40px">Error: '+e+'</p>';return;}
   main.innerHTML=`<section class="page active">${html}</section>`;
   if(BIND[id])BIND[id]();
-  if(TABFN[id])renderTab(id);}
+  const SEC={mercado:'merc',energia:'ener',inversion:'inv',reportes:'rep'};
+  const sk=SEC[id]||id;
+  if(TABFN[sk])renderTab(sk);}
 document.addEventListener('click',e=>{const tb=e.target.closest('[data-tab]');if(tb){const[s,i]=tb.dataset.tab.split(':');showTab(s,i);return;}const row=e.target.closest('tr[data-com]');if(row){F.calc.comuna=row.dataset.com;const sel=$('#cf-com');if(sel)sel.value=row.dataset.com;TAB.calc='detalle';$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab==='calc:detalle'));renderTab('calc');return;}const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);}});
 Promise.all([fetch('data/datos.json?v='+V).then(r=>r.json()),fetch('data/cargadores.json?v='+V).then(r=>r.json())]).then(([d,c])=>{DB=d;CARG=c;const ff=$('#foot-fecha');if(ff)ff.textContent='Actualizado '+d.fecha;go('inicio');}).catch(e=>{$('#main').innerHTML='<p style="padding:40px">Error cargando datos: '+e+'</p>';});
