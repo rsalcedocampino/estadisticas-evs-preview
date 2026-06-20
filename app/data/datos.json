@@ -1,0 +1,105 @@
+{
+ "fecha": "19 de junio 2026",
+ "fuentes": "SEC · ANAC · CNE · INE Censo 2024 · Permisos de Circulación",
+ "resumen": {
+  "penetracion": {
+   "valor": 18.3,
+   "serie": [
+    0.3,
+    0.3,
+    0.4,
+    0.8,
+    1.6,
+    3.0,
+    6.4,
+    6.3,
+    8.7,
+    9.0,
+    9.5,
+    10.0,
+    10.5,
+    10.3,
+    10.6,
+    10.5,
+    10.8,
+    11.1,
+    11.4,
+    11.4,
+    12.6,
+    15.9,
+    18.3
+   ],
+   "unidad": "%"
+  },
+  "evs_acum": {
+   "valor": 33853,
+   "serie": [
+    276,
+    537,
+    1460,
+    2862,
+    2866,
+    5787,
+    8799,
+    16797,
+    33853
+   ]
+  },
+  "conectores": {
+   "valor": 2360
+  },
+  "comunas_sin": {
+   "valor": 205,
+   "de": 346
+  },
+  "ernc_mw": {
+   "valor": 19890
+  },
+  "bess_mwh": {
+   "valor": 7487
+  }
+ },
+ "infraestructura": {
+  "conectores": 2360,
+  "comunas_con": 141,
+  "comunas_sin": 205,
+  "potencia_mw": 221.5,
+  "por_velocidad": {
+   "AC_lenta": 171,
+   "AC_semi": 1387,
+   "DC": 802
+  },
+  "operadores": [
+   {
+    "nombre": "Enel X Way",
+    "n": 785,
+    "pct": 42.6
+   },
+   {
+    "nombre": "Copec Voltex",
+    "n": 770,
+    "pct": 41.8
+   },
+   {
+    "nombre": "Enerlink",
+    "n": 175,
+    "pct": 9.5
+   },
+   {
+    "nombre": "Trolebuses",
+    "n": 72,
+    "pct": 3.9
+   },
+   {
+    "nombre": "Chass",
+    "n": 36,
+    "pct": 2.0
+   },
+   {
+    "nombre": "Otros",
+    "n": 5,
+    "pct": 0.3
+   }
+  ]
+ }
+}
