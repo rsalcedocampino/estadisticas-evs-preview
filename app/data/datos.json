@@ -186,6 +186,55 @@
    "delta": "de 8x en 2024 a 12x en 2026",
    "c": "#F97316",
    "info": "Vehículos enchufables por cada conector público disponible."
+  },
+  {
+   "t": "CONECTORES PÚBLICOS",
+   "v": "2.360",
+   "sub": "Red pública nacional georreferenciada",
+   "c": "#F59E0B",
+   "info": "Conectores de carga públicos con ubicación registrada en el país (SEC)."
+  },
+  {
+   "t": "COMUNAS CON CARGA",
+   "v": "141",
+   "sub": "de 346 comunas del país",
+   "c": "#16A34A",
+   "info": "Comunas que cuentan con al menos un conector público de carga."
+  },
+  {
+   "t": "COMUNAS SIN CARGA",
+   "v": "205",
+   "sub": "de 346 — oportunidad de despliegue",
+   "c": "#EF4444",
+   "info": "Comunas que aún no tienen ningún cargador público. Principal brecha de cobertura."
+  },
+  {
+   "t": "POTENCIA INSTALADA",
+   "v": "110,3 MW",
+   "sub": "Capacidad total de la red de carga",
+   "c": "#2563EB",
+   "info": "Suma de la potencia (kW) de todos los conectores públicos georreferenciados."
+  },
+  {
+   "t": "PRECIO MÍNIMO CARGA",
+   "v": "$209",
+   "sub": "por kWh · carga pública nacional",
+   "c": "#16A34A",
+   "info": "Tarifa más baja publicada por kWh entre los conectores públicos del país."
+  },
+  {
+   "t": "PRECIO PROMEDIO CARGA",
+   "v": "$359",
+   "sub": "por kWh · carga pública nacional",
+   "c": "#2563EB",
+   "info": "Tarifa promedio por kWh entre los 1.364 conectores con tarifa publicada."
+  },
+  {
+   "t": "PRECIO MÁXIMO CARGA",
+   "v": "$495",
+   "sub": "por kWh · carga pública nacional",
+   "c": "#EF4444",
+   "info": "Tarifa más alta publicada por kWh entre los conectores públicos del país."
   }
  ]
 }

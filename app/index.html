@@ -69,7 +69,10 @@ section.page.active{display:block;animation:fade .35s ease;}
 .kbar{background:#fff;border:1px solid var(--line);border-left:4px solid #2563EB;border-radius:12px;padding:15px 16px;box-shadow:var(--shadow);}
 .kbar-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;}
 .kbar-lbl{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.4px;line-height:1.25;text-transform:uppercase;}
-.kbar-i{flex-shrink:0;width:16px;height:16px;border-radius:50%;border:1.5px solid #CBD5E1;color:#94A3B8;font-size:10px;font-weight:800;font-style:italic;display:flex;align-items:center;justify-content:center;cursor:help;}
+.kbar-i{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:1.5px solid #CBD5E1;background:#fff;color:#94A3B8;font-size:11px;font-weight:800;font-style:italic;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;line-height:1;transition:.15s;}
+.kbar-i:hover{border-color:var(--primary);color:var(--primary);background:#EFF6FF;}
+#infopop{position:absolute;z-index:1000;background:#0F172A;color:#fff;font-size:12px;line-height:1.45;padding:10px 12px;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,.25);}
+#infopop::after{content:'';position:absolute;top:-6px;right:14px;border:6px solid transparent;border-bottom-color:#0F172A;border-top:0;}
 .kbar-val{font-size:27px;font-weight:800;letter-spacing:-1px;margin-top:8px;line-height:1;}
 .kbar-sub{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.3;}
 .kbar-delta{font-size:11px;font-weight:700;color:var(--green);margin-top:6px;}
@@ -154,6 +157,6 @@ footer{border-top:1px solid var(--line);background:#fff;padding:22px 0;margin-to
   <span>Observatorio de Electromovilidad y Energía · Chile</span>
   <span id="foot-fecha"></span>
 </div></footer>
-<script src="app.js?v=1781970298"></script>
+<script src="app.js?v=1781977727"></script>
 </body>
 </html>
