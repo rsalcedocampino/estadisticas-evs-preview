@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781966058';
+const V='1781966293';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -60,13 +60,15 @@ async function pageInfra(){await load('infra_extra');F.infra=F.infra||{region:''
    <div id="if-precios" style="margin-bottom:18px"></div>
    ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'},{id:'evol',label:'Evolución'},{id:'dist',label:'Distribución'}])}`;}
 function tipoAD(c){return (c.t==='DC'||(+c.kw||0)>=50)?'DC':'AC';}
+function conesDisp(){const f=F.infra;return [...new Set(CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&c.cn).map(c=>c.cn))].sort();}
+function fillConSelect(){const opts=conesDisp();if(F.infra.con&&!opts.includes(F.infra.con))F.infra.con='';const sel=$('#if-con');if(sel)sel.innerHTML='<option value="">Todos</option>'+opts.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('');}
 function infraData(){const f=F.infra;return CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&(!f.con||c.cn===f.con));}
 function bindInfra(){const re=()=>{infraKpis();renderTab('infra');};
-  $('#if-reg').onchange=e=>{F.infra.region=e.target.value;F.infra.comuna='';const cs=[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b));$('#if-com').innerHTML='<option value="">Todas</option>'+cs.map(c=>`<option value="${c}">${c}</option>`).join('');re();};
-  $('#if-com').onchange=e=>{F.infra.comuna=e.target.value;re();};
-  $('#if-vel').onchange=e=>{F.infra.vel=e.target.value;re();};
+  $('#if-reg').onchange=e=>{F.infra.region=e.target.value;F.infra.comuna='';const cs=[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b));$('#if-com').innerHTML='<option value="">Todas</option>'+cs.map(c=>`<option value="${c}">${c}</option>`).join('');fillConSelect();re();};
+  $('#if-com').onchange=e=>{F.infra.comuna=e.target.value;fillConSelect();re();};
+  $('#if-vel').onchange=e=>{F.infra.vel=e.target.value;fillConSelect();re();};
   $('#if-con').onchange=e=>{F.infra.con=e.target.value;re();};
-  $('#if-reset').onclick=()=>{F.infra={region:'',vel:'',comuna:'',con:''};$('#if-reg').value='';$('#if-com').innerHTML='<option value="">Todas</option>';$('#if-vel').value='';$('#if-con').value='';re();};}
+  $('#if-reset').onclick=()=>{F.infra={region:'',vel:'',comuna:'',con:''};$('#if-reg').value='';$('#if-com').innerHTML='<option value="">Todas</option>';$('#if-vel').value='';fillConSelect();re();};}
 function infraKpis(){const D=infraData(),f=F.infra;const comunas=new Set(D.filter(c=>c.c).map(c=>norm(c.c)));const totCom=f.region?(DB.comunas_por_region[f.region]||0):346;const sin=Math.max(totCom-comunas.size,0);const pot=D.reduce((a,c)=>a+(+c.kw||0),0)/1000;
   const el=$('#if-kpis');if(el)el.innerHTML=[kpi({lbl:'Conectores públicos',val:fint(D.length),bg:'#FEF3C7',c:'#F59E0B',icon:IC.plug}),kpi({lbl:'Comunas con carga',val:fint(comunas.size),bg:'#ECFDF5',c:'#16A34A',icon:IC.map}),kpi({lbl:'Comunas sin carga',val:fint(sin),unit:'/ '+totCom,bg:'#FEE2E2',c:'#EF4444',icon:IC.map}),kpi({lbl:'Potencia instalada',val:fmt(pot),unit:'MW',bg:'#EFF6FF',c:'#2563EB',icon:IC.bolt})].join('');
   // precios de carga (kWh) min / promedio / max de la selección
