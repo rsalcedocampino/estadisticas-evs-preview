@@ -101,5 +101,41 @@
     "pct": 0.3
    }
   ]
- }
+ },
+ "comunas_por_region": {
+  "Arica y Parinacota": 4,
+  "Tarapacá": 7,
+  "Antofagasta": 9,
+  "Atacama": 9,
+  "Coquimbo": 15,
+  "Valparaíso": 38,
+  "Metropolitana": 52,
+  "O'Higgins": 33,
+  "Maule": 30,
+  "Ñuble": 21,
+  "Biobío": 33,
+  "La Araucanía": 32,
+  "Los Ríos": 12,
+  "Los Lagos": 30,
+  "Aysén": 10,
+  "Magallanes": 11
+ },
+ "regiones_orden": [
+  "Arica y Parinacota",
+  "Tarapacá",
+  "Antofagasta",
+  "Atacama",
+  "Coquimbo",
+  "Valparaíso",
+  "Metropolitana",
+  "O'Higgins",
+  "Maule",
+  "Ñuble",
+  "Biobío",
+  "La Araucanía",
+  "Los Ríos",
+  "Los Lagos",
+  "Aysén",
+  "Magallanes"
+ ]
 }
