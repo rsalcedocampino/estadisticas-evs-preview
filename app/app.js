@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781931197';
+const V='1781931503';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -183,9 +183,8 @@ function tabCalcDetalle(){const f=F.calc;if(!f.comuna)return '<div class="card s
 /* ===== METODOLOGÍA ===== */
 function pageMetodo(){const fuentes=[['Mercado EV','ANAC — ventas mensuales de EV/híbridos; homologaciones y fichas de seguridad','Mensual'],['Infraestructura de carga','SEC — registro de conectores públicos','Mensual'],['Energía y BESS','CEN — Coordinador Eléctrico Nacional; SEIA — proyectos','Mensual'],['Población y territorio','INE — Censo 2024','Anual'],['Tráfico vial','MOP Vialidad — TMDA','Anual'],['Permisos de circulación','Registro Civil / municipios','Anual']];
   const defs=[['Penetración EV','Participación de vehículos electrificados (BEV+PHEV+HEV+MHEV) sobre el total de ventas del mes.'],['BEV / PHEV','Eléctrico de batería / híbrido enchufable. Ambos demandan carga.'],['Conector vs cargador','Un cargador puede tener varios conectores (puntos de carga simultáneos).'],['Velocidad de carga','AC lenta ≤7 kW · AC semi 7–22 kW · DC rápida ≥50 kW.'],['ERNC','Energías Renovables No Convencionales (solar, eólica, mini-hidro, biomasa, geotérmica).'],['BESS','Battery Energy Storage System — almacenamiento en baterías (MWh).'],['Score de oportunidad','Índice 0–100 que combina flota EV, ausencia de carga, potencial de upgrade, rutas y ERNC.']];
-  return `<div class="page-head"><h1>Metodología</h1><p class="sub">Fuentes, definiciones y frecuencia de actualización de los datos.</p><div class="meta"><span class="pill">📅 Actualizado: ${DB.fecha}</span></div></div>
-   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Fuentes de datos</h3><div style="overflow-x:auto;margin-top:12px"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="text-align:left;color:var(--muted);font-size:11.5px;text-transform:uppercase"><th style="padding:8px 6px">Sección</th><th style="padding:8px 6px">Fuente</th><th style="padding:8px 6px">Frecuencia</th></tr></thead><tbody>${fuentes.map(([s,f,fr])=>`<tr style="border-top:1px solid var(--line)"><td style="padding:9px 6px;font-weight:700">${s}</td><td style="padding:9px 6px">${f}</td><td style="padding:9px 6px"><span class="pill">${fr}</span></td></tr>`).join('')}</tbody></table></div></div>
-   <div class="card" style="margin-top:16px"><h3 style="padding-right:0">Definiciones clave</h3><div class="grid g2" style="margin-top:12px">${defs.map(([t,d])=>`<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px"><b style="font-size:13.5px;color:var(--primary-d)">${t}</b><p style="font-size:12.5px;color:var(--muted);margin-top:4px">${d}</p></div>`).join('')}</div></div>`;}
+  return `<div class="page-head"><h1>Metodología</h1><p class="sub">Definiciones y conceptos clave del observatorio.</p><div class="meta"><span class="pill">📅 Actualizado: ${DB.fecha}</span></div></div>
+   <div class="card"><h3 style="padding-right:0">Definiciones clave</h3><div class="grid g2" style="margin-top:12px">${defs.map(([t,d])=>`<div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px"><b style="font-size:13.5px;color:var(--primary-d)">${t}</b><p style="font-size:12.5px;color:var(--muted);margin-top:4px">${d}</p></div>`).join('')}</div></div>`;}
 
 /* ===== ROUTER ===== */
 const PAGES={inicio:pageInicio,resumen:pageResumen,infra:pageInfra,mercado:pageMercado,energia:pageEnergia,inversion:pageInversion,reportes:pageReportes,calc:pageCalc,metodo:pageMetodo};
