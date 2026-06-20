@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1781977727';
+const V='1781998079';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -30,9 +30,11 @@ function tabsNav(sec,tabs){return `<div class="tabs">${tabs.map(t=>`<button data
 function showTab(sec,id){TAB[sec]=id;$$(`.tabs button`).forEach(b=>b.classList.toggle('active',b.dataset.tab===sec+':'+id));renderTab(sec);}
 
 /* ===== INICIO ===== */
-function pageInicio(){const r=DB.resumen;const K=DB.kpis_inicio||[];const cards=K.map(k=>`<div class="kbar" style="border-left-color:${k.c}"><div class="kbar-top"><span class="kbar-lbl">${k.t}</span><button class="kbar-i" data-info="${(k.info||'').replace(/"/g,'&quot;')}" aria-label="Más información">i</button></div><div class="kbar-val" style="color:${k.c}">${k.v}</div><div class="kbar-sub">${k.sub}</div>${k.delta?`<div class="kbar-delta">▲ ${k.delta}</div>`:''}</div>`).join('');return `<div class="hero"><h1>El observatorio de electromovilidad y energía de Chile</h1><p>Datos oficiales de vehículos eléctricos, infraestructura de carga, generación renovable y almacenamiento — actualizados y listos para decidir dónde invertir.</p><div class="herobtns"><button class="btn btn-primary" data-go="resumen">Ver resumen ejecutivo</button><button class="btn btn-ghost" data-go="infra">Explorar infraestructura</button></div></div>
-  <h2 style="font-size:17px;font-weight:800;margin:24px 0 12px">Indicadores clave</h2>
-   <div class="kbar-grid">${cards}</div>`;}
+function pageInicio(){const r=DB.resumen;const K=DB.kpis_inicio||[];const card=k=>`<div class="kbar" style="border-left-color:${k.c}"><div class="kbar-top"><span class="kbar-lbl">${k.t}</span><button class="kbar-i" data-info="${(k.info||'').replace(/"/g,'&quot;')}" aria-label="Más información">i</button></div><div class="kbar-val" style="color:${k.c}">${k.v}</div><div class="kbar-sub">${k.sub}</div>${k.delta?`<div class="kbar-delta">▲ ${k.delta}</div>`:''}</div>`;
+  const grupos=[...new Set(K.map(k=>k.g||'Indicadores'))];
+  const bloques=grupos.map(g=>`<h3 class="kgroup">${g}</h3><div class="kbar-grid">${K.filter(k=>(k.g||'Indicadores')===g).map(card).join('')}</div>`).join('');return `<div class="hero"><h1>El observatorio de electromovilidad y energía de Chile</h1><p>Datos oficiales de vehículos eléctricos, infraestructura de carga, generación renovable y almacenamiento — actualizados y listos para decidir dónde invertir.</p><div class="herobtns"><button class="btn btn-primary" data-go="resumen">Ver resumen ejecutivo</button><button class="btn btn-ghost" data-go="infra">Explorar infraestructura</button></div></div>
+  <h2 style="font-size:18px;font-weight:800;margin:24px 0 6px">Indicadores clave</h2>
+   ${bloques}`;}
 
 /* ===== RESUMEN (filtro región + tabs) ===== */
 function regKey(r){const ks=Object.keys(REP.reg);const nk=x=>norm(x).replace(/\./g,'');return ks.find(k=>nk(k)===nk(r))||ks.find(k=>nk(r).includes(nk(k))||nk(k).includes(nk(r)));}
