@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1782011269';
+const V='1782011870';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -135,7 +135,7 @@ async function pageMercado(){const M=await load('mercado');await load('mercado_e
   return `<div class="page-head"><h1>Mercado EV</h1><p class="sub">Ventas mensuales, penetración por tecnología y catálogo de marcas y modelos.</p></div>
    <div class="filterbar"><div class="fgroup"><label>Año</label><select id="mf-anio"><option value="">Todos</option>${fopt(anios,F.merc.anio)}</select></div><div class="fgroup"><label>Tecnología</label><select id="mf-tech"><option value="">Todas</option>${TECHS.map(t=>`<option value="${t}"${F.merc.tech===t?' selected':''}>${t}</option>`).join('')}</select></div><button class="btn btn-ghost" id="mf-reset" style="align-self:flex-end">Limpiar filtros</button></div>
    <div class="grid g4" id="mc-kpis" style="margin-bottom:18px"></div>
-   ${tabsNav('merc',[{id:'ventas',label:'Ventas'},{id:'tech',label:'Tecnología'},{id:'marcas',label:'Marcas'},{id:'region',label:'Por región'},{id:'buscador',label:'Buscador de modelos'}])}`;}
+   ${tabsNav('merc',[{id:'ventas',label:'Ventas'},{id:'tech',label:'Tecnología'},{id:'region',label:'Marcas y permisos'},{id:'buscador',label:'Buscador de modelos'}])}`;}
 function mercMeses(){const M=DATA.mercado,f=F.merc;return f.anio?M.serie.filter(s=>s.mes.startsWith(f.anio)):M.serie;}
 function bindMercado(){const re=()=>{mercKpis();renderTab('merc');};$('#mf-anio').onchange=e=>{F.merc.anio=e.target.value;re();};$('#mf-tech').onchange=e=>{F.merc.tech=e.target.value;re();};$('#mf-reset').onclick=()=>{F.merc={anio:'',tech:'',q:'',orden:'anio'};$('#mf-anio').value='';$('#mf-tech').value='';re();};}
 function mercKpis(){const M=DATA.mercado,f=F.merc,meses=mercMeses();
@@ -304,14 +304,26 @@ function tabInfraDist(){const X=DATA.infra_extra;
    <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Top 20 comunas por conectores</h3><div class="subtitle">Comunas con mayor número de conectores públicos.</div><div style="position:relative;height:460px"><canvas id="if-top"></canvas></div><div class="card-src">Fuente: SEC · ${DB.fecha}</div></div>`;}
 
 /* ===== MERCADO: pestaña Por región ===== */
-function tabMercRegion(){const RY=DATA.mercado_extra.regYearly;const yrs=Object.keys(RY).sort();const last=RY[yrs.at(-1)];
-  setTimeout(()=>{const cx=$('#mc-reg');if(cx)chart(cx,{type:'bar',data:{labels:last.labels,datasets:[{data:last.data||last.evs||last.vals,backgroundColor:'#16A34A'}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}}}}});
-    const px=$('#mc-pen');if(px){const ps=DB.resumen.penetracion.serie;chart(px,{type:'line',data:{labels:ps.map((_,i)=>i+1),datasets:[{label:'Penetración %',data:ps,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.1)',fill:true,tension:.3}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false}}}});}},60);
-  const dataArr=last.data||last.evs||last.vals||[];
-  return `<div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Vehículos eléctricos por región (${yrs.at(-1)})</h3><div class="subtitle">Flota acumulada por región.</div><div style="position:relative;height:420px"><canvas id="mc-reg"></canvas></div><div class="card-src">Fuente: ANAC · permisos de circulación · ${DB.fecha}</div></div>
-   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Penetración EV mensual</h3><div class="subtitle">Participación de electrificados en ventas (últimos meses).</div><div style="position:relative;height:240px"><canvas id="mc-pen"></canvas></div><div class="card-src">Fuente: ANAC · ${DB.fecha}</div></div>`;}
+function marcasPorAnio(){const MM=DATA.mercado_extra.marcasMonthly,f=F.merc;const techs=(f.tech&&['BEV','PHEV','HEV','MHEV'].includes(f.tech))?[f.tech]:['BEV','PHEV','HEV','MHEV'];const acc={};
+  for(const [mes,d] of Object.entries(MM)){if(f.anio&&!mes.startsWith(f.anio))continue;(d.labels||[]).forEach((lb,i)=>{let t=0;techs.forEach(tk=>{if(d[tk])t+=d[tk][i]||0;});acc[lb]=(acc[lb]||0)+t;});}
+  return Object.entries(acc).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);}
+function tabMercRegion(){const f=F.merc;const meses=mercMeses();
+  const MES={'01':'enero','02':'febrero','03':'marzo','04':'abril','05':'mayo','06':'junio','07':'julio','08':'agosto','09':'septiembre','10':'octubre','11':'noviembre','12':'diciembre'};
+  const ult=meses.length?meses.at(-1).mes:'';const periodo=f.anio?(ult.endsWith('-12')?`año ${f.anio}`:`acum. a ${MES[ult.slice(5,7)]||''} ${ult.slice(0,4)}`):`acum. a ${MES[ult.slice(5,7)]||''} ${ult.slice(0,4)}`;
+  const rk=marcasPorAnio().slice(0,12);
+  const ebus=meses.reduce((a,s)=>a+(s.ebus||0),0),etruck=meses.reduce((a,s)=>a+(s.etruck||0),0);
+  const labels=[...rk.map(x=>x[0]),'E-buses (total)','E-camiones (total)'];
+  const data=[...rk.map(x=>x[1]),ebus,etruck];
+  const cols=[...rk.map(()=>'#2563EB'),'#0D9488','#EF4444'];
+  // permisos por region: usar año seleccionado si está en regYearly, sino 2024
+  const RY=DATA.mercado_extra.regYearly;const ryYears=Object.keys(RY);const ryY=(f.anio&&RY[f.anio])?f.anio:(ryYears.includes('2024')?'2024':ryYears.at(-1));const ry=RY[ryY];const ryData=ry.data||ry.evs||ry.vals||[];
+  setTimeout(()=>{const cx=$('#mc-marcas');if(cx)chart(cx,{type:'bar',data:{labels,datasets:[{data,backgroundColor:cols,borderWidth:0}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}}}}});
+    const px=$('#mc-pen');if(px){const ps=DB.resumen.penetracion.serie;chart(px,{type:'line',data:{labels:ps.map((_,i)=>i+1),datasets:[{label:'Penetración %',data:ps,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,.1)',fill:true,tension:.3,pointRadius:0}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},datalabels:{display:false}},scales:{x:{display:false}}}});}
+    const rx=$('#mc-permreg');if(rx)chart(rx,{type:'bar',data:{labels:ry.labels,datasets:[{data:ryData,backgroundColor:'#16A34A',borderWidth:0}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:10}}}}}});},60);
+  return `<div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Marcas más vendidas — todas las tecnologías</h3><div class="subtitle">Top marcas por unidades (BEV, PHEV, HEV, MHEV) · ${periodo}. Incluye totales de E-buses y E-camiones.</div><div style="position:relative;height:440px"><canvas id="mc-marcas"></canvas></div><div class="card-src">Fuente: ANAC · marcas de EVs por mes · ${DB.fecha}</div></div>
+   <div class="card" style="margin-bottom:16px"><span class="datechip">📅 ${DB.fecha}</span><h3>Penetración EV mensual</h3><div class="subtitle">Participación de electrificados en las ventas (últimos meses).</div><div style="position:relative;height:240px"><canvas id="mc-pen"></canvas></div><div class="card-src">Fuente: ANAC · ${DB.fecha}</div></div>
+   <div class="card"><span class="datechip">📅 ${DB.fecha}</span><h3>Permiso de circulación — vehículos eléctricos por región (${ryY})</h3><div class="subtitle">Flota acumulada por región según permisos de circulación. Dato anual${ryY!==f.anio&&f.anio?` · último disponible: ${ryY}`:''}.</div><div style="position:relative;height:420px"><canvas id="mc-permreg"></canvas></div><div class="card-src">Fuente: Permisos de circulación · ${ryY}</div></div>`;}
 
-/* ===== ENERGIA: pestañas BESS y Solar ===== */
 function tabEnerBess(){const X=DATA.energia_extra;
   setTimeout(()=>{const a=$('#en-bess-anio');if(a&&X.bessAnio)chart(a,{type:'bar',data:{labels:X.bessAnio.labels,datasets:[{label:'MW',data:X.bessAnio.mw,backgroundColor:'#7C3AED'}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10}}}}}});
     const b=$('#en-bess-estado');if(b)chart(b,{type:'doughnut',data:{labels:X.bessEstado.labels,datasets:[{data:X.bessEstado.mwh,backgroundColor:['#94A3B8','#F59E0B','#0EA5E9','#16A34A','#7C3AED'],borderWidth:0}]},options:{cutout:'58%',plugins:{legend:{position:'right',labels:{boxWidth:11,font:{size:10}}}},maintainAspectRatio:false}});
