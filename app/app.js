@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1782000384';
+const V='1782011269';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -42,7 +42,7 @@ function spark(serie,color){if(!serie||serie.length<2)return'';const w=120,h=34,
   const pts=serie.map((v,i)=>[i/(serie.length-1)*w,h-((v-mn)/rg)*(h-6)-3]);
   const dd=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');const id='g'+Math.random().toString(36).slice(2,7);
   return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".25"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs><path d="${dd} L${w} ${h} L0 ${h} Z" fill="url(#${id})"/><path d="${dd}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${pts.at(-1)[0].toFixed(1)}" cy="${pts.at(-1)[1].toFixed(1)}" r="3" fill="${color}"/></svg>`;}
-function kpi(o){return `<div class="kpi"><div class="top"><div class="ico" style="background:${o.bg};color:${o.c}">${o.icon}</div><div class="lbl">${o.lbl}</div></div><div class="val">${o.val}${o.unit?`<small>${o.unit}</small>`:''}</div>${o.serie?spark(o.serie,o.c):''}</div>`;}
+function kpi(o){return `<div class="kpi"><div class="top"><div class="ico" style="background:${o.bg};color:${o.c}">${o.icon}</div><div class="lbl">${o.lbl}</div></div><div class="val">${o.val}${o.unit?`<small>${o.unit}</small>`:''}</div>${o.sub?`<div class="kpi-sub">${o.sub}</div>`:''}${o.serie?spark(o.serie,o.c):''}</div>`;}
 const IC={bolt:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>',car:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 110-3 1.5 1.5 0 010 3m-11 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3M19 6.5A1.5 1.5 0 0017.5 5h-11A1.5 1.5 0 005 6.5L3 12v8h2v-2h14v2h2v-8z"/></svg>',plug:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v6m10-6v6M5 8h14v2a7 7 0 01-6 6.9V22h-2v-5.1A7 7 0 015 10z"/></svg>',map:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7m0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5"/></svg>',sun:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7a5 5 0 100 10 5 5 0 000-10m0-5v3m0 14v3M2 12h3m14 0h3M4.2 4.2l2.1 2.1m11.4 11.4l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>',bat:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h14v8H4zm15 2h2v4h-2M7 10l3 0-1 2 2 0-3 4 1-3-2 0z"/></svg>',target:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20m0 4a6 6 0 100 12 6 6 0 000-12m0 4a2 2 0 100 4 2 2 0 000-4"/></svg>',doc:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h9l5 5v15H6zm8 1.5V8h4.5"/></svg>'};
 function velOf(c){const kw=+c.kw||0;if(c.t==='DC'||kw>=50)return'DC';if(kw<=7)return'AC_lenta';return'AC_semi';}
 const COLS={BEV:'#2563EB',PHEV:'#16A34A',HEV:'#F59E0B',MHEV:'#7C3AED',EBUS:'#0D9488',ETRUCK:'#EF4444'};
@@ -138,8 +138,29 @@ async function pageMercado(){const M=await load('mercado');await load('mercado_e
    ${tabsNav('merc',[{id:'ventas',label:'Ventas'},{id:'tech',label:'Tecnología'},{id:'marcas',label:'Marcas'},{id:'region',label:'Por región'},{id:'buscador',label:'Buscador de modelos'}])}`;}
 function mercMeses(){const M=DATA.mercado,f=F.merc;return f.anio?M.serie.filter(s=>s.mes.startsWith(f.anio)):M.serie;}
 function bindMercado(){const re=()=>{mercKpis();renderTab('merc');};$('#mf-anio').onchange=e=>{F.merc.anio=e.target.value;re();};$('#mf-tech').onchange=e=>{F.merc.tech=e.target.value;re();};$('#mf-reset').onclick=()=>{F.merc={anio:'',tech:'',q:'',orden:'anio'};$('#mf-anio').value='';$('#mf-tech').value='';re();};}
-function mercKpis(){const M=DATA.mercado,f=F.merc,meses=mercMeses();const techs=f.tech?[f.tech]:TECHS;const ult=M.serie.at(-1);const ench=(ult.bev||0)+(ult.phev||0);const acum=meses.reduce((a,s)=>a+techs.reduce((x,t)=>x+(s[t.toLowerCase()]||0),0),0);const marcasAct=M.marcas.filter(m=>m.a2026>0).length;
-  const el=$('#mc-kpis');if(el)el.innerHTML=[kpi({lbl:'Enchufables último mes (BEV+PHEV)',val:fint(ench),bg:'#EFF6FF',c:'#2563EB',icon:IC.car}),kpi({lbl:(f.tech||'Total')+' en el periodo',val:fint(acum),unit:'u',bg:'#ECFDF5',c:'#16A34A',icon:IC.bolt}),kpi({lbl:'Marcas activas (2026)',val:fint(marcasAct),bg:'#FEF3C7',c:'#F59E0B',icon:IC.target}),kpi({lbl:'Modelos homologados',val:fint(M.homol.length),bg:'#F3E8FF',c:'#7C3AED',icon:IC.doc})].join('');}
+function mercKpis(){const M=DATA.mercado,f=F.merc,meses=mercMeses();
+  const sum=k=>meses.reduce((a,s)=>a+(s[k]||0),0);
+  const bev=sum('bev'),phev=sum('phev'),hev=sum('hev'),mhev=sum('mhev'),ebus=sum('ebus'),etruck=sum('etruck');
+  const ench=bev+phev, totalEl=bev+phev+hev+mhev+ebus+etruck;
+  const MES={'01':'enero','02':'febrero','03':'marzo','04':'abril','05':'mayo','06':'junio','07':'julio','08':'agosto','09':'septiembre','10':'octubre','11':'noviembre','12':'diciembre'};
+  const ult=meses.length?meses.at(-1).mes:''; const mm=ult.slice(5,7), yy=ult.slice(0,4);
+  const completo=ult.endsWith('-12');
+  const periodo=f.anio?(completo?`año ${f.anio}`:`acumulado a ${MES[mm]||''} ${yy}`):`acumulado a ${MES[mm]||''} ${yy}`;
+  const el=$('#mc-kpis'); if(!el) return;
+  if(f.tech){const tk=f.tech.toLowerCase();const tot=sum(tk);const ultV=meses.length?(meses.at(-1)[tk]||0):0;const prom=meses.length?Math.round(tot/meses.length):0;
+    el.innerHTML=[
+     kpi({lbl:f.tech,val:fint(tot),unit:'u',bg:'#EFF6FF',c:COLS[f.tech]||'#2563EB',icon:IC.car,sub:'Vehículos livianos y medianos · '+periodo}),
+     kpi({lbl:f.tech+' — último mes',val:fint(ultV),unit:'u',bg:'#ECFDF5',c:'#16A34A',icon:IC.bolt,sub:ult?`${MES[mm]||''} ${yy}`:''}),
+     kpi({lbl:f.tech+' — promedio mensual',val:fint(prom),unit:'u/mes',bg:'#FEF3C7',c:'#F59E0B',icon:IC.target}),
+     kpi({lbl:'Total electrificados',val:fint(totalEl),unit:'u',bg:'#F3E8FF',c:'#7C3AED',icon:IC.doc,sub:'Todas las tecnologías · '+periodo})].join('');
+  }else{
+    el.innerHTML=[
+     kpi({lbl:'Eléctricos',val:fint(ench),unit:'u',bg:'#EFF6FF',c:'#2563EB',icon:IC.car,sub:'Vehículos livianos y medianos (BEV+PHEV) · '+periodo}),
+     kpi({lbl:'BEV — eléctrico batería',val:fint(bev),unit:'u',bg:'#ECFDF5',c:'#16A34A',icon:IC.bolt,sub:periodo}),
+     kpi({lbl:'PHEV — híbrido enchufable',val:fint(phev),unit:'u',bg:'#FEF3C7',c:'#F59E0B',icon:IC.plug,sub:periodo}),
+     kpi({lbl:'Total electrificados',val:fint(totalEl),unit:'u',bg:'#F3E8FF',c:'#7C3AED',icon:IC.doc,sub:'Incluye híbridos y buses/camiones · '+periodo})].join('');
+  }
+}
 function tabMercVentas(){const f=F.merc,meses=mercMeses();const techs=f.tech?[f.tech]:TECHS;const last=meses.slice(-12);const labels=last.map(s=>s.mes.slice(2));const ds=techs.map(t=>({label:t,data:last.map(s=>s[t.toLowerCase()]||0),backgroundColor:COLS[t],borderWidth:0}));
   setTimeout(()=>{const cx=$('#mc-chart');if(cx)chart(cx,{type:'bar',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{font:{size:10}}},y:{stacked:true}},plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}}}}});},60);
   const rango=last.length?`${last[0].mes} a ${last.at(-1).mes}`:'';
