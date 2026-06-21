@@ -6,7 +6,7 @@ const fmt=n=>(Math.round((n||0)*10)/10).toLocaleString('es-CL');
 const fint=n=>Math.round(n||0).toLocaleString('es-CL');
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-const V='1782011870';
+const V='1782012535';
 async function load(n){if(DATA[n])return DATA[n];DATA[n]=await fetch(`data/${n}.json?v=${V}`).then(r=>r.json());return DATA[n];}
 function killViz(){_charts.forEach(c=>{try{c.destroy()}catch(e){}});_charts=[];_maps.forEach(m=>{try{m.remove()}catch(e){}});_maps=[];}
 function chart(ctx,cfg){const c=new Chart(ctx,cfg);_charts.push(c);return c;}
@@ -80,7 +80,7 @@ function tabResumenMapa(){const f=F.resumen;
 
 /* ===== INFRAESTRUCTURA (tabs) ===== */
 async function pageInfra(){await load('infra_extra');await load('precios_acdc');F.infra=F.infra||{region:'',vel:'',comuna:'',con:''};TAB.infra=TAB.infra||'mapa';
-  const comunas=F.infra.region?[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b)):[];
+  const comunas=F.infra.region?[...new Set(CARG.filter(c=>c.pub&&c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b)):[];
   const conTipos=[...new Set(CARG.map(c=>c.cn).filter(Boolean))].sort();
   return `<div class="page-head"><h1>Infraestructura de Carga</h1><p class="sub">Distribución, tecnología y operadores de la red pública de carga.</p></div>
    <div class="filterbar"><div class="fgroup"><label>Región</label><select id="if-reg"><option value="">Todo Chile</option>${fopt(REGS(),F.infra.region)}</select></div><div class="fgroup"><label>Comuna</label><select id="if-com"><option value="">Todas</option>${comunas.map(c=>`<option value="${c}"${F.infra.comuna===c?' selected':''}>${c}</option>`).join('')}</select></div><div class="fgroup"><label>Tipo de carga</label><select id="if-vel"><option value="">Todas</option><option value="AC"${F.infra.vel==='AC'?' selected':''}>AC</option><option value="DC"${F.infra.vel==='DC'?' selected':''}>DC</option></select></div><div class="fgroup"><label>Tipo de conector</label><select id="if-con"><option value="">Todos</option>${conTipos.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('')}</select></div><button class="btn btn-ghost" id="if-reset" style="align-self:flex-end">Limpiar filtros</button></div>
@@ -88,11 +88,11 @@ async function pageInfra(){await load('infra_extra');await load('precios_acdc');
    <div id="if-precios" style="margin-bottom:18px"></div>
    ${tabsNav('infra',[{id:'mapa',label:'Mapa'},{id:'tech',label:'Tecnología'},{id:'oper',label:'Operadores'},{id:'evol',label:'Evolución'},{id:'dist',label:'Distribución'},{id:'precios',label:'Precios AC/DC'}])}`;}
 function tipoAD(c){return (c.t==='DC'||(+c.kw||0)>=50)?'DC':'AC';}
-function conesDisp(){const f=F.infra;return [...new Set(CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&c.cn).map(c=>c.cn))].sort();}
+function conesDisp(){const f=F.infra;return [...new Set(CARG.filter(c=>c.pub&&(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&c.cn).map(c=>c.cn))].sort();}
 function fillConSelect(){const opts=conesDisp();if(F.infra.con&&!opts.includes(F.infra.con))F.infra.con='';const sel=$('#if-con');if(sel)sel.innerHTML='<option value="">Todos</option>'+opts.map(c=>`<option value="${c}"${F.infra.con===c?' selected':''}>${c}</option>`).join('');}
-function infraData(){const f=F.infra;return CARG.filter(c=>(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&(!f.con||c.cn===f.con));}
+function infraData(){const f=F.infra;return CARG.filter(c=>c.pub&&(!f.region||c.r===f.region)&&(!f.comuna||c.c===f.comuna)&&(!f.vel||tipoAD(c)===f.vel)&&(!f.con||c.cn===f.con));}
 function bindInfra(){const re=()=>{infraKpis();renderTab('infra');};
-  $('#if-reg').onchange=e=>{F.infra.region=e.target.value;F.infra.comuna='';const cs=[...new Set(CARG.filter(c=>c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b));$('#if-com').innerHTML='<option value="">Todas</option>'+cs.map(c=>`<option value="${c}">${c}</option>`).join('');fillConSelect();re();};
+  $('#if-reg').onchange=e=>{F.infra.region=e.target.value;F.infra.comuna='';const cs=[...new Set(CARG.filter(c=>c.pub&&c.r===F.infra.region&&c.c).map(c=>c.c))].sort((a,b)=>a.localeCompare(b));$('#if-com').innerHTML='<option value="">Todas</option>'+cs.map(c=>`<option value="${c}">${c}</option>`).join('');fillConSelect();re();};
   $('#if-com').onchange=e=>{F.infra.comuna=e.target.value;fillConSelect();re();};
   $('#if-vel').onchange=e=>{F.infra.vel=e.target.value;fillConSelect();re();};
   $('#if-con').onchange=e=>{F.infra.con=e.target.value;re();};
