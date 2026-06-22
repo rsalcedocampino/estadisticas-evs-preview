@@ -1,0 +1,273 @@
+{
+ "generado": "2026-06-22",
+ "fuente": "preview.energiasfuturo.com",
+ "descripcion": "Feed completo de datos del Observatorio de Electromovilidad y Energía (Chile)",
+ "archivos": [
+  {
+   "archivo": "conectores.json",
+   "variable": "MAPA_DATA",
+   "url": "https://preview.energiasfuturo.com/data/conectores.json",
+   "tipo": "array",
+   "n": 2360
+  },
+  {
+   "archivo": "ficha_comunal.json",
+   "variable": "FICHA_COM",
+   "url": "https://preview.energiasfuturo.com/data/ficha_comunal.json",
+   "tipo": "array",
+   "n": 345
+  },
+  {
+   "archivo": "ficha_regional.json",
+   "variable": "FICHA_REG",
+   "url": "https://preview.energiasfuturo.com/data/ficha_regional.json",
+   "tipo": "objeto",
+   "claves": 16
+  },
+  {
+   "archivo": "regiones.json",
+   "variable": "FICHA_REGS",
+   "url": "https://preview.energiasfuturo.com/data/regiones.json",
+   "tipo": "array",
+   "n": 16
+  },
+  {
+   "archivo": "ventas_marca.json",
+   "variable": "VENTAS_MARCA",
+   "url": "https://preview.energiasfuturo.com/data/ventas_marca.json",
+   "tipo": "objeto",
+   "claves": 71
+  },
+  {
+   "archivo": "ventas_modelos.json",
+   "variable": "VENTAS_MOD_DATA",
+   "url": "https://preview.energiasfuturo.com/data/ventas_modelos.json",
+   "tipo": "objeto",
+   "claves": 4
+  },
+  {
+   "archivo": "ventas_mensual.json",
+   "variable": "VENTAS_TOT_MONTHLY",
+   "url": "https://preview.energiasfuturo.com/data/ventas_mensual.json",
+   "tipo": "objeto",
+   "claves": 41
+  },
+  {
+   "archivo": "marcas_mensual.json",
+   "variable": "MARCAS_MONTHLY",
+   "url": "https://preview.energiasfuturo.com/data/marcas_mensual.json",
+   "tipo": "objeto",
+   "claves": 29
+  },
+  {
+   "archivo": "homologados.json",
+   "variable": "HOMOL_DATA",
+   "url": "https://preview.energiasfuturo.com/data/homologados.json",
+   "tipo": "array",
+   "n": 954
+  },
+  {
+   "archivo": "evs_por_region_anual.json",
+   "variable": "REGIONES_YEARLY",
+   "url": "https://preview.energiasfuturo.com/data/evs_por_region_anual.json",
+   "tipo": "objeto",
+   "claves": 9
+  },
+  {
+   "archivo": "bess.json",
+   "variable": "BESS_DATA",
+   "url": "https://preview.energiasfuturo.com/data/bess.json",
+   "tipo": "objeto",
+   "claves": 6
+  },
+  {
+   "archivo": "proyectos_energia.json",
+   "variable": "BESS_MAPA_DATA",
+   "url": "https://preview.energiasfuturo.com/data/proyectos_energia.json",
+   "tipo": "array",
+   "n": 1156
+  },
+  {
+   "archivo": "solar.json",
+   "variable": "SOLAR_DATA",
+   "url": "https://preview.energiasfuturo.com/data/solar.json",
+   "tipo": "objeto",
+   "claves": 6
+  },
+  {
+   "archivo": "solar_region.json",
+   "variable": "SOLAR_REGION_DATA",
+   "url": "https://preview.energiasfuturo.com/data/solar_region.json",
+   "tipo": "objeto",
+   "claves": 2
+  },
+  {
+   "archivo": "brechas.json",
+   "variable": "GAP_DATA",
+   "url": "https://preview.energiasfuturo.com/data/brechas.json",
+   "tipo": "array",
+   "n": 116
+  },
+  {
+   "archivo": "cobertura.json",
+   "variable": "COBERTURA",
+   "url": "https://preview.energiasfuturo.com/data/cobertura.json",
+   "tipo": "objeto",
+   "claves": 3
+  },
+  {
+   "archivo": "ac_sin_carga.json",
+   "variable": "AC_DATA",
+   "url": "https://preview.energiasfuturo.com/data/ac_sin_carga.json",
+   "tipo": "objeto",
+   "claves": 2
+  },
+  {
+   "archivo": "calculadora.json",
+   "variable": "CALC_DATA",
+   "url": "https://preview.energiasfuturo.com/data/calculadora.json",
+   "tipo": "array",
+   "n": 100
+  },
+  {
+   "archivo": "calculadora_pesos.json",
+   "variable": "CALC_DEFAULTS",
+   "url": "https://preview.energiasfuturo.com/data/calculadora_pesos.json",
+   "tipo": "objeto",
+   "claves": 6
+  },
+  {
+   "archivo": "comunas_turisticas.json",
+   "variable": "TOURIST_COM",
+   "url": "https://preview.energiasfuturo.com/data/comunas_turisticas.json",
+   "tipo": "array",
+   "n": 12
+  },
+  {
+   "archivo": "censo_viviendas.json",
+   "variable": "CENSO_REG_DATA",
+   "url": "https://preview.energiasfuturo.com/data/censo_viviendas.json",
+   "tipo": "array",
+   "n": 16
+  },
+  {
+   "archivo": "censo_personas.json",
+   "variable": "CENSO_PERS_DATA",
+   "url": "https://preview.energiasfuturo.com/data/censo_personas.json",
+   "tipo": "array",
+   "n": 16
+  },
+  {
+   "archivo": "coords_region.json",
+   "variable": "CENSO_COORDS",
+   "url": "https://preview.energiasfuturo.com/data/coords_region.json",
+   "tipo": "objeto",
+   "claves": 16
+  },
+  {
+   "archivo": "licencias_edad.json",
+   "variable": "LIC_BY_AGE",
+   "url": "https://preview.energiasfuturo.com/data/licencias_edad.json",
+   "tipo": "objeto",
+   "claves": 6
+  },
+  {
+   "archivo": "acdc_labels.json",
+   "variable": "ACDC_LABELS",
+   "url": "https://preview.energiasfuturo.com/data/acdc_labels.json",
+   "tipo": "array",
+   "n": 8
+  },
+  {
+   "archivo": "acdc_ac.json",
+   "variable": "ACDC_AC",
+   "url": "https://preview.energiasfuturo.com/data/acdc_ac.json",
+   "tipo": "array",
+   "n": 8
+  },
+  {
+   "archivo": "acdc_dc.json",
+   "variable": "ACDC_DC",
+   "url": "https://preview.energiasfuturo.com/data/acdc_dc.json",
+   "tipo": "array",
+   "n": 8
+  },
+  {
+   "archivo": "conector_tipo_labels.json",
+   "variable": "CONECT_LABELS",
+   "url": "https://preview.energiasfuturo.com/data/conector_tipo_labels.json",
+   "tipo": "array",
+   "n": 7
+  },
+  {
+   "archivo": "conector_tipo_vals.json",
+   "variable": "CONECT_VALS",
+   "url": "https://preview.energiasfuturo.com/data/conector_tipo_vals.json",
+   "tipo": "array",
+   "n": 7
+  },
+  {
+   "archivo": "operadores_labels.json",
+   "variable": "CUOTA_LABELS",
+   "url": "https://preview.energiasfuturo.com/data/operadores_labels.json",
+   "tipo": "array",
+   "n": 8
+  },
+  {
+   "archivo": "operadores_vals.json",
+   "variable": "CUOTA_VALS",
+   "url": "https://preview.energiasfuturo.com/data/operadores_vals.json",
+   "tipo": "array",
+   "n": 8
+  },
+  {
+   "archivo": "evol_labels.json",
+   "variable": "EVOL_LABELS",
+   "url": "https://preview.energiasfuturo.com/data/evol_labels.json",
+   "tipo": "array",
+   "n": 9
+  },
+  {
+   "archivo": "evol_evs.json",
+   "variable": "EVOL_VALS",
+   "url": "https://preview.energiasfuturo.com/data/evol_evs.json",
+   "tipo": "array",
+   "n": 9
+  },
+  {
+   "archivo": "evol_conectores.json",
+   "variable": "EVOL_CONECT",
+   "url": "https://preview.energiasfuturo.com/data/evol_conectores.json",
+   "tipo": "array",
+   "n": 9
+  },
+  {
+   "archivo": "potencia_operador_labels.json",
+   "variable": "POT_LABELS",
+   "url": "https://preview.energiasfuturo.com/data/potencia_operador_labels.json",
+   "tipo": "array",
+   "n": 6
+  },
+  {
+   "archivo": "potencia_operador_vals.json",
+   "variable": "POT_VALS",
+   "url": "https://preview.energiasfuturo.com/data/potencia_operador_vals.json",
+   "tipo": "array",
+   "n": 6
+  },
+  {
+   "archivo": "top_comunas_labels.json",
+   "variable": "TOP_LABELS",
+   "url": "https://preview.energiasfuturo.com/data/top_comunas_labels.json",
+   "tipo": "array",
+   "n": 20
+  },
+  {
+   "archivo": "top_comunas_vals.json",
+   "variable": "TOP_VALS",
+   "url": "https://preview.energiasfuturo.com/data/top_comunas_vals.json",
+   "tipo": "array",
+   "n": 20
+  }
+ ]
+}
