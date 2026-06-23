@@ -1,8 +1,7 @@
 {
- "generado": "2026-06-22",
+ "generado": "2026-06-23",
  "fuente": "estadisticas.energiasfuturo.com (produccion)",
  "servido_en": "preview.energiasfuturo.com/data/",
- "descripcion": "Feed completo de datos del Observatorio (datos de produccion)",
  "archivos": [
   {
    "archivo": "conectores.json",
@@ -10,6 +9,13 @@
    "url": "https://preview.energiasfuturo.com/data/conectores.json",
    "tipo": "array",
    "n": 2363
+  },
+  {
+   "archivo": "ficha_comunal.json",
+   "variable": "FICHA_COM",
+   "url": "https://preview.energiasfuturo.com/data/ficha_comunal.json",
+   "tipo": "array",
+   "n": 345
   },
   {
    "archivo": "ventas_marca.json",
@@ -89,6 +95,20 @@
    "claves": 2
   },
   {
+   "archivo": "brechas.json",
+   "variable": "GAP_DATA",
+   "url": "https://preview.energiasfuturo.com/data/brechas.json",
+   "tipo": "array",
+   "n": 116
+  },
+  {
+   "archivo": "ac_sin_carga.json",
+   "variable": "AC_DATA",
+   "url": "https://preview.energiasfuturo.com/data/ac_sin_carga.json",
+   "tipo": "objeto",
+   "claves": 2
+  },
+  {
    "archivo": "calculadora.json",
    "variable": "CALC_DATA",
    "url": "https://preview.energiasfuturo.com/data/calculadora.json",
@@ -124,34 +144,12 @@
    "n": 20
   },
   {
-   "archivo": "ficha_comunal.json",
-   "variable": "FICHA_COM",
-   "url": "https://preview.energiasfuturo.com/data/ficha_comunal.json",
-   "tipo": "array",
-   "n": 345
-  },
-  {
-   "archivo": "brechas.json",
-   "variable": "GAP_DATA",
-   "url": "https://preview.energiasfuturo.com/data/brechas.json",
-   "tipo": "array",
-   "n": 116
-  },
-  {
-   "archivo": "ac_sin_carga.json",
-   "variable": "AC_DATA",
-   "url": "https://preview.energiasfuturo.com/data/ac_sin_carga.json",
-   "tipo": "objeto",
-   "claves": 2
-  },
-  {
    "archivo": "ventas_ev_anual.json",
-   "variable": "(derivado de ventas_mensual)",
+   "variable": "(derivado)",
    "url": "https://preview.energiasfuturo.com/data/ventas_ev_anual.json",
    "tipo": "objeto",
-   "claves": 4,
-   "descripcion": "Ventas de vehiculos electricos (BEV+PHEV+E-Bus+E-Truck) por anio. NO incluye HEV/MHEV."
+   "claves": 4
   }
  ],
- "nota": "ficha_regional y la lista de regiones se derivan agregando ficha_comunal.json por el campo r (region)."
+ "nota": "ficha_regional y la lista de regiones se derivan agregando ficha_comunal.json por el campo r."
 }
