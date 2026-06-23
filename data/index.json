@@ -143,6 +143,14 @@
    "url": "https://preview.energiasfuturo.com/data/ac_sin_carga.json",
    "tipo": "objeto",
    "claves": 2
+  },
+  {
+   "archivo": "ventas_ev_anual.json",
+   "variable": "(derivado de ventas_mensual)",
+   "url": "https://preview.energiasfuturo.com/data/ventas_ev_anual.json",
+   "tipo": "objeto",
+   "claves": 4,
+   "descripcion": "Ventas de vehiculos electricos (BEV+PHEV+E-Bus+E-Truck) por anio. NO incluye HEV/MHEV."
   }
  ],
  "nota": "ficha_regional y la lista de regiones se derivan agregando ficha_comunal.json por el campo r (region)."
