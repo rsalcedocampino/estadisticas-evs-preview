@@ -151,5 +151,6 @@
    "claves": 17
   }
  ],
- "nota": "ficha_regional y regiones se derivan agregando ficha_comunal.json por el campo r."
+ "nota": "ficha_regional y regiones se derivan agregando ficha_comunal.json por el campo r.",
+ "verificado": "2026-07-04T13:36:36.540Z"
 }
