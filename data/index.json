@@ -1,5 +1,5 @@
 {
- "generado": "2026-06-23",
+ "generado": "2026-07-04",
  "fuente": "estadisticas.energiasfuturo.com (produccion)",
  "servido_en": "preview.energiasfuturo.com/data/",
  "archivos": [
@@ -8,7 +8,7 @@
    "variable": "MAPA_DATA",
    "url": "https://preview.energiasfuturo.com/data/conectores.json",
    "tipo": "array",
-   "n": 2363
+   "n": 2289
   },
   {
    "archivo": "ficha_comunal.json",
@@ -22,7 +22,7 @@
    "variable": "VENTAS_MARCA",
    "url": "https://preview.energiasfuturo.com/data/ventas_marca.json",
    "tipo": "objeto",
-   "claves": 71
+   "claves": 73
   },
   {
    "archivo": "ventas_modelos.json",
@@ -36,7 +36,7 @@
    "variable": "VENTAS_TOT_MONTHLY",
    "url": "https://preview.energiasfuturo.com/data/ventas_mensual.json",
    "tipo": "objeto",
-   "claves": 41
+   "claves": 54
   },
   {
    "archivo": "marcas_mensual.json",
@@ -99,7 +99,7 @@
    "variable": "GAP_DATA",
    "url": "https://preview.energiasfuturo.com/data/brechas.json",
    "tipo": "array",
-   "n": 116
+   "n": 158
   },
   {
    "archivo": "ac_sin_carga.json",
@@ -148,8 +148,8 @@
    "variable": "(derivado)",
    "url": "https://preview.energiasfuturo.com/data/ventas_ev_anual.json",
    "tipo": "objeto",
-   "claves": 4
+   "claves": 17
   }
  ],
- "nota": "ficha_regional y la lista de regiones se derivan agregando ficha_comunal.json por el campo r."
+ "nota": "ficha_regional y regiones se derivan agregando ficha_comunal.json por el campo r."
 }
