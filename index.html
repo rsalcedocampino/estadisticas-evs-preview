@@ -1,16 +1,10 @@
 <!doctype html><html lang=es><head><script>
-(function(){
-  var B='20260705';
-  if(window.location.search.indexOf('v='+B)===-1){
-    window.location.replace('/?v='+B);
-  }
-})();
-</script><script>
 document.addEventListener('DOMContentLoaded',function(){
-  if(!Array.isArray(window.MAPA_DATA)||!window.MAPA_DATA.some(function(p){return p.infra==='PRIVADO';})){
+  if(!Array.isArray(window.MAPA_DATA)||window.MAPA_DATA.length<1500||!window.MAPA_DATA.some(function(p){return p.infra==='PRIVADO';})){
     fetch('/?_r='+Date.now(),{cache:'no-store'}).then(function(r){return r.text();}).then(function(h){
-      var s=h.indexOf('MAPA_DATA=['),e=h.indexOf('];</script>',s);
-      if(s>=0&&e>s){window.MAPA_DATA=new Function('return '+h.slice(s+10,e+1))();try{_applyMapFilters();}catch(x){}}
+      var k='MAPA'+'_DATA=[',t='];</'+'script>';
+      var s=h.indexOf(k),e=h.indexOf(t,s);
+      if(s>=0&&e>s){window.MAPA_DATA=new Function('return '+h.slice(s+k.length-1,e+1))();try{_applyMapFilters();}catch(x){}}
     });
   }
 });
