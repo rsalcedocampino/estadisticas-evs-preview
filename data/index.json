@@ -1,5 +1,5 @@
 {
- "generado": "2026-07-04",
+ "generado": "2026-07-09",
  "fuente": "estadisticas.energiasfuturo.com (produccion)",
  "servido_en": "preview.energiasfuturo.com/data/",
  "archivos": [
@@ -8,7 +8,7 @@
    "variable": "MAPA_DATA",
    "url": "https://preview.energiasfuturo.com/data/conectores.json",
    "tipo": "array",
-   "n": 2289
+   "n": 2363
   },
   {
    "archivo": "ficha_comunal.json",
@@ -22,21 +22,14 @@
    "variable": "VENTAS_MARCA",
    "url": "https://preview.energiasfuturo.com/data/ventas_marca.json",
    "tipo": "objeto",
-   "claves": 73
-  },
-  {
-   "archivo": "ventas_modelos.json",
-   "variable": "VENTAS_MODELOS_DATA",
-   "url": "https://preview.energiasfuturo.com/data/ventas_modelos.json",
-   "tipo": "objeto",
-   "claves": 4
+   "claves": 71
   },
   {
    "archivo": "ventas_mensual.json",
    "variable": "VENTAS_TOT_MONTHLY",
    "url": "https://preview.energiasfuturo.com/data/ventas_mensual.json",
    "tipo": "objeto",
-   "claves": 54
+   "claves": 41
   },
   {
    "archivo": "marcas_mensual.json",
@@ -51,13 +44,6 @@
    "url": "https://preview.energiasfuturo.com/data/homologados.json",
    "tipo": "array",
    "n": 954
-  },
-  {
-   "archivo": "catalogo_vehiculos.json",
-   "variable": "_D",
-   "url": "https://preview.energiasfuturo.com/data/catalogo_vehiculos.json",
-   "tipo": "array",
-   "n": 2159
   },
   {
    "archivo": "evs_por_region_anual.json",
@@ -99,7 +85,7 @@
    "variable": "GAP_DATA",
    "url": "https://preview.energiasfuturo.com/data/brechas.json",
    "tipo": "array",
-   "n": 158
+   "n": 116
   },
   {
    "archivo": "ac_sin_carga.json",
@@ -148,9 +134,8 @@
    "variable": "(derivado)",
    "url": "https://preview.energiasfuturo.com/data/ventas_ev_anual.json",
    "tipo": "objeto",
-   "claves": 17
+   "claves": 4
   }
  ],
- "nota": "ficha_regional y regiones se derivan agregando ficha_comunal.json por el campo r.",
- "verificado": "2026-07-04T13:36:36.540Z"
+ "nota": "ficha_regional y regiones se derivan de ficha_comunal.json por campo r."
 }
